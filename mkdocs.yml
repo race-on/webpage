@@ -1,0 +1,56 @@
+# Project information
+site_name: 'Race On'
+site_description: 'Self-Driving Car Competition'
+site_author: 'The Race On Organizing Team'
+# site_url: 'https://squidfunk.github.io/mkdocs-material/'
+
+# Repository
+repo_name: 'squidfunk/mkdocs-material'
+repo_url: 'https://github.com/squidfunk/mkdocs-material'
+
+# Copyright
+copyright: 'Copyright &copy; 2019 The Race On Organizing Team'
+
+# Configuration
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'black'
+    accent: 'red'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+
+# Customization
+extra:
+  manifest: 'manifest.webmanifest'
+  social:
+    - type: 'github'
+      link: 'https://github.com/squidfunk'
+
+# Google Analytics
+google_analytics:
+  - 'UA-XXXXXXXX-X'
+  - 'auto'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+
