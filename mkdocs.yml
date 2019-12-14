@@ -4,15 +4,27 @@ site_description: 'Self-Driving Car Competition'
 site_author: 'The Race On Organizing Team'
 # site_url: 'https://squidfunk.github.io/mkdocs-material/'
 
+
 # Repository
-repo_name: 'squidfunk/mkdocs-material'
-repo_url: 'https://github.com/squidfunk/mkdocs-material'
+repo_name: 'Race On Tutorials'
+repo_url: 'https://github.com/race-on/workshops/'
+edit_uri: ''
+
 
 # Copyright
-copyright: 'Copyright &copy; 2019 The Race On Organizing Team'
+copyright: 'Copyright &copy; 2019 The Race On organizing team'
+
+
+# Folders configuration for GitHub Pages
+docs_dir: 'source'
+site_dir: 'docs'
+
 
 # Configuration
 theme:
+  logo: 'images/logo.png'
+  favicon: 'images/favicon.png'
+  custom_dir: 'theme'
   name: 'material'
   language: 'en'
   palette:
@@ -22,21 +34,24 @@ theme:
     text: 'Roboto'
     code: 'Roboto Mono'
 
+
 # Customization
 extra:
   manifest: 'manifest.webmanifest'
-  social:
-    - type: 'github'
-      link: 'https://github.com/squidfunk'
 
 # Google Analytics
 google_analytics:
   - 'UA-XXXXXXXX-X'
   - 'auto'
 
-# Extensions
+plugins:
+  - search
+  - awesome-pages
+
+
 markdown_extensions:
   - admonition
+  - meta
   - codehilite:
       guess_lang: false
       linenums: true

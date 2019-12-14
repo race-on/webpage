@@ -1,4 +1,4 @@
-# Welcome to MkDocs
+# Tutorials Index
 
 For full documentation visit [mkdocs.org](https://mkdocs.org).
 ## Test Code
