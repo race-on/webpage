@@ -683,102 +683,54 @@
 <ol>
 <li>
 <p>Race On competition consists of three races with mandatory participation.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Date</strong></th>
-<th align="center"><strong>Room</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Race 0</td>
-<td>Saturday, February 8</td>
-<td align="center">EEB 132</td>
-</tr>
-<tr>
-<td>Race 1</td>
-<td>Saturday, February 29</td>
-<td align="center">EEB 132</td>
-</tr>
-<tr>
-<td>Race 2</td>
-<td>Friday, April 17</td>
-<td align="center">EEB 132</td>
-</tr>
-</tbody>
-</table>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>|        | **Date**              | **Room**|
+|--------|-----------------------|:-------:|
+| Race 0 | Saturday, February 8  | EEB 132 |
+| Race 1 | Saturday, February 29 | EEB 132 |
+| Race 2 | Friday, April 17      | EEB 132 |
+</pre></div>
+</td></tr></table>
+
 </li>
 <li>
-<p>Team are awarded points based on their performance in each race.</p>
+<p>Teams are awarded points based on their performance in each race.</p>
 </li>
-<li>In Race 0 teams will race on a simple loop track. The goal of this race is to stimulate teams to finish assembling their car.</li>
-<li>In Race 1 teams will race on an average complexity track and will be awarded points for both participation and ranking.</li>
-<li>In Race 2 teams will race on a longer and more complex track. Team will receive points for completing a lap and the ranking points will be double compared to the first race.</li>
+<li>In Race 0, teams will race on a simple loop track. The goal of this race is to stimulate teams to finish assembling their cars.</li>
+<li>In Race 1, teams will race on an average complexity track and will be awarded points for both participation and ranking.</li>
+<li>In Race 2 teams will race on a longer and more complex track. Teams will receive points for completing a lap and the ranking points will be double compared to the first race.</li>
 </ol>
 <h2 id="points">Points<a class="headerlink" href="#points" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The point system is designed such that a team that did average in Race 1 can still win the competition if they improve for Race 2. The best team from Race 1 does not automatically win if they do average in Race 2, their are not even guaranteed a top three position. However, winning Race 1 helps break some ties in the final standings.</p>
+<p class="admonition-title">Note<p>The point system is designed such that a team that did average in Race 1 can still win the competition if they improve for Race 2. The best team from Race 1 does not automatically win if they do average in Race 2. However, winning Race 1 helps break some ties in the final standings.</p>
+</p>
 </div>
 <ol>
 <li>
-<p>In all three races teams will be awarded points for running the car, finishing a lap, and ranking in top five in the race.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th align="center"><strong>Race 0</strong></th>
-<th align="center"><strong>Race 1</strong></th>
-<th align="center"><strong>Race 2</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Run</td>
-<td align="center">2</td>
-<td align="center">2</td>
-<td align="center">-</td>
-</tr>
-<tr>
-<td>Lap</td>
-<td align="center">-</td>
-<td align="center">2</td>
-<td align="center">4</td>
-</tr>
-<tr>
-<td>Rank 1</td>
-<td align="center">-</td>
-<td align="center">10</td>
-<td align="center">20</td>
-</tr>
-<tr>
-<td>Rank 2</td>
-<td align="center">-</td>
-<td align="center">8</td>
-<td align="center">16</td>
-</tr>
-<tr>
-<td>Rank 3</td>
-<td align="center">-</td>
-<td align="center">6</td>
-<td align="center">12</td>
-</tr>
-<tr>
-<td>Rank 4</td>
-<td align="center">-</td>
-<td align="center">4</td>
-<td align="center">8</td>
-</tr>
-<tr>
-<td>Rank 5</td>
-<td align="center">-</td>
-<td align="center">2</td>
-<td align="center">4</td>
-</tr>
-</tbody>
-</table>
+<p>In all three races, teams will be awarded points for running the car, finishing a lap, and ranking in the top five in each race.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>|        | **Race 0** | **Race 1** | **Race 2** |
+|--------|:----------:|:----------:|:----------:|
+| Run    |      2     |      2     |      -     |
+| Lap    |      -     |      2     |      4     |
+| Rank 1 |      -     |     10     |     20     |
+| Rank 2 |      -     |      8     |     16     |
+| Rank 3 |      -     |      6     |     12     |
+| Rank 4 |      -     |      4     |      8     |
+| Rank 5 |      -     |      2     |      4     |
+</pre></div>
+</td></tr></table>
+
 </li>
 <li>
 <p>Run points will be awarded in Race 0 and Race 1. Teams that manage to run their car, car moves autonomously on the track, will receive 2 points.</p>
@@ -792,27 +744,27 @@
 </ol>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
-<p>Team 1 manages to assemble the car for Race 0 and run it on the track. In Race 1, the team runs the car but does not complete a lap, and in Race 2, the team finishes the lap and it is the fastest lap of all teams. As a result, Team 1 will receive 28 points: 2 points for running the car in Race 0, plus 2 points for running the car in Race 1, plus 4 points for finishing a lap in Race 2, and plus 20 points for ranking first in Race 2.</p>
-<p>Team 2 does not manage to assemble the car for Race 0. In Race 1 they finish a lap and rank third and in Race 2 the car runs on the track but does not complete a lap. As a result, team 2 will receive 10 points: 2 points for running the car in Race 1, plus 2 points for finishing a lap in Race 1, and plus 6 points for ranking third in Race 1.</p>
+<p>Team 1 manages to assemble the car for Race 0 and run it on the track. In Race 1, the team runs the car but does not complete a lap, and in Race 2, the team finishes the lap and it is the fastest lap of all teams. As a result, Team 1 will receive 28 points: 2 points for running the car in Race 0, plus 2 points for running the car in Race 1, plus 4 points for finishing a lap in Race 2, and 20 points for ranking first in Race 2.</p>
+<p>Team 2 does not manage to assemble the car for Race 0. In Race 1 they finish a lap and rank third and in Race 2 the car runs on the track but does not complete a lap. As a result, team 2 will receive 10 points: 2 points for running the car in Race 1, plus 2 points for finishing a lap in Race 1, and 6 points for ranking third in Race 1.</p>
 </div>
 <h2 id="awards">Awards<a class="headerlink" href="#awards" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Teams that competed before in Race On are allowed to switch to Jetson Nano once they earn 2 or more points.</li>
-<li>Teams that accumlate 4 points or more by the end of Race 1 will receive encoders and an inertial measurement unit as an award.</li>
-<li>At the end of the competition, after Race 2, teams will be awarded an Amazon gift card in value of $10 for each accumulated point.</li>
+<li>Teams that accumulate 4 points or more by the end of Race 1 will receive encoders and an inertial measurement unit as an award.</li>
+<li>At the end of the competition, after Race 2, teams will be awarded an Amazon gift card in the value of $10 for each accumulated point.</li>
 </ol>
 <h2 id="car-kit">Car Kit<a class="headerlink" href="#car-kit" title="Permanent link">&para;</a></h2>
 <ol>
-<li>All teams compete with a car built around an 1/10 scale RC touring chassis.</li>
+<li>All teams compete with a car built around a 1/10 scale RC touring chassis.</li>
 <li>Distance between the front and back wheels, wheelbase, should be between 250 mm to 270 mm.</li>
-<li>Altering the contact surface of the tires is not allowed. Changing the tires to similar ones but with different tire pattern is allowed.</li>
+<li>Altering the contact surface of the tires is not allowed. Changing the tires to similar ones but with a different pattern is allowed.</li>
 <li>Cars should use one Mabuchi RS-540SH brushed motor to drive the car.</li>
 <li>Cars should use one battery, two LiPo cells with 7.4 V nominal and 8.4 V max, to power the car and the electronics.</li>
 <li>Converters that produce voltages above 8.4 V are not allowed.</li>
 <li>Cars should be controlled solely by a Raspberry Pi or Jetson Nano board and operate autonomously during the race.</li>
-<li>Camera must be the primary navigation sensor.</li>
+<li>The camera must be the primary navigation sensor.</li>
 <li>Car dimensions should not exceed 12 inch width, 15 inch length, and 12 inch height with all sensors and additional boards mounted.</li>
-<li>Adding additional sensors such as accelerometer, gyroscope, encoders is allowed.</li>
+<li>Adding additional sensors such as accelerometer, gyroscope, encoders are allowed.</li>
 <li>Adjusting the suspension springs and weight balance, removing auxiliary chassis parts, and mounting additional boards is allowed.</li>
 <li>Additional modifications are allowed if they are easy to replicate by other teams.</li>
 </ol>
@@ -822,20 +774,20 @@
 </div>
 <h2 id="track">Track<a class="headerlink" href="#track" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Racing track is built out of black segments containing white lines for delimiting the track boundary.</li>
+<li>The racing track is built out of black segments containing white lines for delimiting the track boundary.</li>
 <li>The dimensions of a track segment are 48 inch width and 48 inch length.</li>
-<li>The white lines delimiting the track are 2 inch wide and spaced 2 inch from the edge of the track segment.</li>
+<li>The white lines delimiting the track are 2 inches wide and spaced 2 inches from the edge of the track segment.</li>
 <li>Track segments are of three types, Start/Finish Line, Straight Line, and 90° Turn.</li>
-<li>The Start/Finish segment is similar to Straing Line segment but has two white squares in the middle which are 2 inch wide and spaced 2 inch apart.</li>
+<li>The Start/Finish segment is similar to the Straight Line segment but has two white squares in the middle which are 2 inches wide and spaced 2 inches apart.</li>
 </ol>
 <h2 id="racing-day">Racing Day<a class="headerlink" href="#racing-day" title="Permanent link">&para;</a></h2>
-<p>Racing day is composed of three parts, practice session in the morning followed by the car inspection aroung noon and ending with the race itself in the afternoon. The exact time of each part would be announce a week before the race day.</p>
+<p>The racing day is composed of three parts, practice session in the morning followed by the car inspection around noon and ending with the race itself in the afternoon. The exact time of each part would be announced a week before the race day.</p>
 <h3 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h3>
 <ol>
-<li>In the morning of the race day, each team will receive dedicate practice time on the race track.</li>
+<li>On the morning of the race day, each team will receive dedicate practice time on the race track.</li>
 <li>The start time and the duration of the practice session will be announced a week before.</li>
 <li>During the practice session, each time will receive 1 minute on the track and no other cars are allowed to be on the track during that time.</li>
-<li>At the end of the 1 minute practice run teams are allowed to get back in line to request and additional minute.</li>
+<li>At the end of the 1-minute practice run, teams are allowed to get back in line to request and additional minute.</li>
 </ol>
 <h3 id="inspection">Inspection<a class="headerlink" href="#inspection" title="Permanent link">&para;</a></h3>
 <ol>
@@ -849,16 +801,16 @@
 <ol>
 <li>Only teams that passed the inspection are allowed to race.</li>
 <li>Teams will be grouped into 30 minutes slots.</li>
-<li>At the beggining of each slot, all the teams in that slot are required to come to the pre-race area to pick up their car.</li>
-<li>Teams are allocated into slots at random and find their racing order within the slot at the beggining of that slot.</li>
-<li>Team have 4 minutes in the pre-race area to setup their car and practive on a simple oval track.</li>
+<li>At the beginning of each slot, all the teams in that slot are required to come to the pre-race area to pick up their car.</li>
+<li>Teams are allocated into slots at random and find their racing order within the slot at the beginning of that slot.</li>
+<li>The team has 4 minutes in the pre-race area to set up their car and practice on a simple oval track.</li>
 <li>The team that is going to race next has priority on the practice track.</li>
 <li>After being called for racing, teams have 4 minutes to record a time.</li>
 <li>Teams have a practice run plus three attempts to finish the race and record the fastest time.</li>
-<li>First run is considered a practice run which does not count for ranking.</li>
+<li>The first run is considered a practice run and does not count for ranking.</li>
 <li>Teams, in order, will finish the first attempt before proceeding with the second and then the third.</li>
 <li>Cars are placed two to six feet before the finish line.</li>
-<li>During the race, cars should always be between the two white line delimiting the track.</li>
+<li>During the race, cars should always be between the two white lines delimiting the track.</li>
 <li>If during the race one or more wheels completely cross the white line, the attempt is marked as failed.</li>
 </ol>
                 
