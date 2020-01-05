@@ -61,9 +61,13 @@ title: Rules
 
     Team 2 does not manage to assemble the car for Race 0. In Race 1 they finish a lap and rank third and in Race 2 the car runs on the track but does not complete a lap. As a result, team 2 will receive 10 points: 2 points for running the car in Race 1, plus 2 points for finishing a lap in Race 1, and plus 6 points for ranking third in Race 1.
 
+
 ## Awards
 
-** After Race 2, 
+1. Teams that competed before in Race On are allowed to switch to Jetson Nano once they earn 2 or more points.
+1. Teams that accumlate 4 points or more by the end of Race 1 will receive encoders and an inertial measurement unit as an award.
+1. At the end of the competition, after Race 2, teams will be awarded an Amazon gift card in value of $10 for each accumulated point.
+
 
 ## Car Kit
 
@@ -83,6 +87,7 @@ title: Rules
 !!! attention
     To see whether your additional modifications are acceptable, contact Race On team before implementing them. If your modifications are illegal, you will not be allowed to compete in the races.
 
+
 ## Track
 
 1. Racing track is built out of black segments containing white lines for delimiting the track boundary.
@@ -91,28 +96,42 @@ title: Rules
 1. Track segments are of three types, Start/Finish Line, Straight Line, and 90° Turn.
 1. The Start/Finish segment is similar to Straing Line segment but has two white squares in the middle which are 2 inch wide and spaced 2 inch apart.
 
+
 ## Racing Day
+
+Racing day is composed of three parts, practice session in the morning followed by the car inspection aroung noon and ending with the race itself in the afternoon. The exact time of each part would be announce a week before the race day.
+
 
 ### Practice
 
+1. In the morning of the race day, each team will receive dedicate practice time on the race track.
+1. The start time and the duration of the practice session will be announced a week before.
+1. During the practice session, each time will receive 1 minute on the track and no other cars are allowed to be on the track during that time.
+1. At the end of the 1 minute practice run teams are allowed to get back in line to request and additional minute.
+
+
 ### Inspection
 
-1. One hour before the races start, all cars should be placed on the inspections area.
+1. Before the race starts, all cars should be handed on for inspection.
 1. The judges will inspect the cars according to requirements specified in the cars section.
 1. Violation of the requirements would be penalized with extra time or disqualified based on the severity of the violation.
 1. Cars would stay in the inspection area until the beginning of the race.
 1. No mechanical modifications are allowed after this point without approval from the judges.
 
 
-### Racing procedure
+### Racing
 
-1. The starting order of the teams is selected randomly.
-1. After being called for racing, teams have five minutes to record a time.
+1. Only teams that passed the inspection are allowed to race.
+1. Teams will be grouped into 30 minutes slots.
+1. At the beggining of each slot, all the teams in that slot are required to come to the pre-race area to pick up their car.
+1. Teams are allocated into slots at random and find their racing order within the slot at the beggining of that slot.
+1. Team have 4 minutes in the pre-race area to setup their car and practive on a simple oval track.
+1. The team that is going to race next has priority on the practice track.
+1. After being called for racing, teams have 4 minutes to record a time.
 1. Teams have a practice run plus three attempts to finish the race and record the fastest time.
-1. First run is considered a practice run which does not count for standings.
+1. First run is considered a practice run which does not count for ranking.
 1. Teams, in order, will finish the first attempt before proceeding with the second and then the third.
 1. Cars are placed two to six feet before the finish line.
 1. During the race, cars should always be between the two white line delimiting the track.
 1. If during the race one or more wheels completely cross the white line, the attempt is marked as failed.
-1. Completing each race awards the team a certain number of points (see section below called "Points").
 
