@@ -17,11 +17,11 @@ title: Rules
 
 1. Race On competition consists of three races with mandatory participation.
 
-        |        | **Date**              | **Room**|
-        |--------|-----------------------|:-------:|
-        | Race 0 | Saturday, February 8  | EEB 132 |
-        | Race 1 | Saturday, February 29 | EEB 132 |
-        | Race 2 | Friday, April 17      | EEB 132 |
+	|        | **Date**              | **Room**|
+	|--------|-----------------------|:-------:|
+	| Race 0 | Saturday, February 8  | EEB 132 |
+	| Race 1 | Saturday, February 29 | EEB 132 |
+	| Race 2 | Friday, April 17      | EEB 132 |
 
 1. Teams are awarded points based on their performance in each race.
 1. In Race 0, teams will race on a simple loop track. The goal of this race is to stimulate teams to finish assembling their cars.
@@ -37,15 +37,15 @@ title: Rules
 
 1. In all three races, teams will be awarded points for running the car, finishing a lap, and ranking in the top five in each race.
 
-        |        | **Race 0** | **Race 1** | **Race 2** |
-        |--------|:----------:|:----------:|:----------:|
-        | Run    |      2     |      2     |      -     |
-        | Lap    |      -     |      2     |      4     |
-        | Rank 1 |      -     |     10     |     20     |
-        | Rank 2 |      -     |      8     |     16     |
-        | Rank 3 |      -     |      6     |     12     |
-        | Rank 4 |      -     |      4     |      8     |
-        | Rank 5 |      -     |      2     |      4     |
+	|        | **Race 0** | **Race 1** | **Race 2** |
+	|--------|:----------:|:----------:|:----------:|
+	| Run    |      2     |      2     |      -     |
+	| Lap    |      -     |      2     |      4     |
+	| Rank 1 |      -     |     10     |     20     |
+	| Rank 2 |      -     |      8     |     16     |
+	| Rank 3 |      -     |      6     |     12     |
+	| Rank 4 |      -     |      4     |      8     |
+	| Rank 5 |      -     |      2     |      4     |
 
 1. Run points will be awarded in Race 0 and Race 1. Teams that manage to run their car, car moves autonomously on the track, will receive 2 points.
 1. Lap points will be awarded in Race 1 and Race 2. Teams that complete a lap would receive 2 points in Race 1 and 4 points in Race 2.
