@@ -41,7 +41,7 @@ The car is built around a 1/10 scale RC touring chassis powered by a brushed mot
 
 ![Car Kit](images/carkit.png)
 
-Modifications of the chassis are allowed as long as the changes are follow the competition rules. Moreover, more sensors can be added as long as the camera remains the main sensor used for steering the car. Cars are permitted to have a wireless connection with a computer for development and calibration, however, during the final race the car should operate autonomously and no external connection is permitted. All cars will be inspected before the final race and only the ones which comply with the above rules will be allowed to compete.
+Modifications of the chassis are allowed as long as the changes follow the competition rules. Moreover, more sensors can be added as long as the camera remains the main sensor used for steering the car. Cars are permitted to have a wireless connection with a computer for development and calibration, however, during the final race the car should operate autonomously and no external connection is permitted. All cars will be inspected before the final race and only the ones which comply with the above rules will be allowed to compete.
 
 
 
