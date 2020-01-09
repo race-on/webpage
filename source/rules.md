@@ -1,11 +1,11 @@
-title: Rules 
+title: Rules
 
 # Rules – Spring 2020
 
 
 ## Registration
 
-1. Registration for the Spring 2020 edition is open until **Sunday, January 19**. 
+1. Registration for the Spring 2020 edition is open until **Sunday, January 19**.
 1. Teams that register must pay **$250 materials fee** if all members are new to Race On. Teams where one or more team members competed in a previous Race On competition still have to register online but do not pay the materials fee. We encourage teams to reuse previously received cars and we can help replace certain components.
 1. Teams are formed of two to four students that are currently enrolled at USC and are the only ones who build, program, and race the car.
 1. Each team delegates a contact person that will represent the team.
@@ -17,11 +17,11 @@ title: Rules
 
 1. Race On competition consists of three races with mandatory participation.
 
-	|        | **Date**              | **Room**|
-	|--------|-----------------------|:-------:|
-	| Race 0 | Saturday, February 8  | EEB 132 |
-	| Race 1 | Saturday, February 29 | EEB 132 |
-	| Race 2 | Friday, April 17      | EEB 132 |
+    |        | **Date**              | **Room**|
+    |--------|-----------------------|:-------:|
+    | Race 0 | Saturday, February 8  | EEB 132 |
+    | Race 1 | Saturday, February 29 | EEB 132 |
+    | Race 2 | Friday, April 17      | EEB 132 |
 
 1. Teams are awarded points based on their performance in each race.
 1. In Race 0, teams will race on a simple loop track. The goal of this race is to stimulate teams to finish assembling their cars.
@@ -37,15 +37,15 @@ title: Rules
 
 1. In all three races, teams will be awarded points for running the car, finishing a lap, and ranking in the top five in each race.
 
-	|        | **Race 0** | **Race 1** | **Race 2** |
-	|--------|:----------:|:----------:|:----------:|
-	| Run    |      2     |      2     |      -     |
-	| Lap    |      -     |      2     |      4     |
-	| Rank 1 |      -     |     10     |     20     |
-	| Rank 2 |      -     |      8     |     16     |
-	| Rank 3 |      -     |      6     |     12     |
-	| Rank 4 |      -     |      4     |      8     |
-	| Rank 5 |      -     |      2     |      4     |
+    |        | **Race 0** | **Race 1** | **Race 2** |
+    |--------|:----------:|:----------:|:----------:|
+    | Run    |      2     |      2     |      -     |
+    | Lap    |      -     |      2     |      4     |
+    | Rank 1 |      -     |     10     |     20     |
+    | Rank 2 |      -     |      8     |     16     |
+    | Rank 3 |      -     |      6     |     12     |
+    | Rank 4 |      -     |      4     |      8     |
+    | Rank 5 |      -     |      2     |      4     |
 
 1. Run points will be awarded in Race 0 and Race 1. Teams that manage to run their car, car moves autonomously on the track, will receive 2 points.
 1. Lap points will be awarded in Race 1 and Race 2. Teams that complete a lap would receive 2 points in Race 1 and 4 points in Race 2.

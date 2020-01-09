@@ -56,7 +56,7 @@ extra_css:
 
 # Google Analytics
 google_analytics:
-  - 'UA-XXXXXXXX-X'
+  - 'UA-155985310-1'
   - 'auto'
 
 plugins:
@@ -83,4 +83,3 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
-  - pyembed.markdown
