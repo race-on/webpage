@@ -1,7 +1,10 @@
 title: Blog
 
+**Under Construction**
 
-# Welcome to MkDocs
+[!embed](https://www.youtube.com/watch?v=vq2jYFZVMDA)
+
+<!-- # Welcome to MkDocs
 
 For full documentation visit [mkdocs.org](https://mkdocs.org).
 ## Test Code
@@ -26,4 +29,4 @@ print(a.T @ a)
     mkdocs.yml    # The configuration file.
     docs/
         index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+        ...       # Other markdown pages, images and other files. -->

@@ -4,3 +4,12 @@
     margin-left: 1.25em;
 
 }
+
+.md-typeset h1 {
+  text-align: center;
+  font-weight: 700;
+}
+
+body {
+    text-align: justify;
+}

@@ -12,7 +12,7 @@ edit_uri: ''
 
 
 # Copyright
-copyright: 'Copyright &copy; 2019 The Race On organizing team'
+copyright: 'Copyright &copy; 2020 The Race On organizing team'
 
 
 # Folders configuration for GitHub Pages
@@ -33,6 +33,18 @@ theme:
   font:
     text: 'Roboto'
     code: 'Roboto Mono'
+
+# nav:
+#   - Home: index.md
+#   - Rules: test/index.md
+#   - Registration: registration.md
+
+# theme:
+#     name: readthedocs
+#     highlightjs: true
+#     hljs_languages:
+#         - yaml
+#         - rust
 
 
 # Customization
@@ -71,4 +83,4 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
-
+  - pyembed.markdown
