@@ -11,7 +11,7 @@ Registration is open until midnight on **Sunday, January 19**. The first 30 team
 To register your team, please first fill out the registration form below using your **USC EMAIL**. Then, come in one of the days listed below to pay the registration fees.
 
 - For teams where all members have **not** participated in Race On before:  
-**The fee to participate is $250 per team.** This fee covers all the materials needed to assemble a self-driving car.
+**The fee to participate is $250 per team (CASH ONLY).** This fee covers all the materials needed to assemble a self-driving car.
 - For returning teams who **at least one member** who have participated in Race On:  
 Returning teams (or teams with one or more returning members) should reuse their car from the prior year. As such, you **do not need to pay** any money to register.
 
