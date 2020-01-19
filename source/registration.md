@@ -22,7 +22,7 @@ Only one member of the group must fill out this form for their team.
 Fees can be payed on the following date/times:  
 
 * January 13-19, Mon - Fri from 4 - 4:30 pm in EEB 131, while the registration period is **open**.  
-* January 20, Mon from 4 - 4:30 pm in EEB 131, **after** the registration period has closed.
+* January 21, Tue from 4 - 4:30 pm in EEB 131, **after** the registration period has closed.
 
 Please don't wait until the last minute.
 
