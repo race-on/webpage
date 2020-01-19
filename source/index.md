@@ -5,14 +5,6 @@ title: Home
 ![Main](images/RACEON_CARS_MAIN.png)
 
 ## Announcements
-
-!!! attention "Spring 2020 Race On Information Session"
-    Date: **Jan. 16, 2020 (5:00 - 6:50 PM)**
-
-    Venue: **THH 101**
-
-    The Spring 2020 Race On Information Session is open to all undergraduate and masters students who are interested in registering for this semester's race competition. Previous race participants are all encouraged to attend so as to get informed about the new race rules and design changes.
-
 !!! note "Registration Open!"
     Registration is now open for the Spring 2020 Race On self-driving car competition.
 
