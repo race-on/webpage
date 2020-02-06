@@ -5,10 +5,22 @@ title: Home
 ![Main](images/RACEON_CARS_MAIN.png)
 
 ## Announcements
-!!! note "Registration Open!"
+
+!!! note "🏁🏎..  Race 0 Info "
+    - **Race 0 Practice Session** - Feb. 7, 2020 - 5pm to 9pm @ EEB 132
+    - **Race 0 Actual Race** - Feb. 8, 2020 - 9 am to 3pm @ EEB 132
+        - **9am to 11:30am** - Dedicated practice time. Each team can request 1 minute on the track and no other cars are allowed to be on the track during that time.
+        - **11:30 to 1pm** - Car inspection plus lunch break.
+        - **1pm to 3pm** - Racing 🏎. At the beginning of each slot, all the teams in that slot are required to come to the pre-race area to pick up their car.
+
+        Teams, please take note of the racing order details as sent in this week's newsletter to know which time slot you are allotted.
+
+        **Goal**: We expect all of you to have a fully functional car on Saturday and successfully complete a lap on the oval track. But to remove some pressure, we will **reward 2 points** to every team that runs the car on the track *regardless if you finish a lap or not*.
+
+<!-- !!! note "Registration Open!"
     Registration is now open for the Spring 2020 Race On self-driving car competition.
 
-    Registration is open until midnight on **Sunday, January 19, 2020**. The first 30 teams composed of only new members will be admitted while the rest placed on a waiting list. No such restriction is applied to returning teams. Register [**here**](registration).
+    Registration is open until midnight on **Sunday, January 19, 2020**. The first 30 teams composed of only new members will be admitted while the rest placed on a waiting list. No such restriction is applied to returning teams. Register [**here**](registration). -->
 
 ---
 
