@@ -29,6 +29,36 @@ Nodes can send out and receive messages by publishing and subscribing to **topic
 
 For a more in depth discussion of common ROS concepts, check out [ROS concepts](https://http://wiki.ros.org/ROS/Concepts "Title").
 
+# Preparation
+
+Before we proceed with this quickstart quide we need to perform a few preparation steps:
+
+1. If you plan to perform the following steps using a Jupyter terminal instead of ssh, please close all Jupyter tabs except the terminal.
+
+1. Update the list of packages and install all the available software updates.
+    ```bash
+    sudo apt update
+    sudo apt upgrade
+    ```
+    
+1. Install the OpenCV library for Python3. We will use the OpenCV functions for camera calibration and image preprocessing.
+    ```bash
+    sudo apt install python3-opencv
+    ```
+    
+1. Set the ROS_PYTHON_VERSION environment variable to instruct ROS to use Python 3. The commands from the ```.bashrc``` file in the home folder are always executed when you open a terminal.
+    ```bash
+    echo "export ROS_PYTHON_VERSION=3" >> ~/.bashrc
+    ```
+
+1. The ```startup``` folder in the home directory contains the scripts which are run everytime the Pi boots to setup the hardware and start the Jupyter and the ROS services. We need to modify the ROS script, and more exactly, open the file ```~/startup/ros.sh``` using the Jupyter interface and, if present, remove the line ```export ROS_HOSTNAME=raspberrypi"```. In addition, since these scripts are crucial for the Race On platform to function properly we will make them read only to prevent accedental edits. For that run the following command in the terminal.
+    ```bash
+    chmod a-w ~/startup/*
+    ```
+where the argument ```a``` stands for all, ```-``` remove, and ```w``` write permission.
+
+1. Now we can prepare the ROS workspace.
+
 # Setting Up ROS for Your Car
 ## Step by Step Instructions
 1. First, install OpenCV for Python3.
@@ -44,7 +74,7 @@ For a more in depth discussion of common ROS concepts, check out [ROS concepts](
     echo "export ROS_PYTHON_VERSION=3" >> ~/.bashrc
     ```
 
-3. Open the file ```~/startup/ros.h``` and, if present, remove the line ```export ROS_HOSTNAME=raspberrypi"```.
+3. Open the file ```~/startup/ros.sh``` and, if present, remove the line ```export ROS_HOSTNAME=raspberrypi"```.
 
 4. Now, ```sudo reboot```
 
