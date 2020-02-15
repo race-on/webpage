@@ -251,7 +251,3 @@ When the actuator node receives a control message, it uses the car module functi
 
 ### Car Module
 The car module is a class that initializes the servo and motor and provides functions to alter the car's speed and the servo's position and also to brake the car.
-
-### Running the Race On ROS code
-To run the Race On ROS code, first follow the steps listed above to setup your ROS environment.
-Then, run ```roslaunch raceon raceon.launch speed:=140``` to execute the launch file.
