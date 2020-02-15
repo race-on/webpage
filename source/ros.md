@@ -146,11 +146,39 @@ we will use ```std_msgs``` as it includes common message types representing prim
             rate.sleep()
     ```
     The break down. First line tells the terminal that this is a Python script. All Python files should have it. The next three lines import the Python libraries which we declared as dependency for the tutorial package and the math library required for the to calculate the sinusoid values. Next, we declare two global constants which are parameters of the generated sequence. 
-    The code inside the if statement represents the main program. Here we define how the publisher node interface to the rest of ROS. The line ```rospy.init_node(NAME)```, is very important as it tells rospy the name of the node -- until rospy has this information, it cannot start communicating with the ROS Master. In this case, the node will take on the name ```publisher```. NOTE: the name must be a base name, i.e. it cannot contain any slashes "/". The ```rospy.Publisher('data', Float32, queue_size=1)``` declares that your node is publishing to the ```data``` topic using the message type ```Float32```. Float32 here is actually the class std_msgs.msg.Float32. The ```queue_size``` argument limits the amount of queued messages if any subscriber is not receiving them fast enough. ```rate = rospy.Rate(RATE)``` this line creates a Rate object rate. With the help of its method sleep(), it offers a convenient way for looping at the desired rate. With its argument of 10, we should expect to go through the loop 10 times per second (as long as our processing time does not exceed 1/10th of a second!). Next we have a fairly standard rospy loop construct: checking the ```rospy.is_shutdown()``` flag and then doing work. You have to check ```is_shutdown()``` to check if your program should exit (e.g. if there is a ```Ctrl-C``` or otherwise). In this case, the "work" is a call to ```pub.publish(value)``` that publishes a string to our chatter topic. The loop calls ```rate.sleep()```, which sleeps just long enough to maintain the desired rate through the loop. This loop also calls ```rospy.loginfo(str)```, which performs triple-duty: the messages get printed to screen, it gets written to the Node's log file, and it gets written to ```rosout```. ```rosout``` is a handy tool for debugging: you can pull up messages using ```rqt_console``` instead of having to find the console window with your Node's output.  
+    The code inside the if statement represents the main program. Here we define how the publisher node interface to the rest of ROS. The line ```rospy.init_node(NAME)```, is very important as it tells rospy the name of the node -- until rospy has this information, it cannot start communicating with the ROS Master. In this case, the node will take on the name ```publisher```. NOTE: the name must be a base name, i.e. it cannot contain any slashes "/". The ```rospy.Publisher('data', Float32, queue_size=1)``` declares that your node is publishing to the ```data``` topic using the message type ```Float32```. Float32 here is actually the class std_msgs.msg.Float32. The ```queue_size``` argument limits the amount of queued messages if any subscriber is not receiving them fast enough. ```rate = rospy.Rate(RATE)``` this line creates a Rate object rate. With the help of its method sleep(), it offers a convenient way for looping at the desired rate. With its argument of 10, we should expect to go through the loop 10 times per second (as long as our processing time does not exceed 1/10th of a second!). Next we have a fairly standard rospy loop construct: checking the ```rospy.is_shutdown()``` flag and then doing work. You have to check ```is_shutdown()``` to check if your program should exit (e.g. if there is a ```Ctrl-C``` or otherwise). In this case, the "work" is a call to ```pub.publish(value)``` that publishes a string to our ```data``` topic. The loop calls ```rate.sleep()```, which sleeps just long enough to maintain the desired rate through the loop. This loop also calls ```rospy.loginfo(str)```, which performs triple-duty: the messages get printed to screen, it gets written to the Node's log file, and it gets written to ```rosout```. ```rosout``` is a handy tool for debugging: you can pull up messages using ```rqt_console``` instead of having to find the console window with your Node's output. 
+    
+    To run the code we need first to make the script executable by changing the file permission using ```chmod +x ~/race-on-ros/src/tutorial/scripts/publisher.py``` command. Now, we can run the code using ```rosrun tutorial publisher.py``` command. Note, tab autocompletion works with ROS command arguments.
 
+1. The code for subscriber is similar and the steps are the same.
+    ```python
+    #!/usr/bin/env python
+
+    import rospy
+    from std_msgs.msg import Float32
+
+
+    # Automatically called by ROS when new message is received
+    def callback(message):
+        rospy.loginfo("Received {:.3f}".format(message.data))
+
+
+    # Execute this when run as a script
+    if __name__ == '__main__':
+
+        # Init the node and subscribe for data
+        rospy.init_node("subscriber")
+        rospy.Subscriber("data", Float32, callback)
+
+        # Prevents python from exiting until this node is stopped
+        rospy.spin()
+    ```
+    Now you can open a second terminal to run the subscriber.
     
-make the script executable
-    
+1. **Exersices**
+    To better understan ROS concepts try to improve the above code by adding the following two features:
+        1. Create a launch file to start both nodes at the same time. Consult ROS documentation and raceon package code for inspiration
+        1. Replace the global constants in the ```publisher.py``` file with ROS parameters. Update the launch file to include the default parameter values. Find how to overwrite the parameter value when you launch the application.
 
 # Setting Up ROS for Your Car
 To run the ros nodes, run ```roslaunch raceon raceon.launch speed:=140```.
