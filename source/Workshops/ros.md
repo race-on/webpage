@@ -1,14 +1,10 @@
-title: Ros Overview Setup
+title: 1. Introduction to ROS
 
-# What is ROS?
-Ros is open-source framework that aims to simplify the complexities involved in writing robust, general robotics software. [Read more about ROS here.](https://http://wiki.ros.org/ROS/Introduction "Title")
+# Introduction to ROS
 
-## Ros Concepts
-ROS has a number of important filesystem level concepts, including packages, metapackages, package manifests, repositories, message types and service types. For RaceOn, however, we'll focus mostly on the use of **packages** and **message types**. 
+[ROS](https://wiki.ros.org/ROS/Introduction) is an open-source framework that aims to simplify the complexities involved in writing robust, general robotics software. ROS has a number of important filesystem level concepts, including packages, metapackages, package manifests, repositories, message types and service types. For Race On, however, we will focus mostly on the use of **packages** and **message types**. 
+The power of ROS comes from the use of a computation graph similar to one used by Tensorflow, a machine learning library. The computation graph is composed from a number of nodes which either produce or consume data from multiple sources through a publish/subscribe architecture. At initialization, nodes declaretheir name and subscribe to the *topics* which provide all the necessary information for the node to properly function. Each *topic* has an associated *message type* which defines the format that the publishers and subscribers will use to exchange information. Some nodes might only publish data, such as the camera node, some might only subscribe to data topics, such as the motor and servo node, and some might do both such as the image processing node that receives images and outputs the car track position.
 
-Additionally, ROS has several important concepts related to its "computation graph". "The Computation Graph is the peer-to-peer network of ROS processes that are processing data together." For the sake of Race On, the computation graph is composed of a number of ROS nodes that communicate through a publish/subscribe architecture. The pieces of the computational graph that are most relevant to RaceOn are **nodes**, **messages**, and **topics**. 
-
-For an overview of ROS concepts, read [here](http://wiki.ros.org/ROS/Concepts "Title").
 ### Packages
 
 In ROS, **packages** are the primary means of organizing software and are the smallest item you can build and release. They can contain any collection of files that should logically be contained together.
@@ -29,7 +25,7 @@ Nodes can send out and receive messages by publishing and subscribing to **topic
 
 For a more in depth discussion of common ROS concepts, check out [ROS concepts](https://http://wiki.ros.org/ROS/Concepts "Title").
 
-# Preparation
+## Preparation
 
 Before we proceed with this quickstart quide we need to perform a few preparation steps. If you plan to perform these steps using a Jupyter terminal instead of ssh, please before starting close all Jupyter tabs except the terminal.
 
