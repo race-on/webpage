@@ -35,18 +35,18 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../../images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.2">
     
     
       
-        <title>1. Introduction to ROS</title>
+        <title>Ros Overview Setup</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.adb8469c.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
       
         
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.86422ebf.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -64,12 +64,12 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
-      <link rel="manifest" type="application/manifest+json" href="../../manifest.webmanifest" crossorigin="use-credentials">
+      <link rel="manifest" type="application/manifest+json" href="../manifest.webmanifest" crossorigin="use-credentials">
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
     
       
@@ -118,7 +118,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction-to-ros" tabindex="0" class="md-skip">
+      <a href="#what-is-ros" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -151,11 +151,11 @@
 
       <!-- Link to home -->
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.."
+        <a href=".."
             title="Race On"
             class="md-header-nav__button md-logo">
           
-            <img src="../../images/logo.png" style="position:relative; margin-top: 2px;" height="24" />
+            <img src="../images/logo.png" style="position:relative; margin-top: 2px;" height="24" />
           
         </a>
       </div>
@@ -176,7 +176,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                1. Introduction to ROS
+                Ros Overview Setup
               
             </span>
           
@@ -282,10 +282,10 @@
 
   <!-- Site title -->
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../.."
+    <a href=".."
        title="Race On" class="md-nav__button md-logo" style="width: 225px;">
       
-        <img src="../../images/logo.png" height="24" />
+        <img src="../images/logo.png" height="24" />
       
     </a>
     <!-- Race On -->
@@ -323,7 +323,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
+    <a href=".." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -335,7 +335,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../rules/" title="Rules" class="md-nav__link">
+    <a href="../rules/" title="Rules" class="md-nav__link">
       Rules
     </a>
   </li>
@@ -347,20 +347,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../registration/" title="Registration" class="md-nav__link">
+    <a href="../registration/" title="Registration" class="md-nav__link">
       Registration
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../ros/" title="Ros Overview Setup" class="md-nav__link">
-      Ros Overview Setup
     </a>
   </li>
 
@@ -372,9 +360,98 @@
   
 
 
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Ros Overview Setup
+      </label>
+    
+    <a href="./" title="Ros Overview Setup" class="md-nav__link md-nav__link--active">
+      Ros Overview Setup
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ros-concepts" class="md-nav__link">
+    Ros Concepts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages" class="md-nav__link">
+    Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-types" class="md-nav__link">
+    Message Types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    Messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    Topics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
       Workshops
@@ -390,49 +467,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        1. Introduction to ROS
-      </label>
-    
-    <a href="./" title="1. Introduction to ROS" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../Workshops/ros/" title="1. Introduction to ROS" class="md-nav__link">
       1. Introduction to ROS
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#preparation" class="md-nav__link">
-    Preparation
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -509,9 +548,50 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#preparation" class="md-nav__link">
-    Preparation
+  <a href="#ros-concepts" class="md-nav__link">
+    Ros Concepts
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#packages" class="md-nav__link">
+    Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-types" class="md-nav__link">
+    Message Types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodes" class="md-nav__link">
+    Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messages" class="md-nav__link">
+    Messages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topics" class="md-nav__link">
+    Topics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -532,19 +612,24 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
               
                 
                 
-                <h1 id="introduction-to-ros">Introduction to ROS<a class="headerlink" href="#introduction-to-ros" title="Permanent link">&para;</a></h1>
-<p><a href="https://wiki.ros.org/ROS/Introduction">ROS</a> is an open-source framework that aims to simplify the complexities involved in writing robust, general robotics software. ROS has a number of important filesystem level concepts, including packages, metapackages, package manifests, repositories, message types and service types. For Race On, however, we will focus mostly on the use of <strong>packages</strong> and <strong>message types</strong>. 
-The power of ROS comes from the use of a computation graph similar to one used by Tensorflow, a machine learning library. The computation graph is composed from a number of nodes which either produce or consume data from multiple sources through a publish/subscribe architecture. At initialization, nodes declaretheir name and subscribe to the <strong>topics</strong> which provide all the necessary information for the node to properly function. Each <strong>topic</strong> has an associated <strong>message type</strong> which defines the format that the publishers and subscribers will use to exchange information. Some nodes might only publish data, such as the camera node, some might only subscribe to data topics, such as the motor and servo node, and some might do both such as the image processing node that receives images and outputs the car track position.</p>
-<p>ROS concepts review.</p>
-<ul>
-<li><strong>Packages</strong> - In ROS, packages are the primary means of organizing software and are the smallest item you can build and release. They can contain any collection of files that should logically be contained together.</li>
-<li><strong>Message Types</strong> - Message types describe message data structures and outline which data types they contain. When creating a message type, they should be contained in the <code>`msg</code> folder of your package. For more info about defining a custom message type in ROS, check out <a href="https://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv">creating a ROS msg and srv</a>.</li>
-<li><strong>Nodes</strong> - Nodes are modular processes that perform some computation for your system. They should be a logical unit within your sytem. For example, for Race On, we are using 4 nodes (actuation.py, camera.py, control.py and pos_estimation.py), all of which handle a specific part of the car's behavior. Each of these nodes communicate by publishing and subscribing to messages on different <strong>topics</strong>. </li>
-<li><strong>Topics</strong> - Nodes can send out and receive messages by publishing and subscribing to <strong>topics</strong>. Each topic has a name, which should be associated with the message types or message content being sent through it. For example, the control node in the race-on-ros repository subscribes to Pose messages on the <code>position/error</code> topic and publishes AckermanDrive messages on the <code>control</code> topic. Note that you can only send one message type through a single topic. </li>
-<li><strong>Messages</strong> - Messages are simple data structures that can contain a combination of basic data types. 
-For a more in depth discussion of common ROS concepts, check out <a href="https://wiki.ros.org/ROS/Concepts">ROS concepts</a>.</li>
-</ul>
-<h2 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">&para;</a></h2>
+                <h1 id="what-is-ros">What is ROS?<a class="headerlink" href="#what-is-ros" title="Permanent link">&para;</a></h1>
+<p>Ros is open-source framework that aims to simplify the complexities involved in writing robust, general robotics software. <a href="https://http://wiki.ros.org/ROS/Introduction" title="Title">Read more about ROS here.</a></p>
+<h2 id="ros-concepts">Ros Concepts<a class="headerlink" href="#ros-concepts" title="Permanent link">&para;</a></h2>
+<p>ROS has a number of important filesystem level concepts, including packages, metapackages, package manifests, repositories, message types and service types. For RaceOn, however, we'll focus mostly on the use of <strong>packages</strong> and <strong>message types</strong>. </p>
+<p>Additionally, ROS has several important concepts related to its "computation graph". "The Computation Graph is the peer-to-peer network of ROS processes that are processing data together." For the sake of Race On, the computation graph is composed of a number of ROS nodes that communicate through a publish/subscribe architecture. The pieces of the computational graph that are most relevant to RaceOn are <strong>nodes</strong>, <strong>messages</strong>, and <strong>topics</strong>. </p>
+<p>For an overview of ROS concepts, read <a href="http://wiki.ros.org/ROS/Concepts" title="Title">here</a>.</p>
+<h3 id="packages">Packages<a class="headerlink" href="#packages" title="Permanent link">&para;</a></h3>
+<p>In ROS, <strong>packages</strong> are the primary means of organizing software and are the smallest item you can build and release. They can contain any collection of files that should logically be contained together.</p>
+<h3 id="message-types">Message Types<a class="headerlink" href="#message-types" title="Permanent link">&para;</a></h3>
+<p><strong>Message types</strong> describe message data structures and outline which data types they contain. When creating a message type, they should be contained in <code>my_package/msg/MyMessageType.msg</code>. For more info about defining a custom message type in ROS, check out <a href="https://http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv" title="Title">creating a ROS msg and srv</a>.</p>
+<h3 id="nodes">Nodes<a class="headerlink" href="#nodes" title="Permanent link">&para;</a></h3>
+<p><strong>Nodes</strong> are modular processes that perform some computation for your system. They should be a logical unit within your sytem. For example, for RaceOn, we're using 4 nodes (actuation.py, camera.py, control.py and pos_estimation.py), all of which handle a specific part of the car's behavior. Each of these nodes communicate by publishing and subscribing to messages on different <strong>topics</strong>. </p>
+<h3 id="messages">Messages<a class="headerlink" href="#messages" title="Permanent link">&para;</a></h3>
+<p><strong>Messages</strong> are simple data structures that can contain a combination of basic data types. </p>
+<h3 id="topics">Topics<a class="headerlink" href="#topics" title="Permanent link">&para;</a></h3>
+<p>Nodes can send out and receive messages by publishing and subscribing to <strong>topics</strong>. Each topic has a name, which should be associated with the message types or message content being sent through it. For example, the control node in the race-on-ros repository subscribes to Pose messages on the <code>position/error</code> topic and publishes AckermanDrive messages on the <code>control</code> topic. Note that you can only send one message type through a single topic. <a href="https://http://wiki.ros.org/ROS/Concepts" title="Title">This is a classic ROS tutorial for setting up publisher and subscriber nodes.</a></p>
+<p>For a more in depth discussion of common ROS concepts, check out <a href="https://http://wiki.ros.org/ROS/Concepts" title="Title">ROS concepts</a>.</p>
+<h1 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">&para;</a></h1>
 <p>Before we proceed with this quickstart quide we need to perform a few preparation steps. If you plan to perform these steps using a Jupyter terminal instead of ssh, please before starting close all Jupyter tabs except the terminal.</p>
 <ol>
 <li>
@@ -596,14 +681,14 @@ sudo apt upgrade
     First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files. Moreover, the <code>catkin_make</code> command should also create two additional folders in the workspace, <code>build</code> and <code>devel</code>. The <code>build</code> folder is the default location of the build space and is where cmake and make are called to configure and build your packages. The <code>devel</code> folder is the default location of the devel space, which is where your executables and libraries go before you install your packages. </p>
 </li>
 <li>
-<p>Congratulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
+<p>Congradulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>sudo reboot
 </code></pre></div>
 </td></tr></table></p>
 </li>
 </ol>
 <h1 id="ros-tutorial">ROS Tutorial<a class="headerlink" href="#ros-tutorial" title="Permanent link">&para;</a></h1>
-<p>Before we introduce the Race On code for ROS we will do a quick tutorial. In ROS, code is organized around <a href="http://wiki.ros.org/Packages">packages</a> which are folders with special structure inside the  <code>src</code> folder of the workspace. If you run <code>ls ~/race-on-ros/src</code> you will see that the <code>race-on-ros</code> workspace contains only the <code>raceon</code> package. In this tutorial we will create a new package called <code>tutorial</code> that will have two nodes, the <code>publisher</code> node that publishes a sequence of numbers to the <code>data</code> topic and the <code>subscriber</code> node that will subscribe to the <code>data</code> topic to receive the sequence. <a href="http://wiki.ros.org/ROS/Tutorials/CreatingPackage">If you're looking for more, here's another tutorial which provides information on creating a package in a catkin workspace</a>.</p>
+<p>Before we introduce the Race On code for ROS we will do a quick tutorial. In ROS, code is organized around <a href="http://wiki.ros.org/Packages">packages</a> which are folders with special structure inside the  <code>src</code> folder of the workspace. If you run <code>ls ~/race-on-ros/src</code> you will see that the <code>race-on-ros</code> workspace contains only the <code>raceon</code> package. In this tutorial we will create a new package called <code>tutorial</code> that will have two nodes, the <code>publisher</code> node that publishes a sequence of numbers to the <code>data</code> topic and the <code>subscriber</code> node that will subscribe to the <code>data</code> topic to receive the sequence.</p>
 <ol>
 <li>
 <p>To create a new package we have first to make <code>~/race-on-ros/src</code> the current directory and then run the ROS <code>catkin_create_pkg</code> to create a package folder.</p>
@@ -628,7 +713,7 @@ drwxr-xr-x <span class="m">4</span> pi pi <span class="m">4</span>.0K Feb <span 
 drwxr-xr-x <span class="m">2</span> pi pi <span class="m">4</span>.0K Feb <span class="m">15</span> <span class="m">03</span>:06 src
 </code></pre></div>
 </td></tr></table>
-Where <code>package.xml</code> contains the package configuration in XML format, <code>CMakeLists.txt</code> contains the instructions how to build the C++ code, and the <code>src</code> is the directory where you place all your source files. To change the dependency list of your package at a later time or customize the package, edit the <code>package.xml</code> file. However, since our code will be only written in Python, we will create a separate folder called <code>scripts</code> to place our Python programs using the <code>mkdir tutorial/scripts</code> command.</p>
+Where <code>package.xml</code> contains the package configuration in XML format, <code>CMakeLists.txt</code> contains the instructions on how to build the C++ code, and <code>src</code> is the directory where you place all your source files. To change the dependency list of your package at a later time or custumize the package, edit the <code>package.xml</code> file. However, since our code will be only written in Python, we will create a separate folder called <code>scripts</code> to place our Python programs using the <code>mkdir tutorial/scripts</code> command.</p>
 <p>To build the package run 
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~/race-on-ros/
@@ -638,7 +723,7 @@ catkin_make
 Since we did not write any code this will should not encounter any errors, just see that <code>catkin</code>, the build tool of ROS, recognized the new package and traversed it contents.</p>
 </li>
 <li>
-<p>Create the publisher node. In ROS, a "node" is an executable that is connected to the ROS network. Here we will create the publisher node which will continuously send samples generated using a sinusoidal signal. Using the Jupyter interface, navigate to the <code>race-on-ros/src/tutorial/scripts/</code> folder and create a new text file called <code>publisher.py</code>. Paste this content inside the file and save it.
+<p>Create the publisher node. In ROS, a "Node" is an executable that is connected to the ROS network. Here we will create the publisher node which will continuously send samples generated using a sinusoidal signal. Using the Jupyter interface navigate to the <code>race-on-ros/src/tutorial/scripts/</code> folder and create a new text file called <code>publisher.py</code>. Paste this content inside the file and save it.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -708,12 +793,12 @@ Since we did not write any code this will should not encounter any errors, just 
         <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
-    The break down. First line tells the terminal that this is a Python script. All Python files should have it. The next three lines import the Python libraries which we declared as dependencies for the tutorial package and the math library required for the to calculate the sinusoid values. Next, we declare two global constants which are parameters of the generated sequence. 
-    The code inside the if statement represents the main program. Here we define how the publisher node interfaces with the rest of ROS. The line <code>rospy.init_node(NAME)</code>, is very important as it tells rospy the name of the node -- until rospy has this information, it cannot start communicating with the <a href="http://wiki.ros.org/Master">ROS Master</a>. In this case, the node will take on the name <code>publisher</code>. NOTE: the name must be a base name, i.e. it cannot contain any slashes "/". The <code>rospy.Publisher('data', Float32, queue_size=1)</code> declares that your node is publishing to the <code>data</code> topic using the message type <code>Float32</code>. Float32 here is actually the class std_msgs.msg.Float32. The <code>queue_size</code> argument limits the amount of queued messages if any subscriber is not receiving them fast enough. <code>rate = rospy.Rate(RATE)</code> this line creates a Rate object rate. With the help of its method sleep(), it offers a convenient way for looping at the desired rate. With its argument of 10, we should expect to go through the loop 10 times per second (as long as our processing time does not exceed 1/10<sup>th</sup> of a second!). Next we have a fairly standard rospy loop construct: checking the <code>rospy.is_shutdown()</code> flag and then doing work. You have to check <code>is_shutdown()</code> to check if your program should exit (e.g. if there is a <code>Ctrl-C</code> or otherwise). In this case, the "work" is a call to <code>pub.publish(value)</code> that publishes a string to our <code>data</code> topic. The loop calls <code>rate.sleep()</code>, which sleeps just long enough to maintain the desired rate through the loop. This loop also calls <code>rospy.loginfo(str)</code>, which performs triple-duty: the messages get printed to screen, it gets written to the Node's log file, and it gets written to <code>rosout</code>. <code>rosout</code> is a handy tool for debugging: you can pull up messages using <code>rqt_console</code> instead of having to find the console window with your Node's output. </p>
+    The break down. First line tells the terminal that this is a Python script. All Python files should have it. The next three lines import the Python libraries which we declared as dependency for the tutorial package and the math library required for the to calculate the sinusoid values. Next, we declare two global constants which are parameters of the generated sequence. 
+    The code inside the if statement represents the main program. Here we define how the publisher node interface to the rest of ROS. The line <code>rospy.init_node(NAME)</code>, is very important as it tells rospy the name of the node -- until rospy has this information, it cannot start communicating with the ROS Master. In this case, the node will take on the name <code>publisher</code>. NOTE: the name must be a base name, i.e. it cannot contain any slashes "/". The <code>rospy.Publisher('data', Float32, queue_size=1)</code> declares that your node is publishing to the <code>data</code> topic using the message type <code>Float32</code>. Float32 here is actually the class std_msgs.msg.Float32. The <code>queue_size</code> argument limits the amount of queued messages if any subscriber is not receiving them fast enough. <code>rate = rospy.Rate(RATE)</code> this line creates a Rate object rate. With the help of its method sleep(), it offers a convenient way for looping at the desired rate. With its argument of 10, we should expect to go through the loop 10 times per second (as long as our processing time does not exceed 1/10<sup>th</sup> of a second!). Next we have a fairly standard rospy loop construct: checking the <code>rospy.is_shutdown()</code> flag and then doing work. You have to check <code>is_shutdown()</code> to check if your program should exit (e.g. if there is a <code>Ctrl-C</code> or otherwise). In this case, the "work" is a call to <code>pub.publish(value)</code> that publishes a string to our <code>data</code> topic. The loop calls <code>rate.sleep()</code>, which sleeps just long enough to maintain the desired rate through the loop. This loop also calls <code>rospy.loginfo(str)</code>, which performs triple-duty: the messages get printed to screen, it gets written to the Node's log file, and it gets written to <code>rosout</code>. <code>rosout</code> is a handy tool for debugging: you can pull up messages using <code>rqt_console</code> instead of having to find the console window with your Node's output. </p>
 <p>To run the code we need first to make the script executable by changing the file permission using <code>chmod +x ~/race-on-ros/src/tutorial/scripts/publisher.py</code> command. Now, we can run the code using <code>rosrun tutorial publisher.py</code> command. Note, tab autocompletion works with ROS command arguments.</p>
 </li>
 <li>
-<p>The code for the subscriber is similar and the steps are the same.
+<p>The code for subscriber is similar and the steps are the same.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -757,7 +842,7 @@ Since we did not write any code this will should not encounter any errors, just 
     <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
-    Now you can open a second terminal to run the subscriber. Remember to make the subscriber script executable.</p>
+    Now you can open a second terminal to run the subscriber.</p>
 </li>
 <li>
 <p><strong>Exerices</strong>
@@ -773,8 +858,6 @@ Since we did not write any code this will should not encounter any errors, just 
 <p>Read more below to learn more about each of the nodes and the launch file we've provided to run them.</p>
 <h3 id="launch-file">Launch File<a class="headerlink" href="#launch-file" title="Permanent link">&para;</a></h3>
 <p>The launch file has a number of parameters for each of the nodes, which you can customize according to your needs. It also defines the topics to which the nodes publish and subscribe. For example, the camera node publishes to either <code>camera/image</code> or <code>camera/image/compressed</code> topic, depending on the value of the <code>~publish_raw</code> parameter, which is defined below on line 13 of the launch file.</p>
-<h4 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h4>
-<p>Read through the launch file to get a better understanding of how it works. Change or remove the parameters defined in it to see how the nodes respond.</p>
 <h3 id="camera-node">Camera Node<a class="headerlink" href="#camera-node" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -908,7 +991,7 @@ Since we did not write any code this will should not encounter any errors, just 
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../ros/" title="Ros Overview Setup" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../registration/" title="Registration" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -917,11 +1000,25 @@ Since we did not write any code this will should not encounter any errors, just 
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Ros Overview Setup
+                Registration
               </span>
             </div>
           </a>
         
+        
+          <a href="../Workshops/ros/" title="1. Introduction to ROS" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1. Introduction to ROS
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
@@ -947,9 +1044,9 @@ Since we did not write any code this will should not encounter any errors, just 
       
     </div>
     
-      <script src="../../assets/javascripts/application.c33a9706.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
     
   </body>
