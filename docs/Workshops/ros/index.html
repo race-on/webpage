@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.adb8469c.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
         <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.86422ebf.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -66,7 +66,7 @@
     
     <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
-      <link rel="manifest" type="application/manifest+json" href="../../manifest.webmanifest" crossorigin="use-credentials">
+      <link rel="manifest" href="../../manifest.webmanifest">
     
     
       <link rel="stylesheet" href="../../stylesheets/extra.css">
@@ -118,7 +118,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction-to-ros" tabindex="0" class="md-skip">
+      <a href="#introduction-to-ros" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -195,7 +195,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -357,30 +357,18 @@
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../../ros/" title="Ros Overview Setup" class="md-nav__link">
-      Ros Overview Setup
-    </a>
-  </li>
-
-    
-      
-      
-      
-
   
 
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
-    <label class="md-nav__link" for="nav-5">
+    <label class="md-nav__link" for="nav-4">
       Workshops
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
+      <label class="md-nav__title" for="nav-4">
         Workshops
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -550,55 +538,55 @@ For a more in depth discussion of common ROS concepts, check out <a href="https:
 <li>
 <p>Update the list of packages and install all the available software updates.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>sudo apt update
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>sudo apt update
 sudo apt upgrade
-</code></pre></div>
+</pre></div>
 </td></tr></table></p>
 </li>
 <li>
 <p>Install the OpenCV library for Python3. We will use the OpenCV functions for camera calibration and image preprocessing.
-    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>sudo apt install python3-opencv
-</code></pre></div>
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>sudo apt install python3-opencv
+</pre></div>
 </td></tr></table></p>
 </li>
 <li>
 <p>Instruct ROS to use Python 3 by setting the ROS_PYTHON_VERSION environment variable. 
-    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nb">echo</span> <span class="s2">&quot;export ROS_PYTHON_VERSION=3&quot;</span> &gt;&gt; ~/.bashrc
-</code></pre></div>
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;export ROS_PYTHON_VERSION=3&quot;</span> &gt;&gt; ~/.bashrc
+</pre></div>
 </td></tr></table>
     The <code>.bashrc</code> file in the home folder contains all the commands which are executed when you open a terminal.</p>
 </li>
 <li>
 <p>The <code>startup</code> folder in the home directory contains the scripts which are run everytime the Pi boots to setup the hardware and start the Jupyter and the ROS services. We need to modify the ROS script to allow the external devices connect to the ROS running on the Pi. For that open the file <code>~/startup/ros.sh</code> using the Jupyter interface and, if present, remove the line <code>export ROS_HOSTNAME=raspberrypi"</code>. In addition, since these scripts are crucial for the Race On platform to function properly we will make them read only to prevent accedental edits. For that run the following command in the terminal.
-    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>chmod a-w ~/startup/*
-</code></pre></div>
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>chmod a-w ~/startup/*
+</pre></div>
 </td></tr></table>
     where the argument <code>a</code> stands for all, <code>-</code> remove, and <code>w</code> write permission.</p>
 </li>
 <li>
 <p>Now we can prepare the ROS workspace. The <code>race-on-ros</code> folder contains the GitHub repository of the Race On team and only Race On organizers can push updates back to GitHub. To solve this issue we need to first delete the folder, fork the GitHub repository using your own GitHub account where you can add collaborators, and then clone back on Pi the forked repository. To delete the folder, run 
-    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>rm -rf ~/race-on-ros
-</code></pre></div>
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>rm -rf ~/race-on-ros
+</pre></div>
 </td></tr></table>
     Next, go to the GitHub page of the <a href="https://github.com/race-on/race-on-ros">race-on-ros</a> repository and click the fork button on the upper left corner. After a few seconds you should be redirected to your own <code>race-on-ros</code> repository. Clone the forked repository using the following command
-    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>git clone https://github.com/&lt;your-username&gt;/race-on-ros.git
-</code></pre></div>
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>git clone https://github.com/&lt;your-username&gt;/race-on-ros.git
+</pre></div>
 </td></tr></table>
     Now you should see again the <code>race-on-ros</code> folder in your home directory but this time the repository is linked to your own GitHub account.</p>
 </li>
 <li>
 <p>Before we can use the raceon package we need to build it since only source files are commited to GitHub. The following two commands are crucial and if you later experience problems with the ROS code then most likely you forgot to run them. You need to run these commands every time you add new files or dependencies to your packages so ROS knows about them.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>catkin_make -C ~/race-on-ros/
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>catkin_make -C ~/race-on-ros/
 <span class="nb">source</span> ~/race-on-ros/devel/setup.bash
-</code></pre></div>
+</pre></div>
 </td></tr></table>
     First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files. Moreover, the <code>catkin_make</code> command should also create two additional folders in the workspace, <code>build</code> and <code>devel</code>. The <code>build</code> folder is the default location of the build space and is where cmake and make are called to configure and build your packages. The <code>devel</code> folder is the default location of the devel space, which is where your executables and libraries go before you install your packages. </p>
 </li>
 <li>
 <p>Congratulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
-    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>sudo reboot
-</code></pre></div>
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>sudo reboot
+</pre></div>
 </td></tr></table></p>
 </li>
 </ol>
@@ -608,9 +596,9 @@ sudo apt upgrade
 <li>
 <p>To create a new package we have first to make <code>~/race-on-ros/src</code> the current directory and then run the ROS <code>catkin_create_pkg</code> to create a package folder.</p>
 <p><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~/race-on-ros/src
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/race-on-ros/src
 catkin_create_pkg tutorial std_msgs rospy
-</code></pre></div>
+</pre></div>
 </td></tr></table>
 The arguments for the <code>catkin_create_pkg</code> command are the package name followed by the dependencies of the new package. In this case, the dependencies are <code>std_msgs</code> and <code>rospy</code>. Since we will send <code>Float32</code> numbers
 we will use <code>std_msgs</code> as it includes common message types representing primitive data types and other basic message constructs. And <code>rospy</code> since we will write our code in Python. If you plan to write code in C or C++ you must also add <code>roscpp</code> to the dependency list. In case you forget to add a package as dependence, you can do that later by editing one of the package configuration files. </p>
@@ -620,20 +608,20 @@ we will use <code>std_msgs</code> as it includes common message types representi
 3
 4
 5
-6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>total 24K
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>total 24K
 drwxr-xr-x <span class="m">3</span> pi pi <span class="m">4</span>.0K Feb <span class="m">15</span> <span class="m">03</span>:06 .
 drwxr-xr-x <span class="m">4</span> pi pi <span class="m">4</span>.0K Feb <span class="m">15</span> <span class="m">03</span>:06 ..
 -rw-r--r-- <span class="m">1</span> pi pi <span class="m">6</span>.9K Feb <span class="m">15</span> <span class="m">03</span>:06 CMakeLists.txt
 -rw-r--r-- <span class="m">1</span> pi pi <span class="m">2</span>.7K Feb <span class="m">15</span> <span class="m">03</span>:06 package.xml
 drwxr-xr-x <span class="m">2</span> pi pi <span class="m">4</span>.0K Feb <span class="m">15</span> <span class="m">03</span>:06 src
-</code></pre></div>
+</pre></div>
 </td></tr></table>
 Where <code>package.xml</code> contains the package configuration in XML format, <code>CMakeLists.txt</code> contains the instructions how to build the C++ code, and the <code>src</code> is the directory where you place all your source files. To change the dependency list of your package at a later time or customize the package, edit the <code>package.xml</code> file. However, since our code will be only written in Python, we will create a separate folder called <code>scripts</code> to place our Python programs using the <code>mkdir tutorial/scripts</code> command.</p>
 <p>To build the package run 
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nb">cd</span> ~/race-on-ros/
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/race-on-ros/
 catkin_make
-</code></pre></div>
+</pre></div>
 </td></tr></table>
 Since we did not write any code this will should not encounter any errors, just see that <code>catkin</code>, the build tool of ROS, recognized the new package and traversed it contents.</p>
 </li>
@@ -672,7 +660,7 @@ Since we did not write any code this will should not encounter any errors, just 
 31
 32
 33
-34</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+34</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">Float32</span>
@@ -706,9 +694,29 @@ Since we did not write any code this will should not encounter any errors, just 
 
         <span class="c1"># Wait to match the rate</span>
         <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
-</code></pre></div>
+</pre></div>
 </td></tr></table>
-    The break down. First line tells the terminal that this is a Python script. All Python files should have it. The next three lines import the Python libraries which we declared as dependencies for the tutorial package and the math library required for the to calculate the sinusoid values. Next, we declare two global constants which are parameters of the generated sequence. 
+    The break down. 
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>#!/usr/bin/env python
+</pre></div>
+</td></tr></table>
+    This tells the terminal that this is a Python script. All Python files should have it.
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">Float32</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</td></tr></table>
+    We import the Python libraries which we declared as dependencies for the tutorial package and the math library required for the to calculate the sinusoid values. The <code>python rospy</code> library provides all the ROS functionality to Python whereas <code>python std_msgs</code> library the standard message types in ROS. 
+    <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">RATE</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Publishing rate of new data per second</span>
+<span class="n">FREQ</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># Frequency of the sinusoidal signal</span>
+</pre></div>
+</td></tr></table>
+    Next, we declare two global constants which are parameters of the generated sequence. 
     The code inside the if statement represents the main program. Here we define how the publisher node interfaces with the rest of ROS. The line <code>rospy.init_node(NAME)</code>, is very important as it tells rospy the name of the node -- until rospy has this information, it cannot start communicating with the <a href="http://wiki.ros.org/Master">ROS Master</a>. In this case, the node will take on the name <code>publisher</code>. NOTE: the name must be a base name, i.e. it cannot contain any slashes "/". The <code>rospy.Publisher('data', Float32, queue_size=1)</code> declares that your node is publishing to the <code>data</code> topic using the message type <code>Float32</code>. Float32 here is actually the class std_msgs.msg.Float32. The <code>queue_size</code> argument limits the amount of queued messages if any subscriber is not receiving them fast enough. <code>rate = rospy.Rate(RATE)</code> this line creates a Rate object rate. With the help of its method sleep(), it offers a convenient way for looping at the desired rate. With its argument of 10, we should expect to go through the loop 10 times per second (as long as our processing time does not exceed 1/10<sup>th</sup> of a second!). Next we have a fairly standard rospy loop construct: checking the <code>rospy.is_shutdown()</code> flag and then doing work. You have to check <code>is_shutdown()</code> to check if your program should exit (e.g. if there is a <code>Ctrl-C</code> or otherwise). In this case, the "work" is a call to <code>pub.publish(value)</code> that publishes a string to our <code>data</code> topic. The loop calls <code>rate.sleep()</code>, which sleeps just long enough to maintain the desired rate through the loop. This loop also calls <code>rospy.loginfo(str)</code>, which performs triple-duty: the messages get printed to screen, it gets written to the Node's log file, and it gets written to <code>rosout</code>. <code>rosout</code> is a handy tool for debugging: you can pull up messages using <code>rqt_console</code> instead of having to find the console window with your Node's output. </p>
 <p>To run the code we need first to make the script executable by changing the file permission using <code>chmod +x ~/race-on-ros/src/tutorial/scripts/publisher.py</code> command. Now, we can run the code using <code>rosrun tutorial publisher.py</code> command. Note, tab autocompletion works with ROS command arguments.</p>
 </li>
@@ -734,7 +742,7 @@ Since we did not write any code this will should not encounter any errors, just 
 18
 19
 20
-21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
 
 <span class="kn">import</span> <span class="nn">rospy</span>
 <span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">Float32</span>
@@ -755,20 +763,21 @@ Since we did not write any code this will should not encounter any errors, just 
 
     <span class="c1"># Prevents python from exiting until this node is stopped</span>
     <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
-</code></pre></div>
+</pre></div>
 </td></tr></table>
     Now you can open a second terminal to run the subscriber. Remember to make the subscriber script executable.</p>
 </li>
 <li>
 <p><strong>Exerices</strong>
-    To better understan ROS concepts try to improve the above code by adding the following two features:
-        1. Create a launch file to start both nodes at the same time. Consult ROS documentation and raceon package code for inspiration
-        1. Replace the global constants in the <code>publisher.py</code> file with ROS parameters. Update the launch file to include the default parameter values. Find how to overwrite the parameter value when you launch the application.</p>
+    To better understand ROS concepts try to improve the above code by adding the following features:</p>
+<ol>
+<li>Create a launch file to start both nodes at the same time. Consult ROS documentation and raceon package code for inspiration.</li>
+<li>Replace the global constants in the <code>publisher.py</code> file with ROS parameters. Update the launch file to include the default parameter values. Find how to overwrite the parameter value when you launch the application.</li>
+<li>Create a custom message type that contains two float number. Set the value of the second float to be the cosine. Use rqt ROS tool to plot in real-time these values on your machine.</li>
+</ol>
 </li>
 </ol>
-<h1 id="setting-up-ros-for-your-car">Setting Up ROS for Your Car<a class="headerlink" href="#setting-up-ros-for-your-car" title="Permanent link">&para;</a></h1>
-<p>To run the ros nodes, run <code>roslaunch raceon raceon.launch speed:=140</code>.</p>
-<h1 id="overview-of-race-on-ros-code">Overview of Race On ROS Code<a class="headerlink" href="#overview-of-race-on-ros-code" title="Permanent link">&para;</a></h1>
+<h2 id="overview-of-race-on-ros-code">Overview of Race On ROS Code<a class="headerlink" href="#overview-of-race-on-ros-code" title="Permanent link">&para;</a></h2>
 <p>The ROS repository for Race On consists of 4 ROS nodes and one Python class that initializes the car configuration (including the servo's middle and rightmost values and the motor's min, max and brake speeds) and provides functions for steering and changing the speed of the car. The 4 nodes included in the repository are actuation.py, camera.py, control.py and pos_estimation.py. The nodes should be run using the file <code>race-on-ros/src/launch/raceon.launch</code>. </p>
 <p>Read more below to learn more about each of the nodes and the launch file we've provided to run them.</p>
 <h3 id="launch-file">Launch File<a class="headerlink" href="#launch-file" title="Permanent link">&para;</a></h3>
@@ -887,6 +896,8 @@ Since we did not write any code this will should not encounter any errors, just 
 <p>When the actuator node receives a control message, it uses the car module functions to steer the car and set its speed.</p>
 <h3 id="car-module">Car Module<a class="headerlink" href="#car-module" title="Permanent link">&para;</a></h3>
 <p>The car module is a class that initializes the servo and motor and provides functions to alter the car's speed and the servo's position and also to brake the car.</p>
+<h2 id="setting-up-ros-for-your-car">Setting Up ROS for Your Car<a class="headerlink" href="#setting-up-ros-for-your-car" title="Permanent link">&para;</a></h2>
+<p>To run the ros nodes, run <code>roslaunch raceon raceon.launch speed:=140</code>.</p>
                 
                   
                 
@@ -908,7 +919,7 @@ Since we did not write any code this will should not encounter any errors, just 
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../ros/" title="Ros Overview Setup" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../registration/" title="Registration" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -917,7 +928,7 @@ Since we did not write any code this will should not encounter any errors, just 
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Ros Overview Setup
+                Registration
               </span>
             </div>
           </a>
@@ -935,9 +946,9 @@ Since we did not write any code this will should not encounter any errors, just 
           </div>
         
         powered by
-        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        <a href="https://www.mkdocs.org">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        <a href="https://squidfunk.github.io/mkdocs-material/">
           Material for MkDocs</a>
       </div>
       
@@ -947,7 +958,7 @@ Since we did not write any code this will should not encounter any errors, just 
       
     </div>
     
-      <script src="../../assets/javascripts/application.c33a9706.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
