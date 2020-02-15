@@ -170,15 +170,88 @@ we will use ```std_msgs``` as it includes common message types representing prim
         rospy.init_node("subscriber")
         rospy.Subscriber("data", Float32, callback)
 
+
         # Prevents python from exiting until this node is stopped
         rospy.spin()
     ```
     Now you can open a second terminal to run the subscriber.
     
-1. **Exersices**
+1. **Exerices**
     To better understan ROS concepts try to improve the above code by adding the following two features:
         1. Create a launch file to start both nodes at the same time. Consult ROS documentation and raceon package code for inspiration
         1. Replace the global constants in the ```publisher.py``` file with ROS parameters. Update the launch file to include the default parameter values. Find how to overwrite the parameter value when you launch the application.
 
 # Setting Up ROS for Your Car
 To run the ros nodes, run ```roslaunch raceon raceon.launch speed:=140```.
+
+# Overview of Race On ROS Code
+The ROS repository for Race On consists of 4 ROS nodes and one Python class that initializes the car configuration (including the servo's middle and rightmost values and the motor's min, max and brake speeds) and provides functions for steering and changing the speed of the car. The 4 nodes included in the repository are actuation.py, camera.py, control.py and pos_estimation.py. The nodes should be run using the file ```race-on-ros/src/launch/raceon.launch```. 
+
+Read more below to learn more about each of the nodes and the launch file we've provided to run them.
+
+### Launch File 
+The launch file has a number of parameters for each of the nodes, which you can customize according to your needs. It also defines the topics to which the nodes publish and subscribe. For example, the camera node publishes to either ```camera/image``` or ```camera/image/compressed``` topic, depending on the value of the ```~publish_raw``` parameter, which is defined below on line 13 of the launch file.
+
+### Camera Node
+
+|   Topics                        | Message Type      |  Action       |
+| --------------------------------| ------------------| ------------  |
+| ```camera/image```              |   Image           |  Publish      |
+|   ```camera/image/compressed``` |   CompressedImage |  Publish      | 
+
+The camera node, which is found in ```race-on-ros/src/scripts/camera.py``` starts up the pi's camera and begins recording upon startup. Depending on the value of the ```~use_compressed_image``` parameter, it will either publish compressed images on the ```camera/image/compressed``` or uncompressed images on the ```camera/image``` topic. The **resolution**, **frames per second** and **publish_raw** parameters can be configured in the launch file.
+
+#### Suggested Exercise
+Try adjusting the frame rate from the launch file and see how it affects your car's trajectory.
+#### Suggested Exercise
+Try adjusting the frame rate from the launch file and see how it affects your car's trajectory!
+
+### Position Estimation Node
+
+|   Topics                        | Message Type      |  Action         |
+| --------------------------------| ------------------| ------------    |
+| ```camera/image```              |   Image           |  Subscribe      |
+|   ```camera/image/compressed``` |   CompressedImage |  Subscribe      | 
+|   ```position/error```          |   Pose            |  Publish        | 
+|   ```position/track``           |   TrackPosition   |  Publish        | 
+
+The position estimation node is found in ```race-on-ros/src/scripts/pos_estimation.py```. This node executes much of the position-estimation functionality you likely saw before in [the testcar-nomiddleline jupyter notebook](https://github.com/race-on/workshops/blob/master/testcar-nomiddleline.ipynb). Depending on the value of the **use_compressed_image** parameter, the camera node will either subscribe to the ```camera/image/compressed``` or ```camera/image``` topic. 
+
+You can set the **scan line**, **peak threshold**, **track width** and **camera center** parameters in the launch file or adjust their default values in the node's code. The **scan line** parameter is the horizontal line in the image that you'll use to look for peaks. 
+
+When the node receives an image message, it finds peaks along the horizontal scan line and uses them to estimate the car's position within the track. It then **publishes this position estimation to the "position/error" topic**. It also **publishes an estimation of the track position to the "position/track" topic**.
+
+#### Suggested Exercise
+Try changing the peak threshold and see how it affects your estimation of the track and car positions!
+
+### Controller Node
+
+|   Topics                        | Message Type      |  Action         |
+| --------------------------------| ------------------| ------------    |
+| ```position/error```            |   Pose            |  Subscribe      |
+|   ```control```                 |   AckermanDrive   |  Publish        |
+
+The controller node is found in ```race-on-ros/src/scripts/controller.py```. The control node is where you'll want to put your team's control logic (potentially a PID controller?). Currently, the control node uses a proportional gain coefficient to determine how much you should alter the servo's position to minimize the distance from the target position. 
+
+You can change the **motor speed**, **target** (target x position on the track) and **kp** (proportional gain coefficient to use to scale the error) parameters in the launch file or alter their default values in the code.
+
+When the controller node receives a Pose message containing the car's current position on the track, it calculates the error from the target position and estimates a new servo position value using **kp** to steer the car closer to the target. It then **publishes this new servo position and the current motor speed to the control topic**.
+
+#### Suggested Exercises
+Adjust the motor speed and proportional gain parameters and see how they alter your car's behavior.
+
+### Actuator Node
+|   Topics                        | Message Type      |  Action         |
+| --------------------------------| ------------------| ------------    |
+| ```control```                   |   AckermanDrive   |  Subscribe      |
+
+The actuator node is found in ```race-on-ros/src/scripts/actuation.py```. It **subscribes to the ```control``` topic and is responsible for commanding the car**. To do so, it makes use of the car module, which has utility functions to set the car's speed and servo position.
+
+When the actuator node receives a control message, it uses the car module functions to steer the car and set its speed.
+
+### Car Module
+The car module is a class that initializes the servo and motor and provides functions to alter the car's speed and the servo's position and also to brake the car.
+
+### Running the Race On ROS code
+To run the Race On ROS code, first follow the steps listed above to setup your ROS environment.
+Then, run ```roslaunch raceon raceon.launch speed:=140``` to execute the launch file.
