@@ -3,27 +3,16 @@ title: 1. Introduction to ROS
 # Introduction to ROS
 
 [ROS](https://wiki.ros.org/ROS/Introduction) is an open-source framework that aims to simplify the complexities involved in writing robust, general robotics software. ROS has a number of important filesystem level concepts, including packages, metapackages, package manifests, repositories, message types and service types. For Race On, however, we will focus mostly on the use of **packages** and **message types**. 
-The power of ROS comes from the use of a computation graph similar to one used by Tensorflow, a machine learning library. The computation graph is composed from a number of nodes which either produce or consume data from multiple sources through a publish/subscribe architecture. At initialization, nodes declaretheir name and subscribe to the *topics* which provide all the necessary information for the node to properly function. Each *topic* has an associated *message type* which defines the format that the publishers and subscribers will use to exchange information. Some nodes might only publish data, such as the camera node, some might only subscribe to data topics, such as the motor and servo node, and some might do both such as the image processing node that receives images and outputs the car track position.
+The power of ROS comes from the use of a computation graph similar to one used by Tensorflow, a machine learning library. The computation graph is composed from a number of nodes which either produce or consume data from multiple sources through a publish/subscribe architecture. At initialization, nodes declaretheir name and subscribe to the **topics** which provide all the necessary information for the node to properly function. Each **topic** has an associated **message type** which defines the format that the publishers and subscribers will use to exchange information. Some nodes might only publish data, such as the camera node, some might only subscribe to data topics, such as the motor and servo node, and some might do both such as the image processing node that receives images and outputs the car track position.
 
-### Packages
+ROS concepts review.
 
-In ROS, **packages** are the primary means of organizing software and are the smallest item you can build and release. They can contain any collection of files that should logically be contained together.
-
-### Message Types
-
-**Message types** describe message data structures and outline which data types they contain. When creating a message type, they should be contained in ```my_package/msg/MyMessageType.msg```. For more info about defining a custom message type in ROS, check out [creating a ROS msg and srv](https://http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv "Title").
-
-### Nodes
-
-**Nodes** are modular processes that perform some computation for your system. They should be a logical unit within your sytem. For example, for RaceOn, we're using 4 nodes (actuation.py, camera.py, control.py and pos_estimation.py), all of which handle a specific part of the car's behavior. Each of these nodes communicate by publishing and subscribing to messages on different **topics**. 
-
-### Messages
-**Messages** are simple data structures that can contain a combination of basic data types. 
-
-### Topics
-Nodes can send out and receive messages by publishing and subscribing to **topics**. Each topic has a name, which should be associated with the message types or message content being sent through it. For example, the control node in the race-on-ros repository subscribes to Pose messages on the ```position/error``` topic and publishes AckermanDrive messages on the ```control``` topic. Note that you can only send one message type through a single topic. [This is a classic ROS tutorial for setting up publisher and subscriber nodes.](https://http://wiki.ros.org/ROS/Concepts "Title")
-
-For a more in depth discussion of common ROS concepts, check out [ROS concepts](https://http://wiki.ros.org/ROS/Concepts "Title").
+* **Packages** - In ROS, packages are the primary means of organizing software and are the smallest item you can build and release. They can contain any collection of files that should logically be contained together.
+* **Message Types** - Message types describe message data structures and outline which data types they contain. When creating a message type, they should be contained in the ```msg`` folder of your package. For more info about defining a custom message type in ROS, check out [creating a ROS msg and srv](https://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv).
+* **Nodes** - Nodes are modular processes that perform some computation for your system. They should be a logical unit within your sytem. For example, for Race On, we are using 4 nodes (actuation.py, camera.py, control.py and pos_estimation.py), all of which handle a specific part of the car's behavior. Each of these nodes communicate by publishing and subscribing to messages on different **topics**. 
+* **Topics** - Nodes can send out and receive messages by publishing and subscribing to **topics**. Each topic has a name, which should be associated with the message types or message content being sent through it. For example, the control node in the race-on-ros repository subscribes to Pose messages on the ```position/error``` topic and publishes AckermanDrive messages on the ```control``` topic. Note that you can only send one message type through a single topic. 
+* **Messages** - Messages are simple data structures that can contain a combination of basic data types. 
+For a more in depth discussion of common ROS concepts, check out [ROS concepts](https://wiki.ros.org/ROS/Concepts).
 
 ## Preparation
 
@@ -74,7 +63,7 @@ Before we proceed with this quickstart quide we need to perform a few preparatio
     sudo reboot
     ```
     
-# ROS Tutorial
+##  ROS Tutorial
 Before we introduce the Race On code for ROS we will do a quick tutorial. In ROS, code is organized around packages which are folders with special structure inside the  ```src``` folder of the workspace. If you run ```ls ~/race-on-ros/src``` you will see that the ```race-on-ros``` workspace contains only the ```raceon``` package. In this tutorial we will create a new package called ```tutorial``` that will have two nodes, the ```publisher``` node that publishes a sequence of numbers to the ```data``` topic and the ```subscriber``` node that will subscribe to the ```data``` topic to receive the sequence.
 
 1. To create a new package we have first to make ```~/race-on-ros/src``` the current directory and then run the ROS ```catkin_create_pkg``` to create a package folder.
