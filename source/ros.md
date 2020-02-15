@@ -71,9 +71,11 @@ Before we proceed with this quickstart quide we need to perform a few preparatio
     catkin_make -C ~/race-on-ros/
     source ~/race-on-ros/devel/setup.bash
     ```
+
     First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files. Moreover, the ```catkin_make``` command should also create two additional folders in the workspace, ```build``` and ```devel```. The ```build``` folder is the default location of the build space and is where cmake and make are called to configure and build your packages. The ```devel``` folder is the default location of the devel space, which is where your executables and libraries go before you install your packages. 
+
     
-1. Congradulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
+1. Congratulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
     ```bash
     sudo reboot
     ```
@@ -110,31 +112,23 @@ we will use ```std_msgs``` as it includes common message types representing prim
     
     
 
-# Setting Up ROS for Your Car
-## Step by Step Instructions
-1. First, install OpenCV for Python3.
+# Overview of Race On ROS Code
+The ROS repository for Race On consists of 4 ROS nodes and one Python class that initializes the car configuration (including the servo's middle and rightmost values and the motor's min, max and brake speeds) and provides functions for steering and changing the speed of the car. The 4 nodes included in the repository are actuation.py, camera.py, control.py and pos_estimation.py. The nodes should be run using the file ```race-on-ros/src/launch/raceon.launch```. 
 
-    ```
-    sudo apt install python3-opencv
-    ```
+Read more below to learn more about each of the nodes and the launch file we've provided to run them.
 
-    If you run into issues installing OpenCV, especially with problems fetching packages from the Raspbian reposiories, try ```sudo apt update``` to get updated information about packages.
+### Launch File 
+The launch file has a number of parameters for each of the nodes, which you can customize according to your needs. It also defines the topics to which the nodes publish and subscribe. For example, the camera node publishes to either ```camera/image``` or ```camera/image/compressed``` topic, depending on the value of the ```~publish_raw``` parameter, which is defined below on line 13 of the launch file.
 
-2. Next, set the ROS_PYTHON_PATH in your ```.bashrc```.
-    ``` 
-    echo "export ROS_PYTHON_VERSION=3" >> ~/.bashrc
-    ```
+### Camera Node
 
-3. Open the file ```~/startup/ros.sh``` and, if present, remove the line ```export ROS_HOSTNAME=raspberrypi"```.
+|   Topics                        | Message Type      |  Action       |
+| --------------------------------| ------------------| ------------  |
+| ```camera/image```              |   Image           |  Publish      |
+|   ```camera/image/compressed``` |   CompressedImage |  Publish      | 
 
-4. Now, ```sudo reboot```
+The camera node, which is found in ```race-on-ros/src/scripts/camera.py``` starts up the pi's camera and begins recording upon startup. Depending on the value of the ```~use_compressed_image``` parameter, it will either publish compressed images on the ```camera/image/compressed``` or uncompressed images on the ```camera/image``` topic. The **resolution**, **frames per second** and **publish_raw** parameters can be configured in the launch file.
 
-5. If the directory ```race-on-ros``` is present, delete it using ```rm -rf ~/race-on-ros```.
-6. Clone the race-on repository again, using 
-    ```git clone https://github.com/race-on/race-on-ros.git```
-7. Cd into the race-on-ros repository and build the workspace.
- ```
- cd ~/race-on-ros
- catkin_make
- ```
-8. To run the ros nodes, run ```roslaunch raceon raceon.launch speed:=140```.
+#### Suggested Exercise
+Try adjusting the frame rate from the launch file and see how it affects your car's trajectory.
+
