@@ -31,9 +31,7 @@ For a more in depth discussion of common ROS concepts, check out [ROS concepts](
 
 # Preparation
 
-Before we proceed with this quickstart quide we need to perform a few preparation steps:
-
-1. If you plan to perform the following steps using a Jupyter terminal instead of ssh, please close all Jupyter tabs except the terminal.
+Before we proceed with this quickstart quide we need to perform a few preparation steps. If you plan to perform these steps using a Jupyter terminal instead of ssh, please before starting close all Jupyter tabs except the terminal.
 
 1. Update the list of packages and install all the available software updates.
     ```bash
@@ -46,18 +44,40 @@ Before we proceed with this quickstart quide we need to perform a few preparatio
     sudo apt install python3-opencv
     ```
     
-1. Set the ROS_PYTHON_VERSION environment variable to instruct ROS to use Python 3. The commands from the ```.bashrc``` file in the home folder are always executed when you open a terminal.
+1. Instruct ROS to use Python 3 by setting the ROS_PYTHON_VERSION environment variable. 
     ```bash
     echo "export ROS_PYTHON_VERSION=3" >> ~/.bashrc
     ```
+    The ```.bashrc``` file in the home folder contains all the commands which are executed when you open a terminal.
 
-1. The ```startup``` folder in the home directory contains the scripts which are run everytime the Pi boots to setup the hardware and start the Jupyter and the ROS services. We need to modify the ROS script, and more exactly, open the file ```~/startup/ros.sh``` using the Jupyter interface and, if present, remove the line ```export ROS_HOSTNAME=raspberrypi"```. In addition, since these scripts are crucial for the Race On platform to function properly we will make them read only to prevent accedental edits. For that run the following command in the terminal.
+1. The ```startup``` folder in the home directory contains the scripts which are run everytime the Pi boots to setup the hardware and start the Jupyter and the ROS services. We need to modify the ROS script to allow the external devices connect to the ROS running on the Pi. For that open the file ```~/startup/ros.sh``` using the Jupyter interface and, if present, remove the line ```export ROS_HOSTNAME=raspberrypi"```. In addition, since these scripts are crucial for the Race On platform to function properly we will make them read only to prevent accedental edits. For that run the following command in the terminal.
     ```bash
     chmod a-w ~/startup/*
     ```
-where the argument ```a``` stands for all, ```-``` remove, and ```w``` write permission.
+    where the argument ```a``` stands for all, ```-``` remove, and ```w``` write permission.
 
-1. Now we can prepare the ROS workspace.
+1. Now we can prepare the ROS workspace. The ```race-on-ros``` folder contains the GitHub repository of the Race On team and only Race On organizers can push updates back to GitHub. To solve this issue we need to first delete the folder, fork the GitHub repository using your own GitHub account where you can add collaborators, and then clone back on Pi the forked repository. To delete the folder, run 
+    ```bash
+    rm -rf ~/race-on-ros
+    ``` 
+    Next, go to the GitHub page of the [race-on-ros](https://github.com/race-on/race-on-ros) repository and click the fork button on the upper left corner. After a few seconds you should be redirected to your own ```race-on-ros``` repository. Clone the forked repository using the following command
+    ```bash
+    git clone https://github.com/<your-username>/race-on-ros.git
+    ```
+    Now you should see again the ```race-on-ros``` folder in your home directory but this time the repository is linked to your own GitHub account.
+    
+1. Before we can use the raceon package we need to build it since only source files are commited to GitHub. The following two commands are crucial and if you later experience problems with the ROS code then most likely you forgot to run them. You need to run these commands every time you add new files or dependencies to your packages so ROS knows about them.
+    ```bash
+    catkin_make -C ~/race-on-ros/
+    source ~/race-on-ros/devel/setup.bash
+    ```
+    First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files.
+    
+1. Congradulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
+    ```bash
+    sudo reboot
+    ```
+    
 
 # Setting Up ROS for Your Car
 ## Step by Step Instructions
