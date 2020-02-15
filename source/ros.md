@@ -71,12 +71,43 @@ Before we proceed with this quickstart quide we need to perform a few preparatio
     catkin_make -C ~/race-on-ros/
     source ~/race-on-ros/devel/setup.bash
     ```
-    First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files.
+    First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files. Moreover, the ```catkin_make``` command should also create two additional folders in the workspace, ```build``` and ```devel```. The ```build``` folder is the default location of the build space and is where cmake and make are called to configure and build your packages. The ```devel``` folder is the default location of the devel space, which is where your executables and libraries go before you install your packages. 
     
 1. Congradulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
     ```bash
     sudo reboot
     ```
+    
+# ROS Tutorial
+Before we introduce the Race On code for ROS we will do a quick tutorial. In ROS, code is organized around packages which are folders with special structure inside the  ```src``` folder of the workspace. If you run ```ls ~/race-on-ros/src``` you will see that the ```race-on-ros``` workspace contains only the ```raceon``` package. In this tutorial we will create a new package called ```tutorial``` that will have two nodes, the ```publisher``` node that publishes a sequence of numbers to the ```data``` topic and the ```subscriber``` node that will subscribe to the ```data``` topic to receive the sequence.
+
+1. To create a new package we have first to make ```~/race-on-ros/src``` the current directory and then run the ROS ```catkin_create_pkg``` to create a package folder.
+    
+    ```bash
+    cd ~/race-on-ros/src
+    catkin_create_pkg tutorial std_msgs rospy
+    ```
+    The arguments for the ```catkin_create_pkg``` command are the package name followed by the dependencies of the new package. In this case, the dependencies are ```std_msgs``` and ```rospy```. Since we will send ```Float32``` numbers
+we will use ```std_msgs``` as it includes common message types representing primitive data types and other basic message constructs. And ```rospy``` since we will write our code in Python. If you plan to write code in C or C++ you must also add ```roscpp``` to the dependence list. In case you forget to add a package as dependence, you can do that later by editing one of the package configuration files. 
+
+    To check the result of the command we can list the contents of the ```tutorial``` folder using ```ls -ahl tutorial/``` and you should see an output similar to this:
+    ```bash
+    total 24K
+    drwxr-xr-x 3 pi pi 4.0K Feb 15 03:06 .
+    drwxr-xr-x 4 pi pi 4.0K Feb 15 03:06 ..
+    -rw-r--r-- 1 pi pi 6.9K Feb 15 03:06 CMakeLists.txt
+    -rw-r--r-- 1 pi pi 2.7K Feb 15 03:06 package.xml
+    drwxr-xr-x 2 pi pi 4.0K Feb 15 03:06 src
+    ```
+    Where ```package.xml``` contains the package configuration in XML format, ```CMakeLists.txt``` contains the instructions how to build the C++ code, and the ```src``` is the directory where you place all your source files. To change the dependency list of your package at a later time or costumize the package edit the ```package.xml``` file.
+    
+    To build the package run 
+    ```bash
+    cd ~/race-on-ros/
+    catkin_make
+    ```
+    Since we did not write any code this will should not encounter any errors, just see that ```catkin```, the build tool of ROS, recognized the new package and traversed it contents.
+    
     
 
 # Setting Up ROS for Your Car
