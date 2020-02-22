@@ -6,7 +6,7 @@ title: Home
 
 ## Announcements
 
-!!! note "Control Workshop & Practice Session -- Sunday, Feb. 23, 10am - 4pm (EEB 132)"
+!!! note "Control Workshop & Practice Session – Sunday, Feb. 23, 10am - 4pm (EEB 132)"
     See [Gain scheduling](../workshops/2_gain_scheduling) workshop for details.
 
 
