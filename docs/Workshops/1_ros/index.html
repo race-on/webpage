@@ -424,6 +424,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2_gain_scheduling/" title="2. Gain Scheduling" class="md-nav__link">
+      2. Gain Scheduling
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -521,15 +533,15 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
                 
                 
                 <h1 id="introduction-to-ros">Introduction to ROS<a class="headerlink" href="#introduction-to-ros" title="Permanent link">&para;</a></h1>
-<p><a href="https://wiki.ros.org/ROS/Introduction">ROS</a> is an open-source framework that aims to simplify the complexities involved in writing robust, general robotics software. ROS has a number of important filesystem level concepts, including packages, metapackages, package manifests, repositories, message types and service types. For Race On, however, we will focus mostly on the use of <strong>packages</strong> and <strong>message types</strong>. 
+<p><a href="https://wiki.ros.org/ROS/Introduction">ROS</a> is an open-source framework that aims to simplify the complexities involved in writing robust, general robotics software. ROS has a number of important filesystem level concepts, including packages, metapackages, package manifests, repositories, message types and service types. For Race On, however, we will focus mostly on the use of <strong>packages</strong> and <strong>message types</strong>.
 The power of ROS comes from the use of a computation graph similar to one used by Tensorflow, a machine learning library. The computation graph is composed from a number of nodes which either produce or consume data from multiple sources through a publish/subscribe architecture. At initialization, nodes declaretheir name and subscribe to the <strong>topics</strong> which provide all the necessary information for the node to properly function. Each <strong>topic</strong> has an associated <strong>message type</strong> which defines the format that the publishers and subscribers will use to exchange information. Some nodes might only publish data, such as the camera node, some might only subscribe to data topics, such as the motor and servo node, and some might do both such as the image processing node that receives images and outputs the car track position.</p>
 <p>ROS concepts review.</p>
 <ul>
 <li><strong>Packages</strong> - In ROS, packages are the primary means of organizing software and are the smallest item you can build and release. They can contain any collection of files that should logically be contained together.</li>
 <li><strong>Message Types</strong> - Message types describe message data structures and outline which data types they contain. When creating a message type, they should be contained in the <code>`msg</code> folder of your package. For more info about defining a custom message type in ROS, check out <a href="https://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv">creating a ROS msg and srv</a>.</li>
-<li><strong>Nodes</strong> - Nodes are modular processes that perform some computation for your system. They should be a logical unit within your sytem. For example, for Race On, we are using 4 nodes (actuation.py, camera.py, control.py and pos_estimation.py), all of which handle a specific part of the car's behavior. Each of these nodes communicate by publishing and subscribing to messages on different <strong>topics</strong>. </li>
-<li><strong>Topics</strong> - Nodes can send out and receive messages by publishing and subscribing to <strong>topics</strong>. Each topic has a name, which should be associated with the message types or message content being sent through it. For example, the control node in the race-on-ros repository subscribes to Pose messages on the <code>position/error</code> topic and publishes AckermanDrive messages on the <code>control</code> topic. Note that you can only send one message type through a single topic. </li>
-<li><strong>Messages</strong> - Messages are simple data structures that can contain a combination of basic data types. 
+<li><strong>Nodes</strong> - Nodes are modular processes that perform some computation for your system. They should be a logical unit within your sytem. For example, for Race On, we are using 4 nodes (actuation.py, camera.py, control.py and pos_estimation.py), all of which handle a specific part of the car's behavior. Each of these nodes communicate by publishing and subscribing to messages on different <strong>topics</strong>.</li>
+<li><strong>Topics</strong> - Nodes can send out and receive messages by publishing and subscribing to <strong>topics</strong>. Each topic has a name, which should be associated with the message types or message content being sent through it. For example, the control node in the race-on-ros repository subscribes to Pose messages on the <code>position/error</code> topic and publishes AckermanDrive messages on the <code>control</code> topic. Note that you can only send one message type through a single topic.</li>
+<li><strong>Messages</strong> - Messages are simple data structures that can contain a combination of basic data types.
 For a more in depth discussion of common ROS concepts, check out <a href="https://wiki.ros.org/ROS/Concepts">ROS concepts</a>.</li>
 </ul>
 <h2 id="preparation">Preparation<a class="headerlink" href="#preparation" title="Permanent link">&para;</a></h2>
@@ -550,7 +562,7 @@ sudo apt upgrade
 </td></tr></table></p>
 </li>
 <li>
-<p>Instruct ROS to use Python 3 by setting the ROS_PYTHON_VERSION environment variable. 
+<p>Instruct ROS to use Python 3 by setting the ROS_PYTHON_VERSION environment variable.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;export ROS_PYTHON_VERSION=3&quot;</span> &gt;&gt; ~/.bashrc
 </pre></div>
 </td></tr></table>
@@ -564,7 +576,7 @@ sudo apt upgrade
     where the argument <code>a</code> stands for all, <code>-</code> remove, and <code>w</code> write permission.</p>
 </li>
 <li>
-<p>Now we can prepare the ROS workspace. The <code>race-on-ros</code> folder contains the GitHub repository of the Race On team and only Race On organizers can push updates back to GitHub. To solve this issue we need to first delete the folder, fork the GitHub repository using your own GitHub account where you can add collaborators, and then clone back on Pi the forked repository. To delete the folder, run 
+<p>Now we can prepare the ROS workspace. The <code>race-on-ros</code> folder contains the GitHub repository of the Race On team and only Race On organizers can push updates back to GitHub. To solve this issue we need to first delete the folder, fork the GitHub repository using your own GitHub account where you can add collaborators, and then clone back on Pi the forked repository. To delete the folder, run
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>rm -rf ~/race-on-ros
 </pre></div>
 </td></tr></table>
@@ -581,7 +593,7 @@ sudo apt upgrade
 <span class="nb">source</span> ~/race-on-ros/devel/setup.bash
 </pre></div>
 </td></tr></table>
-    First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files. Moreover, the <code>catkin_make</code> command should also create two additional folders in the workspace, <code>build</code> and <code>devel</code>. The <code>build</code> folder is the default location of the build space and is where cmake and make are called to configure and build your packages. The <code>devel</code> folder is the default location of the devel space, which is where your executables and libraries go before you install your packages. </p>
+    First line compiles all the packages in the workspace whereas the second command lets ROS know about the new compiled files. Moreover, the <code>catkin_make</code> command should also create two additional folders in the workspace, <code>build</code> and <code>devel</code>. The <code>build</code> folder is the default location of the build space and is where cmake and make are called to configure and build your packages. The <code>devel</code> folder is the default location of the devel space, which is where your executables and libraries go before you install your packages.</p>
 </li>
 <li>
 <p>Congratulations, you successfully completed all the steps required to setup the Race On ROS environment. But before proceeding with the next section reboot to apply the updates.
@@ -601,7 +613,7 @@ catkin_create_pkg tutorial std_msgs rospy
 </pre></div>
 </td></tr></table>
 The arguments for the <code>catkin_create_pkg</code> command are the package name followed by the dependencies of the new package. In this case, the dependencies are <code>std_msgs</code> and <code>rospy</code>. Since we will send <code>Float32</code> numbers
-we will use <code>std_msgs</code> as it includes common message types representing primitive data types and other basic message constructs. And <code>rospy</code> since we will write our code in Python. If you plan to write code in C or C++ you must also add <code>roscpp</code> to the dependency list. In case you forget to add a package as dependence, you can do that later by editing one of the package configuration files. </p>
+we will use <code>std_msgs</code> as it includes common message types representing primitive data types and other basic message constructs. And <code>rospy</code> since we will write our code in Python. If you plan to write code in C or C++ you must also add <code>roscpp</code> to the dependency list. In case you forget to add a package as dependence, you can do that later by editing one of the package configuration files.</p>
 <p>To check the result of the command we can list the contents of the <code>tutorial</code> folder using <code>ls -ahl tutorial/</code> and you should see an output similar to this:
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
@@ -617,7 +629,7 @@ drwxr-xr-x <span class="m">2</span> pi pi <span class="m">4</span>.0K Feb <span 
 </pre></div>
 </td></tr></table>
 Where <code>package.xml</code> contains the package configuration in XML format, <code>CMakeLists.txt</code> contains the instructions how to build the C++ code, and the <code>src</code> is the directory where you place all your source files. To change the dependency list of your package at a later time or customize the package, edit the <code>package.xml</code> file. However, since our code will be only written in Python, we will create a separate folder called <code>scripts</code> to place our Python programs using the <code>mkdir tutorial/scripts</code> command.</p>
-<p>To build the package run 
+<p>To build the package run
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/race-on-ros/
 catkin_make
@@ -696,7 +708,7 @@ Since we did not write any code this will should not encounter any errors, just 
         <span class="n">rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">()</span>
 </pre></div>
 </td></tr></table>
-    The break down. 
+    The break down.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>#!/usr/bin/env python
 </pre></div>
 </td></tr></table>
@@ -710,14 +722,14 @@ Since we did not write any code this will should not encounter any errors, just 
 <span class="kn">import</span> <span class="nn">math</span>
 </pre></div>
 </td></tr></table>
-    We import the Python libraries which we declared as dependencies for the tutorial package and the math library required for the to calculate the sinusoid values. The <code>python rospy</code> library provides all the ROS functionality to Python whereas <code>python std_msgs</code> library the standard message types in ROS. 
+    We import the Python libraries which we declared as dependencies for the tutorial package and the math library required for the to calculate the sinusoid values. The <code>python rospy</code> library provides all the ROS functionality to Python whereas <code>python std_msgs</code> library the standard message types in ROS.
     <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">RATE</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Publishing rate of new data per second</span>
 <span class="n">FREQ</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># Frequency of the sinusoidal signal</span>
 </pre></div>
 </td></tr></table>
-    Next, we declare two global constants which are parameters of the generated sequence. 
-    The code inside the if statement represents the main program. Here we define how the publisher node interfaces with the rest of ROS. The line <code>rospy.init_node(NAME)</code>, is very important as it tells rospy the name of the node -- until rospy has this information, it cannot start communicating with the <a href="http://wiki.ros.org/Master">ROS Master</a>. In this case, the node will take on the name <code>publisher</code>. NOTE: the name must be a base name, i.e. it cannot contain any slashes "/". The <code>rospy.Publisher('data', Float32, queue_size=1)</code> declares that your node is publishing to the <code>data</code> topic using the message type <code>Float32</code>. Float32 here is actually the class std_msgs.msg.Float32. The <code>queue_size</code> argument limits the amount of queued messages if any subscriber is not receiving them fast enough. <code>rate = rospy.Rate(RATE)</code> this line creates a Rate object rate. With the help of its method sleep(), it offers a convenient way for looping at the desired rate. With its argument of 10, we should expect to go through the loop 10 times per second (as long as our processing time does not exceed 1/10<sup>th</sup> of a second!). Next we have a fairly standard rospy loop construct: checking the <code>rospy.is_shutdown()</code> flag and then doing work. You have to check <code>is_shutdown()</code> to check if your program should exit (e.g. if there is a <code>Ctrl-C</code> or otherwise). In this case, the "work" is a call to <code>pub.publish(value)</code> that publishes a string to our <code>data</code> topic. The loop calls <code>rate.sleep()</code>, which sleeps just long enough to maintain the desired rate through the loop. This loop also calls <code>rospy.loginfo(str)</code>, which performs triple-duty: the messages get printed to screen, it gets written to the Node's log file, and it gets written to <code>rosout</code>. <code>rosout</code> is a handy tool for debugging: you can pull up messages using <code>rqt_console</code> instead of having to find the console window with your Node's output. </p>
+    Next, we declare two global constants which are parameters of the generated sequence.
+    The code inside the if statement represents the main program. Here we define how the publisher node interfaces with the rest of ROS. The line <code>rospy.init_node(NAME)</code>, is very important as it tells rospy the name of the node -- until rospy has this information, it cannot start communicating with the <a href="http://wiki.ros.org/Master">ROS Master</a>. In this case, the node will take on the name <code>publisher</code>. NOTE: the name must be a base name, i.e. it cannot contain any slashes "/". The <code>rospy.Publisher('data', Float32, queue_size=1)</code> declares that your node is publishing to the <code>data</code> topic using the message type <code>Float32</code>. Float32 here is actually the class std_msgs.msg.Float32. The <code>queue_size</code> argument limits the amount of queued messages if any subscriber is not receiving them fast enough. <code>rate = rospy.Rate(RATE)</code> this line creates a Rate object rate. With the help of its method sleep(), it offers a convenient way for looping at the desired rate. With its argument of 10, we should expect to go through the loop 10 times per second (as long as our processing time does not exceed 1/10<sup>th</sup> of a second!). Next we have a fairly standard rospy loop construct: checking the <code>rospy.is_shutdown()</code> flag and then doing work. You have to check <code>is_shutdown()</code> to check if your program should exit (e.g. if there is a <code>Ctrl-C</code> or otherwise). In this case, the "work" is a call to <code>pub.publish(value)</code> that publishes a string to our <code>data</code> topic. The loop calls <code>rate.sleep()</code>, which sleeps just long enough to maintain the desired rate through the loop. This loop also calls <code>rospy.loginfo(str)</code>, which performs triple-duty: the messages get printed to screen, it gets written to the Node's log file, and it gets written to <code>rosout</code>. <code>rosout</code> is a handy tool for debugging: you can pull up messages using <code>rqt_console</code> instead of having to find the console window with your Node's output.</p>
 <p>To run the code we need first to make the script executable by changing the file permission using <code>chmod +x ~/race-on-ros/src/tutorial/scripts/publisher.py</code> command. Now, we can run the code using <code>rosrun tutorial publisher.py</code> command. Note, tab autocompletion works with ROS command arguments.</p>
 </li>
 <li>
@@ -778,7 +790,7 @@ Since we did not write any code this will should not encounter any errors, just 
 </li>
 </ol>
 <h2 id="overview-of-race-on-ros-code">Overview of Race On ROS Code<a class="headerlink" href="#overview-of-race-on-ros-code" title="Permanent link">&para;</a></h2>
-<p>The ROS repository for Race On consists of 4 ROS nodes and one Python class that initializes the car configuration (including the servo's middle and rightmost values and the motor's min, max and brake speeds) and provides functions for steering and changing the speed of the car. The 4 nodes included in the repository are actuation.py, camera.py, control.py and pos_estimation.py. The nodes should be run using the file <code>race-on-ros/src/launch/raceon.launch</code>. </p>
+<p>The ROS repository for Race On consists of 4 ROS nodes and one Python class that initializes the car configuration (including the servo's middle and rightmost values and the motor's min, max and brake speeds) and provides functions for steering and changing the speed of the car. The 4 nodes included in the repository are actuation.py, camera.py, control.py and pos_estimation.py. The nodes should be run using the file <code>race-on-ros/src/launch/raceon.launch</code>.</p>
 <p>Read more below to learn more about each of the nodes and the launch file we've provided to run them.</p>
 <h3 id="launch-file">Launch File<a class="headerlink" href="#launch-file" title="Permanent link">&para;</a></h3>
 <p>The launch file has a number of parameters for each of the nodes, which you can customize according to your needs. It also defines the topics to which the nodes publish and subscribe. For example, the camera node publishes to either <code>camera/image</code> or <code>camera/image/compressed</code> topic, depending on the value of the <code>~publish_raw</code> parameter, which is defined below on line 13 of the launch file.</p>
@@ -843,8 +855,8 @@ Since we did not write any code this will should not encounter any errors, just 
 </tr>
 </tbody>
 </table>
-<p>The position estimation node is found in <code>race-on-ros/src/scripts/pos_estimation.py</code>. This node executes much of the position-estimation functionality you likely saw before in <a href="https://github.com/race-on/workshops/blob/master/testcar-nomiddleline.ipynb">the testcar-nomiddleline jupyter notebook</a>. Depending on the value of the <strong>use_compressed_image</strong> parameter, the camera node will either subscribe to the <code>camera/image/compressed</code> or <code>camera/image</code> topic. </p>
-<p>You can set the <strong>scan line</strong>, <strong>peak threshold</strong>, <strong>track width</strong> and <strong>camera center</strong> parameters in the launch file or adjust their default values in the node's code. The <strong>scan line</strong> parameter is the horizontal line in the image that you'll use to look for peaks. </p>
+<p>The position estimation node is found in <code>race-on-ros/src/scripts/pos_estimation.py</code>. This node executes much of the position-estimation functionality you likely saw before in <a href="https://github.com/race-on/workshops/blob/master/testcar-nomiddleline.ipynb">the testcar-nomiddleline jupyter notebook</a>. Depending on the value of the <strong>use_compressed_image</strong> parameter, the camera node will either subscribe to the <code>camera/image/compressed</code> or <code>camera/image</code> topic.</p>
+<p>You can set the <strong>scan line</strong>, <strong>peak threshold</strong>, <strong>track width</strong> and <strong>camera center</strong> parameters in the launch file or adjust their default values in the node's code. The <strong>scan line</strong> parameter is the horizontal line in the image that you'll use to look for peaks.</p>
 <p>When the node receives an image message, it finds peaks along the horizontal scan line and uses them to estimate the car's position within the track. It then <strong>publishes this position estimation to the "position/error" topic</strong>. It also <strong>publishes an estimation of the track position to the "position/track" topic</strong>.</p>
 <h4 id="suggested-exercise_2">Suggested Exercise<a class="headerlink" href="#suggested-exercise_2" title="Permanent link">&para;</a></h4>
 <p>Try changing the peak threshold and see how it affects your estimation of the track and car positions!</p>
@@ -870,7 +882,7 @@ Since we did not write any code this will should not encounter any errors, just 
 </tr>
 </tbody>
 </table>
-<p>The controller node is found in <code>race-on-ros/src/scripts/controller.py</code>. The control node is where you'll want to put your team's control logic (potentially a PID controller?). Currently, the control node uses a proportional gain coefficient to determine how much you should alter the servo's position to minimize the distance from the target position. </p>
+<p>The controller node is found in <code>race-on-ros/src/scripts/controller.py</code>. The control node is where you'll want to put your team's control logic (potentially a PID controller?). Currently, the control node uses a proportional gain coefficient to determine how much you should alter the servo's position to minimize the distance from the target position.</p>
 <p>You can change the <strong>motor speed</strong>, <strong>target</strong> (target x position on the track) and <strong>kp</strong> (proportional gain coefficient to use to scale the error) parameters in the launch file or alter their default values in the code.</p>
 <p>When the controller node receives a Pose message containing the car's current position on the track, it calculates the error from the target position and estimates a new servo position value using <strong>kp</strong> to steer the car closer to the target. It then <strong>publishes this new servo position and the current motor speed to the control topic</strong>.</p>
 <h4 id="suggested-exercises">Suggested Exercises<a class="headerlink" href="#suggested-exercises" title="Permanent link">&para;</a></h4>
@@ -933,6 +945,20 @@ Since we did not write any code this will should not encounter any errors, just 
             </div>
           </a>
         
+        
+          <a href="../2_gain_scheduling/" title="2. Gain Scheduling" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                2. Gain Scheduling
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
