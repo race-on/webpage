@@ -32,9 +32,18 @@ Note, the above diagram is for continuous time systems, our car is a discrete ti
 
 **Exercises**:
 
-1. If you haven't yet, try to implement a PID controller for your car. You can reference this ![pseudocode](https://en.wikipedia.org/wiki/PID_controller#Pseudocode "Wikipedia: PID").
+1. If you haven't yet, try to implement a PID controller for your car. You can reference this [pseudocode](https://en.wikipedia.org/wiki/PID_controller#Pseudocode "Wikipedia: PID").
 2. Search online for hints on how to tune the different gains. What are the expected effects of increasing/decreasing each one of them?
 
+### Step Response
+
+Before we dive deeper into more advanced controllers, we first need to know how to measure the performance of different controllers. The most simple and at the same time informative method is the step response shown in the figure below.
+![step-response-plot alt <>](./../images/step-response.png "Step response graph")
+
+The step response is obtained by suddenly cheanging the reference from one value to another, in the figure above is from zero to one, and tracking how the controller responds to this change. To get a step response using you car, run the car on a straight line and after one second switch the reference value from ```CAMERA_CENTER``` to ```CAMERA_CENTER - 100``` and save the values of ```line_pos``` into an array, stop the car after a timeout and plot the array to see the step response. Repeat with a step in a different direction ```CAMERA_CENTER + 100``` to make sure your car responds to left and right turns equally.
+
+The most important metrics of the step response are **rise time**, **overshoot**, and **settling time**.We want a fast rise time with no overshoot and low settling time, however, in practice we have to accept a tradeoff as optimizing all three at the same time is most of the time impossible. **Rise time** is defined as the time from when the reference value changed until we reach the new reference (or 0.9 of the new refence value). A high gain (high value of the proportional and derivative coefficients) leads to a fast response time but also to an overshoot. **Overshoot** defines by how much we miss the new reference once we reach the new reference value for the first time. A high overshoot can make you car run off the track as you exit the turn, but a small overshoot can be tolerated and help decreases the rise time. **Settling time** is the time between the reference change and the time the system stabilizes around it. A low settling time helps if there are a sequence of turns as the car will stay closer to the reference.  
+ 
 ### Gain Scheduling
 A well tuned PID controller can yield very good performance. However, what happens if the operating condition changes? Airplanes are a good example. The system behaves remarkably different at take-off, in-flight and on landing. In these cases, the gains tuned for one operating condition might not lead to the desired behavior when the system is at another operating point. One possible solution to this problem is gain scheduling. It is usually done in 4 steps:
 

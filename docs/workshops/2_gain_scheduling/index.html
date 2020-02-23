@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
       
         <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,12 +55,12 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -426,6 +426,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-response" class="md-nav__link">
+    Step Response
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#gain-scheduling_1" class="md-nav__link">
     Gain Scheduling
   </a>
@@ -530,6 +537,13 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-response" class="md-nav__link">
+    Step Response
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#gain-scheduling_1" class="md-nav__link">
     Gain Scheduling
   </a>
@@ -580,9 +594,14 @@ Try to identify each of the elements in the block diagram in the context of Race
 <p>Note, the above diagram is for continuous time systems, our car is a discrete time system since we send one control command per image and not continuously while waiting for the next image. In discrete time systems the integral is replaced with the sum operator and the derivative with the difference between current and past error. The controller gains <code>Kp</code>, <code>Ki</code>, and <code>Kd</code> have to be selected such that the system presents the desired behavior (fast convergence to <em>r</em>, low overshooting etc). If we have a mathematical model of the system, there are analytical and graphical tools that help tuning the gains. In other cases, the gains are set using trial and error.</p>
 <p><strong>Exercises</strong>:</p>
 <ol>
-<li>If you haven't yet, try to implement a PID controller for your car. You can reference this <img alt="pseudocode" src="https://en.wikipedia.org/wiki/PID_controller#Pseudocode" title="Wikipedia: PID" />.</li>
+<li>If you haven't yet, try to implement a PID controller for your car. You can reference this <a href="https://en.wikipedia.org/wiki/PID_controller#Pseudocode" title="Wikipedia: PID">pseudocode</a>.</li>
 <li>Search online for hints on how to tune the different gains. What are the expected effects of increasing/decreasing each one of them?</li>
 </ol>
+<h3 id="step-response">Step Response<a class="headerlink" href="#step-response" title="Permanent link">&para;</a></h3>
+<p>Before we dive deeper into more advanced controllers, we first need to know how to measure the performance of different controllers. The most simple and at the same time informative method is the step response shown in the figure below.
+<img alt="step-response-plot alt &lt;&gt;" src="../../images/step-response.png" title="Step response graph" /></p>
+<p>The step response is obtained by suddenly cheanging the reference from one value to another, in the figure above is from zero to one, and tracking how the controller responds to this change. To get a step response using you car, run the car on a straight line and after one second switch the reference value from <code>CAMERA_CENTER</code> to <code>CAMERA_CENTER - 100</code> and save the values of <code>line_pos</code> into an array, stop the car after a timeout and plot the array to see the step response. Repeat with a step in a different direction <code>CAMERA_CENTER + 100</code> to make sure your car responds to left and right turns equally.</p>
+<p>The most important metrics of the step response are <strong>rise time</strong>, <strong>overshoot</strong>, and <strong>settling time</strong>.We want a fast rise time with no overshoot and low settling time, however, in practice we have to accept a tradeoff as optimizing all three at the same time is most of the time impossible. <strong>Rise time</strong> is defined as the time from when the reference value changed until we reach the new reference (or 0.9 of the new refence value). A high gain (high value of the proportional and derivative coefficients) leads to a fast response time but also to an overshoot. <strong>Overshoot</strong> defines by how much we miss the new reference once we reach the new reference value for the first time. A high overshoot can make you car run off the track as you exit the turn, but a small overshoot can be tolerated and help decreases the rise time. <strong>Settling time</strong> is the time between the reference change and the time the system stabilizes around it. A low settling time helps if there are a sequence of turns as the car will stay closer to the reference.  </p>
 <h3 id="gain-scheduling_1">Gain Scheduling<a class="headerlink" href="#gain-scheduling_1" title="Permanent link">&para;</a></h3>
 <p>A well tuned PID controller can yield very good performance. However, what happens if the operating condition changes? Airplanes are a good example. The system behaves remarkably different at take-off, in-flight and on landing. In these cases, the gains tuned for one operating condition might not lead to the desired behavior when the system is at another operating point. One possible solution to this problem is gain scheduling. It is usually done in 4 steps:</p>
 <ol>
@@ -675,6 +694,7 @@ Then, run a lap on the track and plot your error with the command <code>plt.plot
                 
                   
                 
+                
               
               
                 
@@ -731,7 +751,7 @@ Then, run a lap on the track and plot your error with the command <code>plt.plot
       
     </div>
     
-      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
