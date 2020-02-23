@@ -2,12 +2,12 @@ title: 2. Gain Scheduling
 
 # Gain Scheduling
 
-You assembled your car, connected it to your computer, tested the electronics, and (hopefully) got to run a few laps. So, what's next? Yoda has the answer for you :)
+You assembled your car, connected it to your computer, tested the electronics, and hopefully got to run a few laps. So, what's next? Yoda has the answer for you!
 
 ![yoda_quote alt <>](../images/yoda_quote.gif "Master Yoda")
 <!-- <img src="yoda_quote.gif" alt="Master Yoda" class="center"> -->
 
-We have already encouraged you to improve the original self-driving code by adding integral and derivative terms to the controller. We will now introduce a new control technique called *Gain Scheduling*, which can be seen as an extension of PID.
+We have already encouraged you to improve the original self-driving code by adding integral and derivative terms to the PID controller. We will now introduce a new control technique called *Gain Scheduling*, which can be seen as an extension of PID.
 
 ## Theory
 ---
@@ -20,20 +20,20 @@ Let's start with a quick recap on feedback control. One of the simplest ways to 
 
 ![block_diagram alt <>](./../images/basic_block_diagram-1.png "Block Diagram")
 
-Our goal is to make the system output *y* as close as possible to the reference *r*. In order to do that, we use a sensor to measure variable *y*, compute the difference between current and desired value, obtain the error *e* and feed it to a controller. And this is where the magic happens. The controller block is responsible for transforming the measured error *e* in an input *u* which takes the system's output *y* closer to *r*.
+Our goal is to make the system output *y* as close as possible to the reference *r*. In order to do that, we use a sensor to measure variable *y*, compute the difference between current and desired value to obtain the error *e* and feed it to a controller. And here is where the magic happens. The controller block is responsible for transforming the measured error *e* into a command *u* which brings the system's output *y* closer to the reference *r*.
 
 **Exercise**:
 Try to identify each of the elements in the block diagram in the context of Race On. What is the system and what is the sensor? Which variables in your code are *r*, *e*, *y* and *u*?
 
-Controllers can take very different forms. One example is the *on-off* mechanism of old thermostats: the heater turns on when the temperature is below the reference and it turns off when the temperature is above the reference. Another example is the *proportional* controller, which can be described by *u = Ke*. We can also have a controller which computes system inputs based not only on the current error, but also on its accumulated value and its changing rate. This leads to the famous [PID controller](https://en.wikipedia.org/wiki/PID_controller "Wikipedia: PID").
+Controllers can take very different forms. One example is the *on-off* mechanism of the heaters with a thermostat: the heater turns on when the temperature is below the reference and it turns off when the temperature is above the reference. Another example is the *proportional* controller, which can be described by *u = Ke*. We can also have a controller which computes system inputs based not only on the current error, but also based on the error integral and derivative. This leads to the famous [PID controller](https://en.wikipedia.org/wiki/PID_controller "Wikipedia: PID").
 
 ![pid_diagram alt <>](./../images/pid_block_diagram-1.png "PID block diagram")
 
-The controller gains *K<sub>p</sub>*, *K<sub>i</sub>* and *K<sub>d</sub>* have to be chosen so that the system presents the desired behavior (fast convergence to *r*, low overshooting etc). If we have a mathematical model of the system, there are analytical and graphical tools that help tuning the gains. In other cases, the gains are set based on trial and error.
+Note, the above diagram is for continuous time systems, our car is a discrete time system since we send one control command per image and not continuously while waiting for the next image. In discrete time systems the integral is replaced with the sum operator and the derivative with the difference between current and past error. The controller gains $K_p$, $K_i$, and $K_d$ have to be selected such that the system presents the desired behavior (fast convergence to *r*, low overshooting etc). If we have a mathematical model of the system, there are analytical and graphical tools that help tuning the gains. In other cases, the gains are set using trial and error.
 
 **Exercises**:
 
-1. If you haven't yet, try to implement a PID controller for your car. Note that the description in the PID block diagram is for continuous variables but your controller is actually discrete.
+1. If you haven't yet, try to implement a PID controller for your car. You can reference this ![pseudocode](https://en.wikipedia.org/wiki/PID_controller#Pseudocode "Wikipedia: PID").
 2. Search online for hints on how to tune the different gains. What are the expected effects of increasing/decreasing each one of them?
 
 ### Gain Scheduling
@@ -50,7 +50,7 @@ Steps 1, 2, and 4 are the same as you would do for a regular PID controller. Ste
 * *Transient switch*: when the operation conditions change, linearly change from one gain to the other within a certain time interval. The trick here is to choose the time interval long enough to create a smooth transient but short enough to allow the controller to respond properly to the operating condition change.
 * *Interpolate between gains*: we can avoid switching by creating a curve that smoothly changes between gains continuously. This is possible when the operating conditions also change continuously.
 
-The three cases are illustrated below, where *t<sub>c</sub>* is the time when the operating condition change is identified, and *T* is the transient time for the transient switch approach.
+The three cases are illustrated below, where $t_c$ is the time when the operating condition change is identified, and $T$ is the transient time for the transient switch approach.
 
 ![pid_diagram alt <>](../images/switches.png "PID block diagram")
 <!-- <img src="./../images/switches.png" alt="drawing" width="500" class="center"/> -->
