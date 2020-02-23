@@ -10,10 +10,9 @@ You assembled your car, connected it to your computer, tested the electronics, a
 We have already encouraged you to improve the original self-driving code by adding integral and derivative terms to the PID controller. We will now introduce a new control technique called *Gain Scheduling*, which can be seen as an extension of PID.
 
 ## Theory
----
-**Note**: The following is a *very* simplified view of the topics. This is just to provide you an intuition of how the controllers work.
+!!! note 
+    The following is a *very* simplified view of the topics. This is just to provide you an intuition of how the controllers work.
 
----
 
 ### Feedback Control
 Let's start with a quick recap on feedback control. One of the simplest ways to represent a typical control problem is through a block diagram.
@@ -29,7 +28,7 @@ Controllers can take very different forms. One example is the *on-off* mechanism
 
 ![pid_diagram alt <>](./../images/pid_block_diagram-1.png "PID block diagram")
 
-Note, the above diagram is for continuous time systems, our car is a discrete time system since we send one control command per image and not continuously while waiting for the next image. In discrete time systems the integral is replaced with the sum operator and the derivative with the difference between current and past error. The controller gains $K_p$, $K_i$, and $K_d$ have to be selected such that the system presents the desired behavior (fast convergence to *r*, low overshooting etc). If we have a mathematical model of the system, there are analytical and graphical tools that help tuning the gains. In other cases, the gains are set using trial and error.
+Note, the above diagram is for continuous time systems, our car is a discrete time system since we send one control command per image and not continuously while waiting for the next image. In discrete time systems the integral is replaced with the sum operator and the derivative with the difference between current and past error. The controller gains ```Kp```, ```Ki```, and ```Kd``` have to be selected such that the system presents the desired behavior (fast convergence to *r*, low overshooting etc). If we have a mathematical model of the system, there are analytical and graphical tools that help tuning the gains. In other cases, the gains are set using trial and error.
 
 **Exercises**:
 
@@ -50,7 +49,7 @@ Steps 1, 2, and 4 are the same as you would do for a regular PID controller. Ste
 * *Transient switch*: when the operation conditions change, linearly change from one gain to the other within a certain time interval. The trick here is to choose the time interval long enough to create a smooth transient but short enough to allow the controller to respond properly to the operating condition change.
 * *Interpolate between gains*: we can avoid switching by creating a curve that smoothly changes between gains continuously. This is possible when the operating conditions also change continuously.
 
-The three cases are illustrated below, where $t_c$ is the time when the operating condition change is identified, and $T$ is the transient time for the transient switch approach.
+The three cases are illustrated below, where ```tc``` is the time when the operating condition change is identified, and ```T``` is the transient time for the transient switch approach.
 
 ![pid_diagram alt <>](../images/switches.png "PID block diagram")
 <!-- <img src="./../images/switches.png" alt="drawing" width="500" class="center"/> -->

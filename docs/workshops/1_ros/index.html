@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.30686662.css">
       
         <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,12 +55,12 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -698,7 +698,7 @@ Since we did not write any code this will should not encounter any errors, just 
         <span class="n">value</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">step</span><span class="o">/</span><span class="n">RATE</span><span class="p">)</span>
 
         <span class="c1"># Log and publish data</span>
-        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Publishing </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Publishing {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
         <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
         <span class="c1"># Advance the sequence</span>
@@ -762,7 +762,7 @@ Since we did not write any code this will should not encounter any errors, just 
 
 <span class="c1"># Automatically called by ROS when new message is received</span>
 <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
-    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Received </span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Received {:.3f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
 
 
 <span class="c1"># Execute this when run as a script</span>
@@ -913,7 +913,6 @@ Since we did not write any code this will should not encounter any errors, just 
                 
                   
                 
-                
               
               
                 
@@ -984,7 +983,7 @@ Since we did not write any code this will should not encounter any errors, just 
       
     </div>
     
-      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../../assets/javascripts/application.ac79c3b0.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
