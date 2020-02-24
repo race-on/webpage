@@ -14,5 +14,3 @@ RUN \
     pip install mkdocs==${MKDOCS_VERSION} && \
     pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-awesome-pages-plugin pyembed-markdown && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
-
-RUN mkdocs serve
