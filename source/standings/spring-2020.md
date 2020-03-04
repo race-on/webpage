@@ -33,13 +33,11 @@ Table with name, points race 0, points race 1, points race 2, total
 | Weiji Huang                   | 0                 | 0                 | -                 | 0                |
 | Shatad Purohit                | 0                 | 0                 | -                 | 0                |
 | Jeff Szielenski               | 0                 | 0                 | -                 | 0                |
-| YIHANG CHEN                   | 0                 | 0                 | -                 | 0                |
+| Yihang Chen                   | 0                 | 0                 | -                 | 0                |
 | Atharva Fulay                 | 0                 | 0                 | -                 | 0                |
 
 
 ## Results for Race 0
-
-Name, practice run, run 1, run 2, run 3, best time, points
 
 | **Name**                      | **Practice Run** | **Run 1** | **Run 2** | **Run 3** | **Best time** | **Points** |
 |-:-:---------------------------|-:-:--------------|-:-:-------|-:-:-------|-:-:-------|-:-:-----------|-:-:--------|
@@ -56,56 +54,56 @@ Name, practice run, run 1, run 2, run 3, best time, points
 | Shihong Ling                  | RUN              | RUN       | RUN       | RUN       | -             | 2          |
 | Alexander Vilesov             | RUN              | RUN       | -         | -         | -             | 2          |
 | Chongxian Wang                | RUN              | RUN       | RUN       | RUN       | -             | 2          |
-| Marshall Demirjian            | RUN              | RUN       |           | -         | -             | 2          |
-| Mason Mcinnis                 | 9.47             | 8.78      | RUN       | RUN       | 8.78          | 2          |
-| Gabe Dalessandro              | 12.84            | 12.67     | 11.03     |           | 11.03         | 2          |
+| Marshall Demirjian            | RUN              | RUN       |           | -         | -             | *1*        |
+| Lingchen Lian                 | RUN              | -         | -         | -         | -             | *1*        |
+| Mason Mcinnis                 | 9.47             | 8.78      | RUN       | RUN       | 8.78          | *0*        |
+| Gabe Dalessandro              | 12.84            | 12.67     | 11.03     |           | 11.03         | *0*        |
 | Zhenghao Dai                  | -                | -         | -         | -         | -             | 0          |
 | Tejas Harishchandra Acharya   | -                | -         | -         | -         | -             | 0          |
 | Divyanhsu Sahay               | -                | -         | -         | -         | -             | 0          |
 | Weiji Huang                   | -                | -         | -         | -         | -             | 0          |
 | Shatad Purohit                | -                | -         | -         | -         | -             | 0          |
 | Jeff Szielenski               | -                | -         | -         | -         | -             | 0          |
-| YIHANG CHEN                   | -                | -         | -         | -         | -             | 0          |
+| Yihang Chen                   | -                | -         | -         | -         | -             | 0          |
 | Zhiyuan Ning                  | -                | -         | -         | -         | -             | 0          |
 | Atharva Fulay                 | -                | -         | -         | -         | -             | 0          |
-| Lingchen Lian                 | -                | -         | -         | -         | -             | 0          |
 
+
+*Penalized*
 
 ## Results for Race 1
 
-Name, practice run, run 1, run 2, run 3, best time, points
+| **Name**                      | **Practice Run** | **Run 1** | **Run 2** | **Run 3** | **Best Time** | **Points** |
+|-:-:---------------------------|-:-:--------------|-:-:-------|-:-:-------|-:-:-------|-:-:-----------|-:-:--------|
+| Chien-Ming Chen               | 9.904            | 9.398     | 8.787     | 8.509     | 8.509         | 14         |
+| Zhenghao Dai                  | RUN              | 12.065    | 12.181    | 8.961     | 8.961         | 12         |
+| Yijia Zhang                   | RUN              | RUN       | RUN       | 9.501     | 9.501         | 10         |
+| Shiyuan Tian                  | RUN              | 9.616     | RUN       | RUN       | 9.616         | 8          |
+| Iris Liu                      | RUN              | 10.623    | 10.577    | RUN       | 10.577        | 6          |
+| Gabe Dalessandro              | 12.6             | 14.039    | 11.459    | RUN       | 11.459        | 4          |
+| Divyanhsu Sahay               | 12.677           | RUN       | 12.879    | RUN       | 12.879        | 4          |
+| Marshall Demirjian            | 13.942           | 14.267    | RUN       | RUN       | 14.267        | 4          |
+| Shihong Ling                  | RUN              | 16.796    | RUN       | 15.982    | 15.982        | 4          |
+| Avadhoot Ahire                | RUN              | RUN       | 20.112    | 16.391    | 16.391        | 4          |
+| Justin Ho                     | RUN              | 16.79     | 16.416    | RUN       | 16.416        | 4          |
+| Chongxian Wang                | RUN              | 18.865    | 17.064    | RUN       | 17.064        | 4          |
+| Mason Mcinnis                 | 28.725           | RUN       | 29.904    | 30.703    | 29.904        | 4          |
+| Ranga Sai Shreyas Manchikanti | RUN              | RUN       | RUN       | RUN       | -             | 2          |
+| Hanyu She                     | RUN              | RUN       | RUN       | RUN       | -             | 2          |
+| Zhiyuan Ning                  | RUN              | RUN       | RUN       | RUN       | -             | *1*        |
+| Pushpret Singh Hanspal        | -                | -         | -         | -         | -             | 0          |
+| Usman Shahid                  | -                | -         | -         | -         | -             | 0          |
+| Alexander Vilesov             | -                | -         | -         | -         | -             | 0          |
+| Tejas Harishchandra Acharya   | -                | -         | -         | -         | -             | 0          |
+| Weiji Huang                   | -                | -         | -         | -         | -             | 0          |
+| Shatad Purohit                | -                | -         | -         | -         | -             | 0          |
+| Jeff Szielenski               | -                | -         | -         | -         | -             | 0          |
+| Yihang Chen                   | -                | -         | -         | -         | -             | 0          |
+| Atharva Fulay                 | -                | -         | -         | -         | -             | 0          |
+| Lingchen Lian                 | -                | -         | -         | -         | -             | 0          |
 
-| **Name**                     | **Practice Lap** | **Lap 1** | **Lap 2** | **Lap 3** | **Best Time** | **Race 1 Points** |
-|-:-:---------------------------|-:-:--------------|-:-:-------|-:-:-------|-:-:-------|-:-:-----------|-:-:---------------|
-| Chien-Ming Chen               | 9.904            | 9.398     | 8.787     | 8.509     | 8.509         | 14                |
-| Zhenghao Dai                  | RUN              | 12.065    | 12.181    | 8.961     | 8.961         | 12                |
-| Yijia Zhang                   | RUN              | RUN       | RUN       | 9.501     | 9.501         | 10                |
-| Shiyuan Tian                  | RUN              | 9.616     | RUN       | RUN       | 9.616         | 8                 |
-| Iris Liu                      | RUN              | 10.623    | 10.577    | RUN       | 10.577        | 6                 |
-| Gabe Dalessandro              | 12.6             | 14.039    | 11.459    | RUN       | 11.459        | 4                 |
-| Divyanhsu Sahay               | 12.677           | 99        | 12.879    | RUN       | 12.879        | 4                 |
-| Marshall Demirjian            | 13.942           | 14.267    | RUN       | RUN       | 14.267        | 4                 |
-| Shihong Ling                  | RUN              | 16.796    | RUN       | 15.982    | 15.982        | 4                 |
-| Avadhoot Ahire                | RUN              | RUN       | 20.112    | 16.391    | 16.391        | 4                 |
-| Justin Ho                     | RUN              | 16.79     | 16.416    | RUN       | 16.416        | 4                 |
-| Chongxian Wang                | RUN              | 18.865    | 17.064    | RUN       | 17.064        | 4                 |
-| Mason Mcinnis                 | 28.725           | RUN       | 29.904    | 30.703    | 29.904        | 4                 |
-| Ranga Sai Shreyas Manchikanti | RUN              | RUN       | RUN       | RUN       | RUN           | 2                 |
-| Hanyu She                     | 99               | RUN       | RUN       | RUN       | RUN           | 2                 |
-| Zhiyuan Ning                  | 99               | RUN       | RUN       | RUN       | RUN           | 1                 |
-| Pushpret Singh Hanspal        | -                | -         | -         | -         | -             | 0                 |
-| Usman Shahid                  | -                | -         | -         | -         | -             | 0                 |
-| Alexander Vilesov             | -                | -         | -         | -         | -             | 0                 |
-| Tejas Harishchandra Acharya   | -                | -         | -         | -         | -             | 0                 |
-| Weiji Huang                   | -                | -         | -         | -         | -             | 0                 |
-| Shatad Purohit                | -                | -         | -         | -         | -             | 0                 |
-| Jeff Szielenski               | -                | -         | -         | -         | -             | 0                 |
-| YIHANG CHEN                   | -                | -         | -         | -         | -             | 0                 |
-| Atharva Fulay                 | -                | -         | -         | -         | -             | 0                 |
-| Lingchen Lian                 | -                | -         | -         | -         | -             | 0                 |
-
-
+*Penalized 1 point*
 
 ## Results for Race 2
 
-Race 2 is scheduled for April 18 in EEB 132.
+*Race 2 is scheduled for April 18 in EEB 132.*
