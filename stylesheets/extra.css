@@ -1,0 +1,37 @@
+.md-typeset ol li, .md-typeset ul li {
+
+    margin-bottom: 0em;
+    margin-left: 1.25em;
+
+}
+
+.md-typeset h1 {
+  text-align: center;
+  font-weight: 700;
+}
+
+body {
+    text-align: justify;
+}
+
+img[alt$=">"] {
+  float:right;
+}
+
+img[alt$="<"] {
+  float:left;
+}
+
+img[alt$="<>"] {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+    float: none!important;
+}
+
+/* iframe {
+ {
+    position: absolute;
+    margin: auto;
+} */

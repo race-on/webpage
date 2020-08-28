@@ -1,0 +1,762 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-Driving Car Competition">
+      
+      
+      
+        <meta name="author" content="The Race On Organizing Team">
+      
+      <link rel="shortcut icon" href="../../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.11">
+    
+    
+      
+        <title>2. Gain Scheduling - Race On</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.860688db.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.943997b5.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#000000">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+      <link rel="manifest" href="../../manifest.webmanifest" crossorigin="use-credentials">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-155985310-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#gain-scheduling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!--
+  Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+
+      <!-- Link to home -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.."
+            title="Race On"
+            class="md-header-nav__button md-logo">
+          
+            <img src="../../images/logo.png" style="position:relative; margin-top: 2px;" height="24" />
+          
+        </a>
+      </div>
+
+      <!-- Button to toggle drawer -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button"
+            for="__drawer"></label>
+      </div>
+
+      <!-- Header title -->
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title"
+            data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+		<!-- Race On -->
+            </span>
+            <span class="md-header-nav__topic">
+              
+                2. Gain Scheduling
+              
+            </span>
+          
+        </div>
+      </div>
+
+      <!-- Button to open search dialogue -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button"
+              for="__search"></label>
+
+          <!-- Search interface -->
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+
+      <!-- Repository containing source -->
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+<a href="https://github.com/race-on/workshops/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Race On Tutorials
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+
+
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!--
+  Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Main navigation -->
+<nav class="md-nav md-nav--primary" data-md-level="0">
+
+  <!-- Site title -->
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.."
+       title="Race On" class="md-nav__button md-logo" style="width: 225px;">
+      
+        <img src="../../images/logo.png" height="24" />
+      
+    </a>
+    <!-- Race On -->
+  </label>
+
+  <!-- Repository containing source -->
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/race-on/workshops/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Race On Tutorials
+  </div>
+</a>
+    </div>
+  
+
+  <!-- Render item list -->
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../rules/" title="Rules" class="md-nav__link">
+      Rules
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../registration/" title="Registration" class="md-nav__link">
+      Registration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Workshops
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Workshops" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Workshops
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1_ros/" title="1. Introduction to ROS" class="md-nav__link">
+      1. Introduction to ROS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        2. Gain Scheduling
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="2. Gain Scheduling" class="md-nav__link md-nav__link--active">
+      2. Gain Scheduling
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#feedback-control" class="md-nav__link">
+    Feedback Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-response" class="md-nav__link">
+    Step Response
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gain-scheduling_1" class="md-nav__link">
+    Gain Scheduling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applied-to-race-on" class="md-nav__link">
+    Applied to Race On
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3_wheel_encoders/" title="3. Wheel encoders" class="md-nav__link">
+      3. Wheel encoders
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Standings
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Standings" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Standings
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../standings/spring-2020/" title="Standings - Spring 2020" class="md-nav__link">
+      Standings - Spring 2020
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+
+
+
+<div id="mailchimp-subscribe-container" class="md-typeset" style="width:200px; margin:80px 0 0 0.5em;">
+
+<div style="font-size:.64rem">
+<hr/>
+Be first to hear the latest Race On updates
+</div>
+
+<style type="text/css">
+/* MailChimp Form Embed Code - Horizontal Super Slim - 12/16/2015 v10.7
+Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
+
+#mc_embed_signup form {padding:10px 0 10px 0;}
+.mc-field-group { display: inline-block; } /* positions input field horizontally */
+#mc_embed_signup input.email {font-family:"Roboto","Open Sans","Helvetica Neue",Arial,Helvetica,Verdana,sans-serif; font-size: 15px; border: 1px solid #000;  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; color: #000; background-color: #fff; box-sizing:border-box; height:32px; padding: 0px 0.4em; display: inline-block; margin: 5px 0; width:200px; vertical-align:top;}
+#mc_embed_signup label {display:block; font-size:16px; padding-bottom:10px; font-weight:bold;}
+#mc_embed_signup .clear {padding: 0.5em 0; display: block;} /* positions button horizontally in line with input */
+#mc_embed_signup .button {font-size: 13px; border: none; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; letter-spacing: .03em; color: #fff; background-color: #000; box-sizing:border-box; height:32px; line-height:32px; padding:0 18px; display: inline-block; margin: 0; transition: all 0.23s ease-in-out 0s;}
+#mc_embed_signup .button:hover {background-color:rgba(245, 22, 65, 0.894); cursor:pointer;}
+#mc_embed_signup div#mce-responses {float:left; top:-1.4em; padding:0em .5em 0em .5em; overflow:hidden; width:90%;margin: 0 5%; clear: both;}
+#mc_embed_signup div.response {margin:1em 0; padding:1em .5em .5em 0; font-weight:bold; float:left; top:-1.5em; z-index:1; width:80%;}
+#mc_embed_signup #mce-error-response {display:none;}
+#mc_embed_signup #mce-success-response {color:#529214; display:none;}
+#mc_embed_signup label.error {display:block; float:none; width:auto; margin-left:1.05em; text-align:left; padding:.5em 0;}
+@media (max-width: 768px) {
+    #mc_embed_signup input.email {width:100%; margin-bottom:5px;}
+    #mc_embed_signup .clear {padding 0.5em 0;}
+    #mc_embed_signup .button {width: 100%; margin:0; }
+}
+#mc_embed_signup{background:#fff; clear:left; font:14px "Roboto",Helvetica,Arial,sans-serif; width:100%;}
+</style>
+<div id="mc_embed_signup">
+<form action="https://raceon.us4.list-manage.com/subscribe/post?u=7b136ad752889f814039d5cc9&amp;id=4457808152" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<div id="mc_embed_signup_scroll">
+    <input type="text" value="" name="FNAME" class="email" id="mce-FNAME" placeholder="first name" required>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_7b136ad752889f814039d5cc9_4457808152" tabindex="-1" value=""><input type="text" name="group[67013][4]" value="4"></div>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</div>
+</form>
+</div>
+</div>
+
+
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#feedback-control" class="md-nav__link">
+    Feedback Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-response" class="md-nav__link">
+    Step Response
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gain-scheduling_1" class="md-nav__link">
+    Gain Scheduling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applied-to-race-on" class="md-nav__link">
+    Applied to Race On
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="gain-scheduling">Gain Scheduling<a class="headerlink" href="#gain-scheduling" title="Permanent link">&para;</a></h1>
+<p>You assembled your car, connected it to your computer, tested the electronics, and hopefully got to run a few laps. So, what's next? Yoda has the answer for you!</p>
+<p><img alt="yoda_quote alt &lt;&gt;" src="../../images/yoda_quote.gif" title="Master Yoda" />
+<!-- <img src="yoda_quote.gif" alt="Master Yoda" class="center"> --></p>
+<p>We have already encouraged you to improve the original self-driving code by adding integral and derivative terms to the PID controller. We will now introduce a new control technique called <em>Gain Scheduling</em>, which can be seen as an extension of PID.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following is a <em>very</em> simplified view of the topics. This is just to provide you an intuition of how the controllers work.</p>
+</div>
+<h3 id="feedback-control">Feedback Control<a class="headerlink" href="#feedback-control" title="Permanent link">&para;</a></h3>
+<p>Let's start with a quick recap on feedback control. One of the simplest ways to represent a typical control problem is through a block diagram.</p>
+<p><img alt="block_diagram alt &lt;&gt;" src="../../images/basic_block_diagram-1.png" title="Block Diagram" /></p>
+<p>Our goal is to make the system output <em>y</em> as close as possible to the reference <em>r</em>. In order to do that, we use a sensor to measure variable <em>y</em>, compute the difference between current and desired value to obtain the error <em>e</em> and feed it to a controller. And here is where the magic happens. The controller block is responsible for transforming the measured error <em>e</em> into a command <em>u</em> which brings the system's output <em>y</em> closer to the reference <em>r</em>.</p>
+<p><strong>Exercise</strong>:
+Try to identify each of the elements in the block diagram in the context of Race On. What is the system and what is the sensor? Which variables in your code are <em>r</em>, <em>e</em>, <em>y</em> and <em>u</em>?</p>
+<p>Controllers can take very different forms. One example is the <em>on-off</em> mechanism of the heaters with a thermostat: the heater turns on when the temperature is below the reference and it turns off when the temperature is above the reference. Another example is the <em>proportional</em> controller, which can be described by <em>u = Ke</em>. We can also have a controller which computes system inputs based not only on the current error, but also based on the error integral and derivative. This leads to the famous <a href="https://en.wikipedia.org/wiki/PID_controller" title="Wikipedia: PID">PID controller</a>.</p>
+<p><img alt="pid_diagram alt &lt;&gt;" src="../../images/pid_block_diagram-1.png" title="PID block diagram" /></p>
+<p>Note, the above diagram is for continuous time systems, our car is a discrete time system since we send one control command per image and not continuously while waiting for the next image. In discrete time systems the integral is replaced with the sum operator and the derivative with the difference between current and past error. The controller gains <code>Kp</code>, <code>Ki</code>, and <code>Kd</code> have to be selected such that the system presents the desired behavior (fast convergence to <em>r</em>, low overshooting etc). If we have a mathematical model of the system, there are analytical and graphical tools that help tuning the gains. In other cases, the gains are set using trial and error.</p>
+<p><strong>Exercises</strong>:</p>
+<ol>
+<li>If you haven't yet, try to implement a PID controller for your car. You can reference this <a href="https://en.wikipedia.org/wiki/PID_controller#Pseudocode" title="Wikipedia: PID">pseudocode</a>.</li>
+<li>Search online for hints on how to tune the different gains. What are the expected effects of increasing/decreasing each one of them?</li>
+</ol>
+<h3 id="step-response">Step Response<a class="headerlink" href="#step-response" title="Permanent link">&para;</a></h3>
+<p>Before we dive deeper into more advanced controllers, we first need to know how to measure the performance of different controllers. The most simple and at the same time informative method is the step response shown in the figure below.
+<img alt="step-response-plot alt &lt;&gt;" src="../../images/step-response.png" title="Step response graph" /></p>
+<p>The step response is obtained by suddenly cheanging the reference from one value to another, in the figure above is from zero to one, and tracking how the controller responds to this change. To get a step response using you car, run the car on a straight line and after one second switch the reference value from <code>CAMERA_CENTER</code> to <code>CAMERA_CENTER - 100</code> and save the values of <code>line_pos</code> into an array, stop the car after a timeout and plot the array to see the step response. Repeat with a step in a different direction <code>CAMERA_CENTER + 100</code> to make sure your car responds to left and right turns equally.</p>
+<p>The most important metrics of the step response are <strong>rise time</strong>, <strong>overshoot</strong>, and <strong>settling time</strong>.We want a fast rise time with no overshoot and low settling time, however, in practice we have to accept a tradeoff as optimizing all three at the same time is most of the time impossible. <strong>Rise time</strong> is defined as the time from when the reference value changed until we reach the new reference (or 0.9 of the new refence value). A high gain (high value of the proportional and derivative coefficients) leads to a fast response time but also to an overshoot. <strong>Overshoot</strong> defines by how much we miss the new reference once we reach the new reference value for the first time. A high overshoot can make you car run off the track as you exit the turn, but a small overshoot can be tolerated and help decreases the rise time. <strong>Settling time</strong> is the time between the reference change and the time the system stabilizes around it. A low settling time helps if there are a sequence of turns as the car will stay closer to the reference.  </p>
+<h3 id="gain-scheduling_1">Gain Scheduling<a class="headerlink" href="#gain-scheduling_1" title="Permanent link">&para;</a></h3>
+<p>A well tuned PID controller can yield very good performance. However, what happens if the operating condition changes? Airplanes are a good example. The system behaves remarkably different at take-off, in-flight and on landing. In these cases, the gains tuned for one operating condition might not lead to the desired behavior when the system is at another operating point. One possible solution to this problem is gain scheduling. It is usually done in 4 steps:</p>
+<ol>
+<li>Define the different system operating conditions;</li>
+<li>Tune your controller gains for each operating condition. This will create an array (or a table) of controller gains;</li>
+<li>Determine how to vary the controller gains based on the operating conditions;</li>
+<li>Assess system performance.</li>
+</ol>
+<p>Steps 1, 2, and 4 are the same as you would do for a regular PID controller. Step 3 is the fun part! The main options are:</p>
+<ul>
+<li><em>Simple switch</em>: change the gains when the system is at a different operating point. The advantage of this method is its simplicity. However, this creates discontinuities. If the error is 2 and the gain changes from 2 to 5, your control input jumps from 4 to 10! This can damage actuators or create undesirable system behavior.</li>
+<li><em>Transient switch</em>: when the operation conditions change, linearly change from one gain to the other within a certain time interval. The trick here is to choose the time interval long enough to create a smooth transient but short enough to allow the controller to respond properly to the operating condition change.</li>
+<li><em>Interpolate between gains</em>: we can avoid switching by creating a curve that smoothly changes between gains continuously. This is possible when the operating conditions also change continuously.</li>
+</ul>
+<p>The three cases are illustrated below, where <code>tc</code> is the time when the operating condition change is identified, and <code>T</code> is the transient time for the transient switch approach.</p>
+<p><img alt="pid_diagram alt &lt;&gt;" src="../../images/switches.png" title="PID block diagram" />
+<!-- <img src="./../images/switches.png" alt="drawing" width="500" class="center"/> --></p>
+<p>For a more in depth introduction to gain scheduling, we recommend watching this <a href="https://www.youtube.com/watch?v=YiUjAV1bhKs">video</a>.</p>
+<h2 id="applied-to-race-on">Applied to Race On<a class="headerlink" href="#applied-to-race-on" title="Permanent link">&para;</a></h2>
+<p>For now, let's assume your car is set to a constant speed and we only want to control the position relative to the center of the track. We will reference the original code provided with the car but it should be easy to adapt these instructions to your modified code. If you have any issues with it, remember you can always check the original code at the <a href="https://github.com/race-on">race on</a> github. We follow the 4 steps described previously:</p>
+<ol>
+<li>
+<p>Define the different system operating conditions.</p>
+<p>Even though the car itself doesn't change much during the race, the track varies considerably. We can define three different operating modes for the car: straight line, 90<sup>o</sup> turn and 180<sup>o</sup> turn.  Next, we have to find a way to identify these conditions. One way of doing this is by looking at the error. This requires a few steps and some tuning. Let's get to it!</p>
+<p>Create an error array in your code before the loop starts and populate the array at every iteration:
+<div class="highlight"><pre><span></span><code><span class="n">error_array</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+       <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+       <span class="n">error</span> <span class="o">=</span> <span class="n">CAMERA_CENTER</span> <span class="o">-</span> <span class="n">line_pos</span>
+       <span class="n">error_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</code></pre></div>
+Then, run a lap on the track and plot your error with the command <code>plt.plot(error_array)</code>.   You should be able to map different peaks and valleys on your error plot to straight lines, 90<sup>o</sup> and 180<sup>o</sup> turns on the track. After this, you can create thresholds to identify when the car is in each of these scenarios.</p>
+</li>
+<li>
+<p>Tune your controller gains for each operating condition.</p>
+<p>While it's complicated to tune the controller individually for each operating condition, we can use our knowledge of the problem to estimate how the gains should change. Intuitively, an error on a straight line doesn't need to be corrected as aggressively as errors on turns. Therefore, let's define:
+<div class="highlight"><pre><span></span><code><span class="n">K_0</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">K_90</span> <span class="o">=</span> <span class="mi">7000</span>
+<span class="n">K_180</span> <span class="o">=</span> <span class="mi">9000</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Determine how to vary the controller gains based on the operating conditions</p>
+<p>We will use a simple discrete switch. Based on your observation of the errors, create thresholds and use them to choose your gain:
+<div class="highlight"><pre><span></span><code><span class="n">e_90</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">e_180</span> <span class="o">=</span> <span class="mi">75</span>
+<span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">gain</span> <span class="o">=</span> <span class="n">K_0</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="n">e_180</span><span class="p">:</span>
+      <span class="n">gain</span> <span class="o">=</span> <span class="n">K_180</span>
+    <span class="k">elif</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="n">e_90</span><span class="p">:</span>
+      <span class="n">gain</span> <span class="o">=</span> <span class="n">K_90</span>
+
+    <span class="n">DUTY_CYCLE</span> <span class="o">=</span> <span class="n">SERVO_MIDDLE</span> <span class="o">+</span> <span class="n">gain</span><span class="o">*</span><span class="n">error</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Assess system performance.</p>
+<p>Use the error plot to check your car performance on the track. Is it overshooting after turns? Does it take too long to realize it's in a turn? Or maybe it takes too long to realize it's back on a straight line? You should adjust the gains and thresholds to optimize your controller and start doing some aggressive turns!</p>
+</li>
+</ol>
+<p><strong>Exercises</strong></p>
+<ol>
+<li>You probably noticed our example only covers the proportional gain. Include integral and derivative gains in your gain scheduling routine.</li>
+<li>Test the same approach for speed scheduling. Define three different speeds (one for each operating condition) and switch among them to see if you can get faster laps.</li>
+<li>This is just one of numerous ways to apply gain scheduling to your vehicle controller. You are encouraged to try other approaches!</li>
+</ol>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../1_ros/" title="1. Introduction to ROS" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                1. Introduction to ROS
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../3_wheel_encoders/" title="3. Wheel encoders" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                3. Wheel encoders
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 The Race On organizing team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.df0def68.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ba57d267.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

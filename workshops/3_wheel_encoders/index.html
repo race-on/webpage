@@ -1,0 +1,825 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Self-Driving Car Competition">
+      
+      
+      
+        <meta name="author" content="The Race On Organizing Team">
+      
+      <link rel="shortcut icon" href="../../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.11">
+    
+    
+      
+        <title>3. Wheel encoders - Race On</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.860688db.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.943997b5.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#000000">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+      <link rel="manifest" href="../../manifest.webmanifest" crossorigin="use-credentials">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-155985310-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="red">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wheel-encoders" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!--
+  Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+
+      <!-- Link to home -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.."
+            title="Race On"
+            class="md-header-nav__button md-logo">
+          
+            <img src="../../images/logo.png" style="position:relative; margin-top: 2px;" height="24" />
+          
+        </a>
+      </div>
+
+      <!-- Button to toggle drawer -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button"
+            for="__drawer"></label>
+      </div>
+
+      <!-- Header title -->
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title"
+            data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+		<!-- Race On -->
+            </span>
+            <span class="md-header-nav__topic">
+              
+                3. Wheel encoders
+              
+            </span>
+          
+        </div>
+      </div>
+
+      <!-- Button to open search dialogue -->
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button"
+              for="__search"></label>
+
+          <!-- Search interface -->
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+
+      <!-- Repository containing source -->
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+<a href="https://github.com/race-on/workshops/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Race On Tutorials
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+
+
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <!--
+  Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+<!-- Main navigation -->
+<nav class="md-nav md-nav--primary" data-md-level="0">
+
+  <!-- Site title -->
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.."
+       title="Race On" class="md-nav__button md-logo" style="width: 225px;">
+      
+        <img src="../../images/logo.png" height="24" />
+      
+    </a>
+    <!-- Race On -->
+  </label>
+
+  <!-- Repository containing source -->
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/race-on/workshops/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Race On Tutorials
+  </div>
+</a>
+    </div>
+  
+
+  <!-- Render item list -->
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../rules/" title="Rules" class="md-nav__link">
+      Rules
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../registration/" title="Registration" class="md-nav__link">
+      Registration
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Workshops
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Workshops" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Workshops
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1_ros/" title="1. Introduction to ROS" class="md-nav__link">
+      1. Introduction to ROS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2_gain_scheduling/" title="2. Gain Scheduling" class="md-nav__link">
+      2. Gain Scheduling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        3. Wheel encoders
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="3. Wheel encoders" class="md-nav__link md-nav__link--active">
+      3. Wheel encoders
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    Initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-data" class="md-nav__link">
+    Reading data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estimating-the-speed" class="md-nav__link">
+    Estimating the speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estimating-turning-angle" class="md-nav__link">
+    Estimating turning angle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recostructing-the-car-trajectory" class="md-nav__link">
+    Recostructing the car trajectory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Standings
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Standings" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Standings
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../standings/spring-2020/" title="Standings - Spring 2020" class="md-nav__link">
+      Standings - Spring 2020
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+
+
+
+<div id="mailchimp-subscribe-container" class="md-typeset" style="width:200px; margin:80px 0 0 0.5em;">
+
+<div style="font-size:.64rem">
+<hr/>
+Be first to hear the latest Race On updates
+</div>
+
+<style type="text/css">
+/* MailChimp Form Embed Code - Horizontal Super Slim - 12/16/2015 v10.7
+Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
+
+#mc_embed_signup form {padding:10px 0 10px 0;}
+.mc-field-group { display: inline-block; } /* positions input field horizontally */
+#mc_embed_signup input.email {font-family:"Roboto","Open Sans","Helvetica Neue",Arial,Helvetica,Verdana,sans-serif; font-size: 15px; border: 1px solid #000;  -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; color: #000; background-color: #fff; box-sizing:border-box; height:32px; padding: 0px 0.4em; display: inline-block; margin: 5px 0; width:200px; vertical-align:top;}
+#mc_embed_signup label {display:block; font-size:16px; padding-bottom:10px; font-weight:bold;}
+#mc_embed_signup .clear {padding: 0.5em 0; display: block;} /* positions button horizontally in line with input */
+#mc_embed_signup .button {font-size: 13px; border: none; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; letter-spacing: .03em; color: #fff; background-color: #000; box-sizing:border-box; height:32px; line-height:32px; padding:0 18px; display: inline-block; margin: 0; transition: all 0.23s ease-in-out 0s;}
+#mc_embed_signup .button:hover {background-color:rgba(245, 22, 65, 0.894); cursor:pointer;}
+#mc_embed_signup div#mce-responses {float:left; top:-1.4em; padding:0em .5em 0em .5em; overflow:hidden; width:90%;margin: 0 5%; clear: both;}
+#mc_embed_signup div.response {margin:1em 0; padding:1em .5em .5em 0; font-weight:bold; float:left; top:-1.5em; z-index:1; width:80%;}
+#mc_embed_signup #mce-error-response {display:none;}
+#mc_embed_signup #mce-success-response {color:#529214; display:none;}
+#mc_embed_signup label.error {display:block; float:none; width:auto; margin-left:1.05em; text-align:left; padding:.5em 0;}
+@media (max-width: 768px) {
+    #mc_embed_signup input.email {width:100%; margin-bottom:5px;}
+    #mc_embed_signup .clear {padding 0.5em 0;}
+    #mc_embed_signup .button {width: 100%; margin:0; }
+}
+#mc_embed_signup{background:#fff; clear:left; font:14px "Roboto",Helvetica,Arial,sans-serif; width:100%;}
+</style>
+<div id="mc_embed_signup">
+<form action="https://raceon.us4.list-manage.com/subscribe/post?u=7b136ad752889f814039d5cc9&amp;id=4457808152" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<div id="mc_embed_signup_scroll">
+    <input type="text" value="" name="FNAME" class="email" id="mce-FNAME" placeholder="first name" required>
+    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_7b136ad752889f814039d5cc9_4457808152" tabindex="-1" value=""><input type="text" name="group[67013][4]" value="4"></div>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</div>
+</form>
+</div>
+</div>
+
+
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    Initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-data" class="md-nav__link">
+    Reading data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estimating-the-speed" class="md-nav__link">
+    Estimating the speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estimating-turning-angle" class="md-nav__link">
+    Estimating turning angle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recostructing-the-car-trajectory" class="md-nav__link">
+    Recostructing the car trajectory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <h1 id="wheel-encoders">Wheel encoders<a class="headerlink" href="#wheel-encoders" title="Permanent link">&para;</a></h1>
+<p>In this workshop, we will introduce an additional sensor, the wheel encoders, to help estimate your car's speed. This speed information can be utilized to improve your car's racing performance.</p>
+<p>Parts and Components provided:</p>
+<ol>
+<li>2x - Line sensors (wheel encoders)</li>
+<li>2x - wheel spokes cut-outs</li>
+<li>1x - left sensor mount</li>
+<li>1x - right sensor mounts</li>
+<li>2x - round cap screws</li>
+<li>2x - nuts</li>
+</ol>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Disassemble both of your rear tires. This is simply done by removing the hex screw as indicated by the red arrow in the image below. [Note: After the removal of the tires, be sure to secure the hex screw back to the axle to avoid accidentally losing any tire components, e.g. the securing pin.]
+  <img alt="rear_wheel alt &lt;&gt;" src="../../images/3a_rear_wheel.jpg" style="height:400px;width:400px" title="Rear wheel" /></li>
+<li>You will be provided with a piece of paper containing two printed copies of the "wheel spokes." Cut the outlines (both the inside and outside circles) carefully. After you  finish cutting the outlines, call any of the organizer's attention for them to help you glue these wheel spokes onto your tires. See illustration below. [Note: We don't allow students to glue these by themselves, so as to prevent them from unintentionally glueing other tire components.]
+  <img alt="wheel_spokes alt &lt;&gt;" src="../../images/3b_wheel_spokes.jpg" style="height:400px;width:400px" title="Wheel spokes" /></li>
+<li>You are provided with line sensors (wheel encoders). Place the line sensor board onto the mount. Ensure that the securing holes of both the board and the mount are aligned properly. Insert the screw through the securing holes and place the nut on the other end of the screw to properly secure the sensor. See illustration below. Repeat this step for the second rear wheel encoder.
+  <img alt="encoder_mount alt &lt;&gt;" src="../../images/3c_encoder_mount.jpg" style="height:400px;width:400px" title="Encoder mount" /></li>
+<li>Now it is time to install the assembled wheel encoders onto the car. First dislocate the balljoint from the wheel axle by removing the screw as indicated by the red arrow. Then remove the washer as indicated by the yellow circle (depending on the car model this washer is either black or red). You will not be needing this washer anymore.
+  <img alt="rear_wheel_balljoint alt &lt;&gt;" src="../../images/3d_rear_wheel_balljoint.jpg" style="height:400px;width:400px" title="Rear wheel balljoint" /></li>
+<li>Before placing the sensors on both the rear wheels, note that the mounts provided are  dedicated left and right mounts. Place the assembled wheel encoder from where you remove the washer. The sensor will have to be facing towards the center of the car rather than facing the rear. If it is otherwise, just use the other sensor mount you assembled. Ensure that the protruding secure pin from the mount is attached properly on the axle with the securing holes aligned properly. Screw back the screw to securely fix the sensor on the wheel axle. See illustration below for the final setup.
+  <img alt="wheel_encoder_fixed alt &lt;&gt;" src="../../images/3e_assembled_encoder.jpg" style="height:400px;width:400px" title="Final assembled wheel encoder" /></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Feel free to change the pattern on your wheels, i.e., add more black and white stripes or create a bigger gap to detect a full rotation. You can access on Overleaf the <a href="https://www.overleaf.com/read/cxcfqgjwvswc">LaTeX source</a> of the provided pattern and you can use the Overleaf editor to generate a new ones.</p>
+</div>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<p>Before running this code we need to install an additional Python library to read the inputs from the encoder. For that run in the terminal</p>
+<div class="highlight"><pre><span></span><code>sudo apt install python3-rpi.gpio
+</code></pre></div>
+
+<p>Next update the contents of your raceon.py file to match the one on the <a href="https://github.com/race-on/workshops/blob/master/raceon.py">GitHub</a> which now includes the Encoders class.</p>
+<p>Now we can test the encoders. Our test procedure will gradually increase the motor power, wait for 300 milliseconds for the motor to reach a stable speed at the new power, and then measure the wheels speed in a time window of 50 ms. The Jupyter Notebook with the testing procedure can be downloaded from <a href="https://github.com/race-on/workshops/blob/master/test-encoders.ipynb">GitHub</a>. To run it, you have to save the notebook in the same folder as the <code>raceon.py</code> file. Note, the 4<sup>th</sup> cell which contains the <code>for</code> loop will spin the wheel up to 70% power, and threfore, before running that cell pick up the car so that the wheels do not touch the floor. </p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>Encoders give you a pulse per each transition from black to white or viceversa. Since we attached the encoders to the rear wheels which are connected throught a differential we can estimate besides the speed also the turning angle since the inside wheel will travel less distance. In what follows we will show how to measure the speed and the turning angle.</p>
+<h3 id="initialization">Initialization<a class="headerlink" href="#initialization" title="Permanent link">&para;</a></h3>
+<p>To use the encoders we need to instantiate the <code>Encoders</code> class which we import from the <code>raceon</code> library. The class constructor requires two arguments, the signal of the left and the right encoder. For the white boards these should be 25 and 27. Place the next block of code before the motor and servo itialization code in you notebook. You need to run this code only once.
+<div class="highlight"><pre><span></span><code><span class="n">K</span>   <span class="o">=</span> <span class="mf">0.21</span> <span class="o">/</span> <span class="mi">20</span>  <span class="c1"># distance traveled in meters per encoder pulse </span>
+<span class="n">Rw</span>  <span class="o">=</span> <span class="mf">0.155</span>      <span class="c1"># distance in meters between the wheels centers</span>
+
+<span class="n">encoders</span> <span class="o">=</span> <span class="n">Encoders</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="reading-data">Reading data<a class="headerlink" href="#reading-data" title="Permanent link">&para;</a></h3>
+<p>Once the class is instantiated, it will continuously read pulses from the encoders. The class method <code>Nl, Nr = encoders.read()</code> returns the number of pulses for both wheels from the last reading. Modify your Jupyter notebook code such that the for loop looks similar to this:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Reset encoders counter</span>
+<span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">encoders_array</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
+
+    <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+
+    <span class="c1"># Read encoders value</span>
+    <span class="n">encoders_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+    <span class="c1"># Get the intensity component of the image (a trick to get black and white images)</span>
+</code></pre></div>
+
+<p>This code saves the number of pulses from the encoders into the <code>encoders_array</code> which we will use later for track reconstruction.</p>
+<h3 id="estimating-the-speed">Estimating the speed<a class="headerlink" href="#estimating-the-speed" title="Permanent link">&para;</a></h3>
+<p>To calculate the distance traveled by the car in meters we take the average of the two sensors and multiply by a conversion constant  defined in the initialization part.</p>
+<div class="highlight"><pre><span></span><code><span class="n">Nl</span><span class="p">,</span> <span class="n">Nr</span>   <span class="o">=</span> <span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nl</span> <span class="o">+</span> <span class="n">Nr</span><span class="p">)</span> <span class="o">*</span> <span class="n">K</span> <span class="o">/</span> <span class="mi">2</span>
+</code></pre></div>
+
+<p>To obtaine the speed, divide the distance by the time between the two measurements, i.e., between the call of the <code>read</code>method. Note, having a speed estimation you can dynamically adjust the motor duty cycle so you reach your desired speed. You can do this by adding a second PID controller the actively adjusts motor duty cycle to ensure the desired speed irespective of the battery voltage or friction.</p>
+<h3 id="estimating-turning-angle">Estimating turning angle<a class="headerlink" href="#estimating-turning-angle" title="Permanent link">&para;</a></h3>
+<p>Using differential measurements we can estimate how much the car turned since the last measurement. </p>
+<div class="highlight"><pre><span></span><code><span class="n">Nl</span><span class="p">,</span> <span class="n">Nr</span>      <span class="o">=</span> <span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">delta_theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nl</span> <span class="o">-</span> <span class="n">Nr</span><span class="p">)</span> <span class="o">*</span> <span class="n">K</span> <span class="o">/</span> <span class="n">Rw</span>
+</code></pre></div>
+
+<p>Keeping track of the sum of these angles once the turn started would give a good extimate of how much we turned. You can decrease your lap time if you can start accelerating on the straight lines before the turn ends.</p>
+<h3 id="recostructing-the-car-trajectory">Recostructing the car trajectory<a class="headerlink" href="#recostructing-the-car-trajectory" title="Permanent link">&para;</a></h3>
+<p>Knowing the distance and the angle we can estimate the car position at each moment in time. Here we will use the previous saved array with the encoders data to plot the car trajectory.</p>
+<div class="highlight"><pre><span></span><code><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">theta</span>  <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">encoders_array</span><span class="p">:</span>
+    <span class="n">d</span>      <span class="o">=</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>   <span class="c1"># distance traveled</span>
+    <span class="n">theta</span> <span class="o">+=</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">Rw</span>  <span class="c1"># angle turned </span>
+
+    <span class="n">dp</span>     <span class="o">=</span> <span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">d</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">points</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">d</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+
+    <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span>
+
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</code></pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../2_gain_scheduling/" title="2. Gain Scheduling" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                2. Gain Scheduling
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../standings/spring-2020/" title="Standings - Spring 2020" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Standings - Spring 2020
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 The Race On organizing team
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.df0def68.min.js"></script>
+      <script src="../../assets/javascripts/bundle.ba57d267.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
