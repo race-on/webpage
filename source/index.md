@@ -2,7 +2,7 @@ title: Home
 
 # Race On – USC Self-Driving Car Competition
 
-![Main](images/RACEON_CARS_MAIN.png)
+<!-- ![Main](images/RACEON_CARS_MAIN.png) -->
 
 <!-- 
 ## Announcements
@@ -26,8 +26,6 @@ title: Home
     Registration is now open for the Spring 2020 Race On self-driving car competition.
 
     Registration is open until midnight on **Sunday, January 19, 2020**. The first 30 teams composed of only new members will be admitted while the rest placed on a waiting list. No such restriction is applied to returning teams. Register [**here**](registration). -->
-
----
 
 <iframe width="1120" height="440" src="https://www.youtube.com/embed/gfciEIwzgJo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
