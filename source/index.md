@@ -4,11 +4,12 @@ title: Home
 
 ![Main](images/RACEON_CARS_MAIN.png)
 
+<!-- 
 ## Announcements
 
 !!! note "Control Workshop & Practice Session – Sunday, Feb. 23, 10am - 4pm (EEB 132)"
     See [Gain scheduling](../workshops/2_gain_scheduling) workshop for details.
-
+-->
 
 <!-- !!! note "🏁🏎..  Race 0 Info "
     - **Race 0 Practice Session** - Feb. 7, 2020 - 5pm to 9pm @ EEB 132
