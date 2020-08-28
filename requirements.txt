@@ -1,0 +1,6 @@
+### Python 3 packages required to build the Race On website ###
+
+mkdocs-material
+mkdocs-git-revision-date-localized-plugin
+mkdocs-awesome-pages-plugin
+pyembed-markdown
