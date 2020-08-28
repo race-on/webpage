@@ -1,15 +1,6 @@
 # Race On Webpage Source Files
-Race On webpage source. Access the website here https://race-on.github.io/webpage/
 
+This repo contains all the source files used to generate the [raceon.io](https://raceon.io/) webpage.
 
-# Change Page Content
-
-To change the content of the website pages you would need to install mkdoks and few plugins used by the webpage. The easiest way to do that is to use conda:
-
-```bash
-conda create -n mkdocs python
-conda activate mkdocs
-pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-awesome-pages-plugin pyembed-markdown
-```
-
-To locally serve the website run ```mkdocs serve``` from the root of the repository.
+**To change the content of the webpage directly change the contents of the files in the source directory, either through a commit or using the GitHub interface. This will trigger an automatic page generation using the free service GitHub Actions. Allow for 30 seconds for the generation to complete, to see the 
+changes in your browser you might need to disable your browser cache.**
