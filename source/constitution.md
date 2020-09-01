@@ -1,9 +1,10 @@
 title: Constitution
 
 # Race On Constitution
+Amended and enforced on September 4, 2020
 
 ## Preamble
-*The goal of the Race On organization is to provide the opportunity for students to acquire real-world experience on the materials learned in class in the context of self-driving cars.*
+The goal of the Race On organization is to provide the opportunity for students to acquire real-world experience related to their course materials in the context of self-driving cars.
 
 ## Article 1 – Membership
 
