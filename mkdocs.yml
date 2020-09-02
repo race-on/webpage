@@ -2,7 +2,6 @@
 site_name: 'Race On'
 site_description: 'Self-Driving Car Competition'
 site_author: 'The Race On Organizing Team'
-# site_url: 'https://squidfunk.github.io/mkdocs-material/'
 
 
 # Repository
@@ -34,18 +33,6 @@ theme:
     text: 'Roboto'
     code: 'Roboto Mono'
 
-# nav:
-#   - Home: index.md
-#   - Rules: test/index.md
-#   - Registration: registration.md
-
-# theme:
-#     name: readthedocs
-#     highlightjs: true
-#     hljs_languages:
-#         - yaml
-#         - rust
-
 
 # Customization
 extra:
@@ -53,6 +40,14 @@ extra:
 
 extra_css:
   - 'stylesheets/extra.css'
+  
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+  - javascripts/tables.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/arithmatex.js
+
 
 # Google Analytics
 google_analytics:
@@ -66,21 +61,33 @@ plugins:
 
 markdown_extensions:
   - admonition
+  - pymdownx.details
+  - pymdownx.superfences
   - attr_list
-  - meta
-  - codehilite:
-      guess_lang: false
+  - pymdownx.highlight:
+      use_pygments: true
       linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets
+  - pymdownx.tabbed
   - footnotes
-  - toc:
-      permalink: true
-  - pymdownx.arithmatex
+  - pymdownx.critic
   - pymdownx.betterem:
       smart_enable: all
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.inlinehilite
-  - pymdownx.magiclink
+  - pymdownx.caret
   - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.smartsymbols
-  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex:
+      generic: true
+  - meta
+  - toc:
+      permalink: true
+  
