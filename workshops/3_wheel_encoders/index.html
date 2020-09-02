@@ -697,8 +697,9 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
 </div>
 <h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
 <p>Before running this code we need to install an additional Python library to read the inputs from the encoder. For that run in the terminal</p>
-<div class="highlight"><pre><span></span><code>sudo apt install python3-rpi.gpio
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sudo apt install python3-rpi.gpio
 </code></pre></div>
+</td></tr></table>
 
 <p>Next update the contents of your raceon.py file to match the one on the <a href="https://github.com/race-on/workshops/blob/master/raceon.py">GitHub</a> which now includes the Encoders class.</p>
 <p>Now we can test the encoders. Our test procedure will gradually increase the motor power, wait for 300 milliseconds for the motor to reach a stable speed at the new power, and then measure the wheels speed in a time window of 50 ms. The Jupyter Notebook with the testing procedure can be downloaded from <a href="https://github.com/race-on/workshops/blob/master/test-encoders.ipynb">GitHub</a>. To run it, you have to save the notebook in the same folder as the <code>raceon.py</code> file. Note, the 4<sup>th</sup> cell which contains the <code>for</code> loop will spin the wheel up to 70% power, and threfore, before running that cell pick up the car so that the wheels do not touch the floor. </p>
@@ -706,14 +707,29 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
 <p>Encoders give you a pulse per each transition from black to white or viceversa. Since we attached the encoders to the rear wheels which are connected throught a differential we can estimate besides the speed also the turning angle since the inside wheel will travel less distance. In what follows we will show how to measure the speed and the turning angle.</p>
 <h3 id="initialization">Initialization<a class="headerlink" href="#initialization" title="Permanent link">&para;</a></h3>
 <p>To use the encoders we need to instantiate the <code>Encoders</code> class which we import from the <code>raceon</code> library. The class constructor requires two arguments, the signal of the left and the right encoder. For the white boards these should be 25 and 27. Place the next block of code before the motor and servo itialization code in you notebook. You need to run this code only once.
-<div class="highlight"><pre><span></span><code><span class="n">K</span>   <span class="o">=</span> <span class="mf">0.21</span> <span class="o">/</span> <span class="mi">20</span>  <span class="c1"># distance traveled in meters per encoder pulse </span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">K</span>   <span class="o">=</span> <span class="mf">0.21</span> <span class="o">/</span> <span class="mi">20</span>  <span class="c1"># distance traveled in meters per encoder pulse </span>
 <span class="n">Rw</span>  <span class="o">=</span> <span class="mf">0.155</span>      <span class="c1"># distance in meters between the wheels centers</span>
 
 <span class="n">encoders</span> <span class="o">=</span> <span class="n">Encoders</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">27</span><span class="p">)</span>
-</code></pre></div></p>
+</code></pre></div>
+</td></tr></table></p>
 <h3 id="reading-data">Reading data<a class="headerlink" href="#reading-data" title="Permanent link">&para;</a></h3>
 <p>Once the class is instantiated, it will continuously read pulses from the encoders. The class method <code>Nl, Nr = encoders.read()</code> returns the number of pulses for both wheels from the last reading. Modify your Jupyter notebook code such that the for loop looks similar to this:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Reset encoders counter</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Reset encoders counter</span>
 <span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">encoders_array</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -726,25 +742,43 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
 
     <span class="c1"># Get the intensity component of the image (a trick to get black and white images)</span>
 </code></pre></div>
+</td></tr></table>
 
 <p>This code saves the number of pulses from the encoders into the <code>encoders_array</code> which we will use later for track reconstruction.</p>
 <h3 id="estimating-the-speed">Estimating the speed<a class="headerlink" href="#estimating-the-speed" title="Permanent link">&para;</a></h3>
 <p>To calculate the distance traveled by the car in meters we take the average of the two sensors and multiply by a conversion constant  defined in the initialization part.</p>
-<div class="highlight"><pre><span></span><code><span class="n">Nl</span><span class="p">,</span> <span class="n">Nr</span>   <span class="o">=</span> <span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Nl</span><span class="p">,</span> <span class="n">Nr</span>   <span class="o">=</span> <span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">distance</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nl</span> <span class="o">+</span> <span class="n">Nr</span><span class="p">)</span> <span class="o">*</span> <span class="n">K</span> <span class="o">/</span> <span class="mi">2</span>
 </code></pre></div>
+</td></tr></table>
 
 <p>To obtaine the speed, divide the distance by the time between the two measurements, i.e., between the call of the <code>read</code>method. Note, having a speed estimation you can dynamically adjust the motor duty cycle so you reach your desired speed. You can do this by adding a second PID controller the actively adjusts motor duty cycle to ensure the desired speed irespective of the battery voltage or friction.</p>
 <h3 id="estimating-turning-angle">Estimating turning angle<a class="headerlink" href="#estimating-turning-angle" title="Permanent link">&para;</a></h3>
 <p>Using differential measurements we can estimate how much the car turned since the last measurement. </p>
-<div class="highlight"><pre><span></span><code><span class="n">Nl</span><span class="p">,</span> <span class="n">Nr</span>      <span class="o">=</span> <span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">Nl</span><span class="p">,</span> <span class="n">Nr</span>      <span class="o">=</span> <span class="n">encoders</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">delta_theta</span> <span class="o">=</span> <span class="p">(</span><span class="n">Nl</span> <span class="o">-</span> <span class="n">Nr</span><span class="p">)</span> <span class="o">*</span> <span class="n">K</span> <span class="o">/</span> <span class="n">Rw</span>
 </code></pre></div>
+</td></tr></table>
 
 <p>Keeping track of the sum of these angles once the turn started would give a good extimate of how much we turned. You can decrease your lap time if you can start accelerating on the straight lines before the turn ends.</p>
 <h3 id="recostructing-the-car-trajectory">Recostructing the car trajectory<a class="headerlink" href="#recostructing-the-car-trajectory" title="Permanent link">&para;</a></h3>
 <p>Knowing the distance and the angle we can estimate the car position at each moment in time. Here we will use the previous saved array with the encoders data to plot the car trajectory.</p>
-<div class="highlight"><pre><span></span><code><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
 <span class="n">theta</span>  <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">encoders_array</span><span class="p">:</span>
@@ -759,6 +793,7 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
                 
                   
                 
@@ -843,6 +878,16 @@ Adapted from: http://blog.heyimcat.com/universal-signup-form/ */
           }, typeof search !== "undefined" && search)
         })
       </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/arithmatex.js"></script>
       
     
   </body>

@@ -652,26 +652,45 @@ Try to identify each of the elements in the block diagram in the context of Race
 <p>Define the different system operating conditions.</p>
 <p>Even though the car itself doesn't change much during the race, the track varies considerably. We can define three different operating modes for the car: straight line, 90<sup>o</sup> turn and 180<sup>o</sup> turn.  Next, we have to find a way to identify these conditions. One way of doing this is by looking at the error. This requires a few steps and some tuning. Let's get to it!</p>
 <p>Create an error array in your code before the loop starts and populate the array at every iteration:
-<div class="highlight"><pre><span></span><code><span class="n">error_array</span> <span class="o">=</span> <span class="p">[]</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">error_array</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
        <span class="p">[</span><span class="o">...</span><span class="p">]</span>
        <span class="n">error</span> <span class="o">=</span> <span class="n">CAMERA_CENTER</span> <span class="o">-</span> <span class="n">line_pos</span>
        <span class="n">error_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 </code></pre></div>
+</td></tr></table>
 Then, run a lap on the track and plot your error with the command <code>plt.plot(error_array)</code>.   You should be able to map different peaks and valleys on your error plot to straight lines, 90<sup>o</sup> and 180<sup>o</sup> turns on the track. After this, you can create thresholds to identify when the car is in each of these scenarios.</p>
 </li>
 <li>
 <p>Tune your controller gains for each operating condition.</p>
 <p>While it's complicated to tune the controller individually for each operating condition, we can use our knowledge of the problem to estimate how the gains should change. Intuitively, an error on a straight line doesn't need to be corrected as aggressively as errors on turns. Therefore, let's define:
-<div class="highlight"><pre><span></span><code><span class="n">K_0</span> <span class="o">=</span> <span class="mi">5000</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">K_0</span> <span class="o">=</span> <span class="mi">5000</span>
 <span class="n">K_90</span> <span class="o">=</span> <span class="mi">7000</span>
 <span class="n">K_180</span> <span class="o">=</span> <span class="mi">9000</span>
-</code></pre></div></p>
+</code></pre></div>
+</td></tr></table></p>
 </li>
 <li>
 <p>Determine how to vary the controller gains based on the operating conditions</p>
 <p>We will use a simple discrete switch. Based on your observation of the errors, create thresholds and use them to choose your gain:
-<div class="highlight"><pre><span></span><code><span class="n">e_90</span> <span class="o">=</span> <span class="mi">50</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="n">e_90</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="n">e_180</span> <span class="o">=</span> <span class="mi">75</span>
 <span class="p">[</span><span class="o">...</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">stream</span><span class="p">:</span>
@@ -683,7 +702,8 @@ Then, run a lap on the track and plot your error with the command <code>plt.plot
       <span class="n">gain</span> <span class="o">=</span> <span class="n">K_90</span>
 
     <span class="n">DUTY_CYCLE</span> <span class="o">=</span> <span class="n">SERVO_MIDDLE</span> <span class="o">+</span> <span class="n">gain</span><span class="o">*</span><span class="n">error</span>
-</code></pre></div></p>
+</code></pre></div>
+</td></tr></table></p>
 </li>
 <li>
 <p>Assess system performance.</p>
@@ -780,6 +800,16 @@ Then, run a lap on the track and plot your error with the command <code>plt.plot
           }, typeof search !== "undefined" && search)
         })
       </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js"></script>
+      
+        <script src="../../javascripts/tables.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="../../javascripts/arithmatex.js"></script>
       
     
   </body>
