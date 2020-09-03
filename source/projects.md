@@ -69,10 +69,10 @@ We start by assuming the vehicle can be modelled by a two-wheel bicycle model. N
 Additional deliverables:
 
 1. Brief introduction to time domain models, state-space notation, why they are useful for Race On and mathematical definition of the model being used
-2. 3. Standard procedure to estimate model parameters
+2. Standard procedure to estimate model parameters
 Blog-post with brief introduction to observers and how to apply it to the Race On vehicle
-4. Description of controller, including state-feedback and possible feedforward term. Sample procedure on defining gains
-5. Average lap times of different controllers
+3. Description of controller, including state-feedback and possible feedforward term. Sample procedure on defining gains
+4. Average lap times of different controllers
 
 
 ### **State-space controller**
