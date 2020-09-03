@@ -105,13 +105,15 @@ Additional deliverables:
 ### **Reliable Camera Calibration and Bird’s Eye view image mapping**
 **Topic**: *Perception* **Priority**: *High* **Difficulty**: *Low*
 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yAYqt3RpT6c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video width="560" controls>
+  <source src="https://april.eecs.umich.edu/media/aprilcal/aprilcal_1080p.mov">
+  Could not load the video file. Check reference 1 below for more details.
+</video>
 
 Wide angle cameras introduce distortions that increase as we go farther from the camera center. These distortions make straight lines look curved. This is a big problem and introduces errors when performing visual odometry or visual localization which rely on a calibrated camera. Therefore, camera calibration must be the first step for any visual algorithm. The goal of this project is to design a calibration procedure that is easy to implement and can be used by teams at any time if they suspect that the camera is not calibrated.
 
 References:
-
+1. [Apriltag based camera calibration](https://april.eecs.umich.edu/papers/details.php?name=richardson2013iros)
 1. [Camera calibration explanation + code](https://nikolasent.github.io/opencv/2017/05/05/Camera-calibration-with-OpenCV.html)
 1. [Bird’s eye view explanation + code](https://nikolasent.github.io/opencv/2017/05/07/Bird's-Eye-View-Transformation.html)
 1. [Rolling Shutter Calibration + IMU based on camera + papers](https://github.com/ethz-asl/kalibr)
