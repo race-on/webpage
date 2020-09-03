@@ -266,8 +266,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#detection-and-pose-estimation-using-apriltags-3-ar-alvar-tags-and-chilitags-are-alternatives" class="md-nav__link">
-    Detection and pose estimation using AprilTags 3 (AR Alvar tags and Chilitags are alternatives)
+  <a href="#pose-estimation-using-visual-tags" class="md-nav__link">
+    Pose estimation using visual tags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localization-using-visual-tags" class="md-nav__link">
+    Localization using visual tags
   </a>
   
 </li>
@@ -287,15 +294,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#state-space-controller-design-and-state-estimation-using-kalman-filter" class="md-nav__link">
-    State-space controller design and state estimation using Kalman Filter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#localization-using-apriltags-as-landmarks" class="md-nav__link">
-    Localization using AprilTags as landmarks
+  <a href="#state-space-controller" class="md-nav__link">
+    State-space controller
   </a>
   
 </li>
@@ -374,8 +374,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-refernce-materials" class="md-nav__link">
-    Additional Refernce Materials
+  <a href="#additional-reference-materials" class="md-nav__link">
+    Additional Reference Materials
   </a>
   
 </li>
@@ -594,8 +594,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#detection-and-pose-estimation-using-apriltags-3-ar-alvar-tags-and-chilitags-are-alternatives" class="md-nav__link">
-    Detection and pose estimation using AprilTags 3 (AR Alvar tags and Chilitags are alternatives)
+  <a href="#pose-estimation-using-visual-tags" class="md-nav__link">
+    Pose estimation using visual tags
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localization-using-visual-tags" class="md-nav__link">
+    Localization using visual tags
   </a>
   
 </li>
@@ -615,15 +622,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#state-space-controller-design-and-state-estimation-using-kalman-filter" class="md-nav__link">
-    State-space controller design and state estimation using Kalman Filter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#localization-using-apriltags-as-landmarks" class="md-nav__link">
-    Localization using AprilTags as landmarks
+  <a href="#state-space-controller" class="md-nav__link">
+    State-space controller
   </a>
   
 </li>
@@ -702,8 +702,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-refernce-materials" class="md-nav__link">
-    Additional Refernce Materials
+  <a href="#additional-reference-materials" class="md-nav__link">
+    Additional Reference Materials
   </a>
   
 </li>
@@ -733,20 +733,33 @@
 <li>Any additional requirements stated in the project description</li>
 </ol>
 <h2 id="high-priority-projects">High Priority Projects<a class="headerlink" href="#high-priority-projects" title="Permanent link">&para;</a></h2>
-<h3 id="detection-and-pose-estimation-using-apriltags-3-ar-alvar-tags-and-chilitags-are-alternatives"><strong>Detection and pose estimation using AprilTags 3</strong> (AR Alvar tags and Chilitags are alternatives)<a class="headerlink" href="#detection-and-pose-estimation-using-apriltags-3-ar-alvar-tags-and-chilitags-are-alternatives" title="Permanent link">&para;</a></h3>
+<h3 id="pose-estimation-using-visual-tags"><strong>Pose estimation using visual tags</strong><a class="headerlink" href="#pose-estimation-using-visual-tags" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Perception</em> <strong>Priority</strong>: <em>High</em> <strong>Difficulty</strong>: <em>Low</em></p>
-<p>Detecting the track ahead of the car is important for local steering decisions but might compromise the overall performance on the track. For example, when detecting a turn without knowing the map, the driving algorithm must assume the worst case scenario which could result in a significant decrease in speed. However, by knowing the map, the best speed for each turn can be used to  drastically improve the performance. For that, special tags can be placed on the track. Upon detection of these tags,  the car position, orientation and speed can be inferred. The goal of this project is to evaluate different tags in terms of reliability of detection and required real-time CPU usage. Moreover, different placement strategies for those tags can also be evaluated.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Y8WEGGbLWlA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>Detecting the track ahead of the car is important for local steering decisions but might compromise the overall performance on the track. For example, when detecting a turn without knowing the map, the driving algorithm must assume the worst case scenario which could result in a significant decrease in speed. However, by knowing the map, the best speed for each turn can be used to  drastically improve the performance. For that, special tags such as <strong>Apriltags 3</strong> can be placed on the track. Upon detection of these tags,  the car position, orientation and speed can be inferred. The goal of this project is to evaluate <strong>Apriltags 3</strong> and other tags in terms of reliability of detection and required real-time CPU usage. Moreover, different placement strategies for those tags can also be evaluated.</p>
 <p>References:</p>
 <ol>
 <li><a href="https://github.com/AprilRobotics/apriltag">AprilTags Github</a></li>
 <li><a href="https://wiki.ros.org/ar_track_alvar">Alvar tags ROS page</a></li>
 <li><a href="https://github.com/chili-epfl/chilitags">Chilitags Github</a></li>
-<li><a href="https://www.youtube.com/watch?v=Y8WEGGbLWlA">AprilTags localization video</a></li>
 <li><a href="http://wiki.ros.org/apriltags_ros">AprilTags ROS package</a></li>
 </ol>
 <p>Additional deliverables:</p>
 <ol>
 <li>Tags to be used and their placement strategy</li>
+</ol>
+<h3 id="localization-using-visual-tags"><strong>Localization using visual tags</strong><a class="headerlink" href="#localization-using-visual-tags" title="Permanent link">&para;</a></h3>
+<p><strong>Topic</strong>: <em>Perception</em> <strong>Priority</strong>: <em>High</em> <strong>Difficulty</strong>: <em>Medium</em></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Dty79dyhGEQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>Real cars have the advantage of using GPS for localization, but this is not the case for Race On cars. Knowing the exact position of the car on the track offers a big advantage as it allows a more precise path planning which heavily outperforms the stay-in-the-middle strategy. By placing two or three <strong>Apriltags 3</strong> or other similar tags on each segment, an accurate track map can be constructed and used for precise localization of the car. Moreover, this localization can be also used in estimating the car model parameters of the state-space controller.</p>
+<p>References:</p>
+<ol>
+<li><a href="https://raw.githubusercontent.com/yvonshong/Probabilistic-Robotics/master/Probabilistic-Robotics-en.pdf">Mobile Robot Localization, Chapter 7</a></li>
+<li><a href="https://pythonrobotics.readthedocs.io/en/latest/modules/localization.html">Different localization algorithms</a></li>
+<li><a href="http://wiki.lofarolabs.com/index.php/Localizing_with_AprilTags">Some insight on choosing AprilTags for localization</a></li>
+<li><a href="https://github.com/lifuguan/AprilTag_Localization">Similar project source code (in chinese)</a></li>
 </ol>
 <h3 id="frequency-domain-model-estimation-and-control"><strong>Frequency domain model estimation and control</strong><a class="headerlink" href="#frequency-domain-model-estimation-and-control" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Control</em> <strong>Priority</strong>: <em>High</em> <strong>Difficulty</strong>: <em>Medium</em></p>
@@ -775,29 +788,19 @@ Blog-post with brief introduction to observers and how to apply it to the Race O
 <li>Description of controller, including state-feedback and possible feedforward term. Sample procedure on defining gains</li>
 <li>Average lap times of different controllers</li>
 </ol>
-<h3 id="state-space-controller-design-and-state-estimation-using-kalman-filter"><strong>State-space controller design and state estimation using Kalman Filter</strong><a class="headerlink" href="#state-space-controller-design-and-state-estimation-using-kalman-filter" title="Permanent link">&para;</a></h3>
+<h3 id="state-space-controller"><strong>State-space controller</strong><a class="headerlink" href="#state-space-controller" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Control</em> <strong>Priority</strong>: <em>High</em> <strong>Difficulty</strong>: <em>High</em></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hnvj4rgrAy0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <p>The main goal of this project is to implement an advanced controller design by utilizing the car dynamical model so as to achieve a better racing performance. This project can be subdivided into the car model estimation and control and state observer design. First, the car model must be estimated either using parametric (first principles model) and/or non-parametric (data-driven) methods. Second, a state-observer design is necessary to estimate the hidden state dynamics used for the higher level control. A typical implementation is the Extended Kalman Filter. Finally, given the model and observer designs, advanced control techniques (e.g. LQR, MPC, etc.) will be implemented and compared with the typical PID implementation. Comparisons in performance will be evaluated. </p>
 <p>References:</p>
 <ol>
-<li><a href="https://www.youtube.com/watch?time_continue=11&amp;v=hnvj4rgrAy0&amp;feature=emb_logo">Video of corner drifting</a></li>
 <li><a href="https://borrelli.me.berkeley.edu/pdfpub/auto_drift.pdf">Paper on LQR controller design for drifting an 1/10 RC car</a></li>
 <li><a href="https://www.diva-portal.org/smash/get/diva2:1149520/FULLTEXT01.pdf">Thesis on LQR controller design for RC car</a></li>
 <li><a href="https://arxiv.org/pdf/1610.06534.pdf">MPC controller paper</a></li>
 <li><a href="https://automatedcars.space/home/2017/4/18/firkxklwjl37emejf1eeevw7a6ulvh">MPC controller website</a></li>
 <li><a href="https://github.com/rlabbe/filterpy">Kalman filter python library</a> + <a href="https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/">book explaining the library</a></li>
 <li><a href="https://github.com/MPC-Berkeley/barc/tree/master/workspace/src/barc/src">Reference controller implementation on a 1/10 car (BARC source code)</a></li>
-</ol>
-<h3 id="localization-using-apriltags-as-landmarks"><strong>Localization using AprilTags as landmarks</strong><a class="headerlink" href="#localization-using-apriltags-as-landmarks" title="Permanent link">&para;</a></h3>
-<p><strong>Topic</strong>: <em>Perception</em> <strong>Priority</strong>: <em>High</em> <strong>Difficulty</strong>: <em>Medium</em></p>
-<p>Real cars have the advantage of using GPS for localization, but this is not the case for Race On cars. Knowing the exact position of the car on the track offers a big advantage as it allows a more precise path planning which heavily outperforms the stay-in-the-middle strategy. By placing two or three AprilTags on each segment, an accurate track map can be constructed and used for precise localization of the car on the track. Moreover, this localization can be also used in estimating the car model parameters of the state-space controller.</p>
-<p>References:</p>
-<ol>
-<li><a href="https://www.youtube.com/watch?v=Y8WEGGbLWlA">Demo video</a></li>
-<li><a href="https://raw.githubusercontent.com/yvonshong/Probabilistic-Robotics/master/Probabilistic-Robotics-en.pdf">Mobile Robot Localization, Chapter 7</a></li>
-<li><a href="https://pythonrobotics.readthedocs.io/en/latest/modules/localization.html">Different localization algorithms</a></li>
-<li><a href="http://wiki.lofarolabs.com/index.php/Localizing_with_AprilTags">Some insight on choosing AprilTags for localization</a></li>
-<li><a href="https://github.com/lifuguan/AprilTag_Localization">Similar project source code (in chinese)</a></li>
 </ol>
 <h3 id="simulation-and-development-docker-images"><strong>Simulation and Development Docker images</strong><a class="headerlink" href="#simulation-and-development-docker-images" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Simulation</em> <strong>Priority</strong>: <em>High</em> <strong>Difficulty</strong>: <em>Low</em></p>
@@ -808,10 +811,11 @@ Blog-post with brief introduction to observers and how to apply it to the Race O
 </ol>
 <h3 id="reliable-camera-calibration-and-birds-eye-view-image-mapping"><strong>Reliable Camera Calibration and Bird’s Eye view image mapping</strong><a class="headerlink" href="#reliable-camera-calibration-and-birds-eye-view-image-mapping" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Perception</em> <strong>Priority</strong>: <em>High</em> <strong>Difficulty</strong>: <em>Low</em></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yAYqt3RpT6c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <p>Wide angle cameras introduce distortions that increase as we go farther from the camera center. These distortions make straight lines look curved. This is a big problem and introduces errors when performing visual odometry or visual localization which rely on a calibrated camera. Therefore, camera calibration must be the first step for any visual algorithm. The goal of this project is to design a calibration procedure that is easy to implement and can be used by teams at any time if they suspect that the camera is not calibrated.</p>
 <p>References:</p>
 <ol>
-<li><a href="https://www.youtube.com/watch?v=yAYqt3RpT6c">Calibrate camera with ROS demo video</a></li>
 <li><a href="https://nikolasent.github.io/opencv/2017/05/05/Camera-calibration-with-OpenCV.html">Camera calibration explanation + code</a></li>
 <li><a href="https://nikolasent.github.io/opencv/2017/05/07/Bird's-Eye-View-Transformation.html">Bird’s eye view explanation + code</a></li>
 <li><a href="https://github.com/ethz-asl/kalibr">Rolling Shutter Calibration + IMU based on camera + papers</a></li>
@@ -819,20 +823,22 @@ Blog-post with brief introduction to observers and how to apply it to the Race O
 <h2 id="medium-priority-projects">Medium Priority Projects<a class="headerlink" href="#medium-priority-projects" title="Permanent link">&para;</a></h2>
 <h3 id="visual-odometry"><strong>Visual Odometry</strong><a class="headerlink" href="#visual-odometry" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Perception</em> <strong>Priority</strong>: <em>Medium</em> <strong>Difficulty</strong>: <em>Medium</em></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/homos4vd_Zs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <p>Visual odometry is the problem of estimating the trajectory of the camera only from its image feed. In more details, given two images we want to estimate the translation over x, y, z and the rotation 𝜃x, 𝜃y, 𝜃z that if applied will transform the first image into the second one. This is a much simpler problem than localization, although the two are connected with the difference that in localization the position is absolute whereas in odometry the position is relative.</p>
 <p>References:</p>
 <ol>
-<li><a href="https://www.youtube.com/watch?v=homos4vd_Zs">Demo Video</a></li>
 <li><a href="http://avisingh599.github.io/vision/monocular-vo/">Tutorial</a></li>
 <li><a href="https://arxiv.org/pdf/1610.03660">An overview of image based localization</a></li>
 <li><a href="https://github.com/SonamYeshe/ENPM673-Perception-for-Autonomous-Robots/tree/master/2.0_VisualOdometry">Similar project</a></li>
 </ol>
 <h3 id="rapidly-exploring-random-trees-for-path-planning"><strong>Rapidly Exploring Random Trees for Path Planning</strong><a class="headerlink" href="#rapidly-exploring-random-trees-for-path-planning" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Planning</em> <strong>Priority</strong>: <em>Medium</em> <strong>Difficulty</strong>: <em>Low</em></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SZ9c_3HUVUE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 <p>Rapidly Exploring Random Trees is an algorithm to search for an optimal trajectory on a constrained map (keeping the car inside the track boundaries). The random part for generating trajectories can be biased towards a trajectory with desirable characteristics (higher car speed and margin of error). The goal of the project is to implement RRT and RRT* or other variants that receive a track configuration and output an optimal trajectory for the car to complete a lap. The algorithm must be configurable to allow a trade off between car speed and margin of error. As a bonus task, one could integrate the car dynamics model into the RRT algorithm.</p>
 <p>References:</p>
 <ol>
-<li><a href="https://www.youtube.com/watch?v=SZ9c_3HUVUE">Demo Video</a></li>
 <li><a href="https://medium.com/@theclassytim/robotic-path-planning-rrt-and-rrt-212319121378">Explanation</a></li>
 <li><a href="https://pythonrobotics.readthedocs.io/en/latest/modules/path_planning.html">Source code + other similar algorithms</a></li>
 <li><a href="https://www.cs.cmu.edu/~motionplanning/reading/PlanningforDynamicVeh-1.pdf">Vehicle Path Planning paper</a></li>
@@ -852,7 +858,7 @@ Blog-post with brief introduction to observers and how to apply it to the Race O
 <h3 id="port-existing-code-to-ros-2-and-real-time-linux"><strong>Port existing code to ROS 2 and Real-Time Linux</strong><a class="headerlink" href="#port-existing-code-to-ros-2-and-real-time-linux" title="Permanent link">&para;</a></h3>
 <p><strong>Topic</strong>: <em>Other</em> <strong>Priority</strong>: <em>Low</em> <strong>Difficulty</strong>: <em>High</em></p>
 <p>Currently, Race On starter code uses ROS 1 and heavily relies on Python 2.7 which as of 2020 is obsolete. ROS 2 and Python 3 is the way to go in the long run. The goal is to port the existing code to ROS 2 and Python 3. Moreover, Linux kernel was not designed for Real-Time applications but there exists a <a href="https://lemariva.com/blog/2019/09/raspberry-pi-4b-preempt-rt-kernel-419y-performance-test">patch</a> that fixes this. This kernel makes the Raspberry Pi slower by at most 10% but instead guarantees that parts of the program will be executed on time if configured so. The goal is to patch a Pi image and provide instruction on how to set up the ROS code to benefit from the real-time kernel.</p>
-<h2 id="additional-refernce-materials">Additional Refernce Materials<a class="headerlink" href="#additional-refernce-materials" title="Permanent link">&para;</a></h2>
+<h2 id="additional-reference-materials">Additional Reference Materials<a class="headerlink" href="#additional-reference-materials" title="Permanent link">&para;</a></h2>
 <ul>
 <li>https://f1tenth.org/learn.html</li>
 <li>https://github.com/SonamYeshe/ENPM673-Perception-for-Autonomous-Robots </li>
