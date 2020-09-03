@@ -113,6 +113,7 @@ Additional deliverables:
 Wide angle cameras introduce distortions that increase as we go farther from the camera center. These distortions make straight lines look curved. This is a big problem and introduces errors when performing visual odometry or visual localization which rely on a calibrated camera. Therefore, camera calibration must be the first step for any visual algorithm. The goal of this project is to design a calibration procedure that is easy to implement and can be used by teams at any time if they suspect that the camera is not calibrated.
 
 References:
+
 1. [Apriltag based camera calibration](https://april.eecs.umich.edu/papers/details.php?name=richardson2013iros)
 1. [Camera calibration explanation + code](https://nikolasent.github.io/opencv/2017/05/05/Camera-calibration-with-OpenCV.html)
 1. [Bird’s eye view explanation + code](https://nikolasent.github.io/opencv/2017/05/07/Bird's-Eye-View-Transformation.html)
