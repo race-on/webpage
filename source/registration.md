@@ -3,7 +3,7 @@ title: Registration
 
 # Fall 2020 Registration
 
-To register as a **Technical Lead** or **Technical Specialist**, please  fill out the registration form below. When registering use your **USC email**. The form is open until midnight on **Sunday, September 6**. We will contact you after the deadline to discuss the next steps.
+To register as a **Technical Lead** or **Technical Specialist**, please  fill out the registration form below. When registering use your **USC email**. The form is open until midnight on **Wednesday, September 9** (deadline updated). We will contact you after the deadline to discuss the next steps.
 
 
 For any queries, please contact Valeriu Balaban at vbalaban@usc.edu
