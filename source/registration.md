@@ -8,8 +8,10 @@ To register as a **Technical Lead** or **Technical Specialist**, please  fill ou
 
 For any queries, please contact Valeriu Balaban at vbalaban@usc.edu
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScBMsZpJmmiKrmUt6soIjgiEp8LYN9IyBB5G3qPZrkSvRAF5A/viewform?embedded=true" width="640" height="2293" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScBMsZpJmmiKrmUt6soIjgiEp8LYN9IyBB5G3qPZrkSvRAF5A/viewform?embedded=true" width="640" height="2393" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
-**After submission of the form, please scroll up to see the confirmation message. You should also receive an email confirmation. ** -->
+**After submission of the form, please scroll up to see the confirmation message. You should also receive an email confirmation.**
+
+If the form above is not loading use the following [link](https://forms.gle/pjqA95PvZpaqvpCW6).
 
 <!-- # Registration Closed -->
