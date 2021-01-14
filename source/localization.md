@@ -103,10 +103,10 @@ To use the python AprilTags bindings from this repo, you first create a Detector
 To use the Detector, we call the detect() function on a image. For pose estimation, we set estimate_tag_pose to True and supply the tag size and four elements from the camera's K matrix. 
 
 The output of the detect() functions is a list of Detection objects. Each Detection contains a lot of information about the tag it detected and I'll highlight the important ones.
-- Tag_ID: The ID of the Tag
+- Tag ID: The ID of the Tag
 - Corners: A list of 4 tuples containing the pixel coordinates of the corners. These wrap counter clockwise from the bottom left corner.
-- Pose_R: A 3x3 Rotation matrix of the tag in the camera frame
-- Pose_T: A 3x1 Translation vector of the tag in the camera frame
+- $Pose_R$: A 3x3 Rotation matrix of the tag in the camera frame
+- $Pose_t$: A 3x1 Translation vector of the tag in the camera frame
 
 ```
 ### In real_time.py
@@ -124,18 +124,18 @@ We now have all of the information we need to estimate the position of the camer
 First, we need the rotation matrix *R* and translation vector *t* of the camera in the tag frame. We can get these by inverting the Pose_R and Pose_T we get from the Apriltags. R is an orthogonal rotation matrix, meaning the inverse is the same as the transpose. t is a translation vector, so its inverse just negates everything.
 
 $^{camera}R_{tag} = Pose_R^{T}$ <br>
-$t_camera_tag = -1 * Pose_t$<br>
+$^{camera}t_{tag} = = -1 * Pose_t$<br>
 
-To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, translate by *t_camera_tag* and multiply by *R_camera_tag*. But the tag center in the tag frame is (0,0,0) so our final equation is
-$Position_tag = R_camera_tag * t_camera_tag$ <br>
+To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, multiply by $^{camera}R_{tag}$ and translate by $^{camera}t_{tag}$ . But the coordinates of the tag center in the tag frame is $(0,0,0)$ so our final equation is
+$^{camera}Position = ^{camera}R_{tag} * ^{camera}t_{tag}$ <br>
 
-The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need X->X,Y->-Y and Z->-Z. We can use a 3x3 diagonal permutation matrix *P* to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO<br>
+The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need $X \rightarrow X, Y \rightarrow -Y, Z \rightarrow -Z$. We can use a 3x3 diagonal permutation matrix $P$ to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO<br>
 
-$Position_tag_unofficial = P * Position_tag$<br>
+$Position_{unofficial} = P * ^{tag}Position_$<br>
 
 Now we go from the tag frame to the global frame using the information from the look-up table we populated when doing the scene setup. We have our global rotation matrix $R_{g}$ and global translation vector $t_{g}$. <br>
 
-$Position_global = R_{g} * Position_tag_unofficial + t_{g}$<br>
+$Position_global = R_{g} * ^{unofficial}Position + t_{g}$<br>
 
 In Python, we can use the matrix mulptiplcation symbol @ introduced in 3.6. Combining all of the transformations becomes
 ```
