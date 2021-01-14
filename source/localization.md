@@ -3,12 +3,12 @@ Date: September 4, 2020 <br>
 Author: Theodore Lewitt <br>
 
 ## Overview
-This article describes the work I did for the Race On RC self-driving car competition at USC. This code will be used by future competitors for car localization on the track! <br>
-I will show you how to set-up both the hardware and software used on this project. I will also explain the reasoning behind each part of the main algorithm and how to make it run at 30+ FPS.
+In this workshop, we will use a wide angle camera to estimate your car's position on the track. This information can help your car drive closer to the edge of the track and pick a faster line.
+This blog will teach you computer vision fundamentals like camera calibration, rotation and translation transformations, and image processing using OpenCV and a Raspberry Pi camera. There are additional oppurtunities to learn more about camera hardware fundamentals or control theory algorithms like Kalman filtering.
 
 ## Final Product
+[![Thumbnail](https://img.youtube.com/vi/7iOmVOEvfgw/0.jpg)](https://www.youtube.com/watch?v=7iOmVOEvfgw)
 
-ADD VIDEO
 ## System Requirements
 For each frame the camera sends to the Raspberry Pi, we need to process the data quickly enough to run in real time. For more concrete requirements, we can look at the servo motor on the car which can only update at 50 Hz. So we don't need anything faster than 50 FPS but will need greater than 20 FPS otherwise the car can travel too far in between updates.
 
@@ -64,8 +64,8 @@ with PiCamera() as camera:
 ```
 
 ## Processing the Images
-The majority of the processing is within the *write()* function of the Stream class.  There are 5 main steps that take an raw camera image to an measurement of the camera's location.
-1. Raw Data to OpenCV Image
+The majority of the processing is within the *write()* function of the Stream class.  There are 5 main steps that take an raw camera image to an measurement of the camera's location. As on 1/13/21, here are the major parts of the algorithm and time it takes ADD TIMES
+1. Raw Data to OpenCV Image 
 2. Undisortion
 3. AprilTag Detection
 4. Pose Estimation
@@ -103,10 +103,10 @@ To use the python AprilTags bindings from this repo, you first create a Detector
 To use the Detector, we call the detect() function on a image. For pose estimation, we set estimate_tag_pose to True and supply the tag size and four elements from the camera's K matrix. 
 
 The output of the detect() functions is a list of Detection objects. Each Detection contains a lot of information about the tag it detected and I'll highlight the important ones.
-Tag_ID: The ID of the Tag
-Corners: A list of 4 tuples containing the pixel coordinates of the corners. These wrap counter clockwise from the bottom left corner.
-Pose_R: A 3x3 Rotation matrix of the tag in the camera frame
-Pose_T: A 3x1 Translation vector of the tag in the camera frame
+- Tag_ID: The ID of the Tag
+- Corners: A list of 4 tuples containing the pixel coordinates of the corners. These wrap counter clockwise from the bottom left corner.
+- Pose_R: A 3x3 Rotation matrix of the tag in the camera frame
+- Pose_T: A 3x1 Translation vector of the tag in the camera frame
 
 ```
 ### In real_time.py
@@ -123,19 +123,19 @@ We now have all of the information we need to estimate the position of the camer
 
 First, we need the rotation matrix *R* and translation vector *t* of the camera in the tag frame. We can get these by inverting the Pose_R and Pose_T we get from the Apriltags. R is an orthogonal rotation matrix, meaning the inverse is the same as the transpose. t is a translation vector, so its inverse just negates everything.
 
-$R_camera_tag = Pose_R^{T}$
-$t_camera_tag = -1 * Pose_t$
+$^{camera}R_{tag} = Pose_R^{T}$ <br>
+$t_camera_tag = -1 * Pose_t$<br>
 
 To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, translate by *t_camera_tag* and multiply by *R_camera_tag*. But the tag center in the tag frame is (0,0,0) so our final equation is
-$Position_tag = R_camera_tag * t_camera_tag$
+$Position_tag = R_camera_tag * t_camera_tag$ <br>
 
-The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need X->X,Y->-Y and Z->-Z. We can use a 3x3 diagonal permutation matrix *P* to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO
+The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need X->X,Y->-Y and Z->-Z. We can use a 3x3 diagonal permutation matrix *P* to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO<br>
 
-$Position_tag_unofficial = P * Position_tag$
+$Position_tag_unofficial = P * Position_tag$<br>
 
-Now we go from the tag frame to the global frame using the information from the look-up table we populated when doing the scene setup. We have our global rotation matrix $R_{g}$ and global translation vector $t_{g}$.
+Now we go from the tag frame to the global frame using the information from the look-up table we populated when doing the scene setup. We have our global rotation matrix $R_{g}$ and global translation vector $t_{g}$. <br>
 
-$Position_global = R_{g} * Position_tag_unofficial + t_{g}$
+$Position_global = R_{g} * Position_tag_unofficial + t_{g}$<br>
 
 In Python, we can use the matrix mulptiplcation symbol @ introduced in 3.6. Combining all of the transformations becomes
 ```
@@ -191,4 +191,21 @@ def write(raw_bytes):
   raw_position_estimate = estimate_pose(detected_tags)
   smoothed_position = moving_average(raw_position_estimate)
 ```
+
+## Future Improvements
+There are lots of improvements to be made to this, reducing localization error and improving FPS.
+#### Scence Setup
+- Print higher quality AprilTags on foam board to ensure a flat surface
+- Place tags in triangle clusters to improve localization accuracy
+#### Camera
+- Reduce motion blur caused by moving camera by increasing shutter speed. Increase analog gain to compensate for darker photos. Picamera has a exposure mode setting that I would switch to SPORT
+- Improve camera calibration using more images and better setup to improve undistortion.
+#### AprilTag Detector
+- Find a optimal quad_decimate parameter that balances FPS and detection accuracy
+- Play with quad_sigma parameter and see if it improves detection accuracy
+- Play with decode_sharpening parameter and see it if improves detection accuracy
+#### Pose Estimation
+- Adding orientation as well as position will help inform the car's trajectory
+#### Filtering
+- Add more information about the car model and the inputs from the servo to utilize a Kalman filter
 
