@@ -927,10 +927,10 @@ I = cv2.remap(I_raw, map_1, map_2)
 - debug: Defaults to 0 but if set to 1 will save images from each step in the detection process. Very computationally expensive, should only be used on single frames.</p>
 <p>To use the Detector, we call the detect() function on a image. For pose estimation, we set estimate_tag_pose to True and supply the tag size and four elements from the camera's K matrix. </p>
 <p>The output of the detect() functions is a list of Detection objects. Each Detection contains a lot of information about the tag it detected and I'll highlight the important ones.
-- Tag_ID: The ID of the Tag
+- Tag ID: The ID of the Tag
 - Corners: A list of 4 tuples containing the pixel coordinates of the corners. These wrap counter clockwise from the bottom left corner.
-- Pose_R: A 3x3 Rotation matrix of the tag in the camera frame
-- Pose_T: A 3x1 Translation vector of the tag in the camera frame</p>
+- <span class="arithmatex">\(Pose_R\)</span>: A 3x3 Rotation matrix of the tag in the camera frame
+- <span class="arithmatex">\(Pose_t\)</span>: A 3x1 Translation vector of the tag in the camera frame</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -950,13 +950,13 @@ detections = detector.detect(I, estimate_tag_pose=True, camera_params=PARAMS,tag
 <p>We now have all of the information we need to estimate the position of the camera. What we want is the position of the camera in the global frame, and we can break that into two steps. We get the location of the camera in the tag frame and combine with the location of the tag in the global frame.</p>
 <p>First, we need the rotation matrix <em>R</em> and translation vector <em>t</em> of the camera in the tag frame. We can get these by inverting the Pose_R and Pose_T we get from the Apriltags. R is an orthogonal rotation matrix, meaning the inverse is the same as the transpose. t is a translation vector, so its inverse just negates everything.</p>
 <p><span class="arithmatex">\(^{camera}R_{tag} = Pose_R^{T}\)</span> <br>
-<span class="arithmatex">\(t_camera_tag = -1 * Pose_t\)</span><br></p>
-<p>To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, translate by <em>t_camera_tag</em> and multiply by <em>R_camera_tag</em>. But the tag center in the tag frame is (0,0,0) so our final equation is
-<span class="arithmatex">\(Position_tag = R_camera_tag * t_camera_tag\)</span> <br></p>
-<p>The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need X-&gt;X,Y-&gt;-Y and Z-&gt;-Z. We can use a 3x3 diagonal permutation matrix <em>P</em> to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO<br></p>
-<p><span class="arithmatex">\(Position_tag_unofficial = P * Position_tag\)</span><br></p>
+<span class="arithmatex">\(^{camera}t_{tag} = = -1 * Pose_t\)</span><br></p>
+<p>To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, multiply by <span class="arithmatex">\(^{camera}R_{tag}\)</span> and translate by <span class="arithmatex">\(^{camera}t_{tag}\)</span> . But the coordinates of the tag center in the tag frame is <span class="arithmatex">\((0,0,0)\)</span> so our final equation is
+<span class="arithmatex">\(^{camera}Position = ^{camera}R_{tag} * ^{camera}t_{tag}\)</span> <br></p>
+<p>The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need <span class="arithmatex">\(X \rightarrow X, Y \rightarrow -Y, Z \rightarrow -Z\)</span>. We can use a 3x3 diagonal permutation matrix <span class="arithmatex">\(P\)</span> to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO<br></p>
+<p><span class="arithmatex">\(Position_{unofficial} = P * ^{tag}Position_\)</span><br></p>
 <p>Now we go from the tag frame to the global frame using the information from the look-up table we populated when doing the scene setup. We have our global rotation matrix <span class="arithmatex">\(R_{g}\)</span> and global translation vector <span class="arithmatex">\(t_{g}\)</span>. <br></p>
-<p><span class="arithmatex">\(Position_global = R_{g} * Position_tag_unofficial + t_{g}\)</span><br></p>
+<p><span class="arithmatex">\(Position_global = R_{g} * ^{unofficial}Position + t_{g}\)</span><br></p>
 <p>In Python, we can use the matrix mulptiplcation symbol @ introduced in 3.6. Combining all of the transformations becomes
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>unofficial_tag_position = P @ Pose_R.T @ (-1 * Pose_T)
