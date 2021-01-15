@@ -3,32 +3,31 @@ Date: September 4, 2020 <br>
 Author: Theodore Lewitt <br>
 
 ## Overview
-In this workshop, we will use a wide angle camera to estimate your car's position on the track. This information can help your car drive closer to the edge of the track and pick a faster line.
-This workshop will teach you computer vision fundamentals like camera calibration, rotation and translation transformations, and image processing using OpenCV and a Raspberry Pi camera. There are additional oppurtunities to learn more about camera hardware fundamentals or control theory algorithms like Kalman filtering.
+*In this blog post we will explore real-time localization of the camera (car) in space using visual tags which position we know in advance. The location information enables the car to drive closer to the edge of the track and pick a faster [racing line](https://en.wikipedia.org/wiki/Racing_line) in corners, both are crucial for a fast lap time. We will start by first calibrating the camera, making straight lines look strainght, which is needed for pose estmation. Next, we will explore a faster way to get gray images from camera in Python using the [picamera](https://picamera.readthedocs.io/) module. After that, we will use the [AprilTags] library to locate the visual tags in the image and from that estimate the camera location. And finally implement a motion filter to improve the localizaton accuracy when the camera is moving in 3D space.*
 
-## Final Product
-[![Thumbnail](https://img.youtube.com/vi/7iOmVOEvfgw/0.jpg)](https://www.youtube.com/watch?v=7iOmVOEvfgw)
+*In this workshop, we will use a wide angle camera to estimate your car's position on the track. This information can help your car drive closer to the edge of the track and pick a faster line. This workshop will teach you computer vision fundamentals like camera calibration, rotation and translation transformations, and image processing using OpenCV and a Raspberry Pi camera. There are additional oppurtunities to learn more about camera hardware fundamentals or control theory algorithms like Kalman filtering.*
 
-## System Requirements
-For each frame the camera sends to the Raspberry Pi, we need to process the data quickly enough to run in real time. For more concrete requirements, we can look at the servo motor on the car which can only update at 50 Hz. So we don't need anything faster than 50 FPS but will need greater than 20 FPS otherwise the car can travel too far in between updates.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7iOmVOEvfgw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-The other requirement is high localization accuracy so our car never is disqualified for going off the track. The white boundaries of the Race On track are 2 inches thick, so we ideally want accuracy up to 2 inches so our car can hug the track around the turns for the fastest time. However, most teams take a more conservative approach and we will require less than 5 inch error.
+## Requirements
+For each frame the camera sends to the Raspberry Pi, we need to process the data quickly enough to run in real time. For more concrete requirements, we can look at the servo motor on the car which can only update 50 times per second (50 Hz). So we don't need anything faster than 50 FPS but will need greater than 20 FPS otherwise the car can travel too far in between updates.
 
+The other requirement is high localization accuracy so our car never is disqualified for going off the track. The white boundaries of the Race On track are 2 inches thick, so we ideally want accuracy up to 2 inches so our car can hug the track around the turns for the fastest time.
 
-- FPS: 20 - 50, ideally >40
-- Max Localization Error: 5 inches (12.7 cm)
+- Frames per second: 20 - 50, ideally > 40
+- Maximum localization error: 2 inches (5 cm)
 
-## What You'll Need
+**What You'll Need**
 - Printed AprilTags, download [here] (https://github.com/AprilRobotics/apriltag-imgs/tree/master/tagStandard41h12), resize to 6 inches by 6 inches using software like [GIMP]( https://www.gimp.org/downloads/), and print!
 - Printed Checkerboard for camera calibration, download [here](https://markhedleyjones.com/storage/checkerboards/Checkerboard-A4-30mm-8x6.pdf) and print!
 - [Raspberry Pi Wide Angle Camera Module](https://www.seeedstudio.com/Raspberry-Pi-Wide-Angle-Camera-Module.html) 
 
-## Set-Up
+**Set-Up**
 - Install OpenCV on the Pi following this [guide](https://www.pyimagesearch.com/2019/09/16/install-opencv-4-on-raspberry-pi-4-and-raspbian-buster/)
 - Clone this [repo](https://github.com/teddylew12/race_on_cv) and install other dependencies using ```pip install -r requirements.txt```
 - Measure the size of your AprilTags in meters. ADD PHOTO HERE
 
-## Camera Calibration
+**Camera Calibration**
 Before we start using the AprilTags for localization, we need some more information about the camera. The Wide Angle Camera Module is a fisheye camera with 160 degrees of view, compared to 80–90 degrees on a normal camera. The trade-off with an fisheye camera is straight lines become curves near the edges of the image. ADD PHOTO
 
 We preform camera calibration to understand where a point in 3D space maps to the 2D pixel coordinates in the image. The output of the camera calibration is  the intrinsic matrix *K* and the distortion array *D*. To learn some of the theory behind camera calibration and what *K* means, check out this [blog](http://ksimek.github.io/2013/08/13/intrinsic/). 
@@ -46,7 +45,7 @@ This is the final step before diving into the actual code, we need to place the 
 ## Getting Images from the Raspberry Pi
 The PiCamera module provides many ways to capture frames from the camera, but many don't provide enough FPS for our use case.  For example, the [capture_continuous](https://picamera.readthedocs.io/en/release-1.13/api_camera.html#picamera.PiCamera.capture_continuous) function allows us to rapidly capture individual frames, but is limited to 20–30 FPS. Instead we record a video, and write to a custom class that can get up to 90 FPS. <br>
 Our custom class, called Stream, is where all of the image processing and AprilTag detection takes place. This happens inside the main function write(), which receives raw YUV camera data from camera.start_recording() function.
-```
+``` python
 #Inside real_time.py
 with PiCamera() as camera:
   stream = Stream()
@@ -73,7 +72,7 @@ The majority of the processing is within the *write()* function of the Stream cl
 
 ### Raw Data to OpenCV Image
 AprilTags detect on grayscale images, so instead of capturing a RGB image and converting to grayscale, we capture a YUV image. An YUV image is composed of three channels: luminance(Y), chroma blue (U), chroma red (V). The Y channel corresponds to a grayscale image, so when the camera writes to the stream, we only need to read in the first channel of the image to get the grayscale. OpenCV represents it's images as numpy arrays in Python. We use np.frombuffer() to read the bytes into a numpy array.
-```
+```python
 # Within stream.py, data is the raw bytes from the camera
 res = (640,480)
 I_raw = np.frombuffer(data, dtype=np.uint8, count=res[1]*res[0])
@@ -83,7 +82,7 @@ I_raw = I_raw.reshape(res[1], res[0])
 Once we have the raw image, we need to apply un-distortion to our image to reverse all of the fisheye distortion before detecting AprilTags. Un-distortion has two steps, one that can be pre-calculated and one that needs to be performed on each frame. <br>
 The pre-calculated step is computing a rectification and un-distortion matrices using cv2.fisheye.initUndistortRectifyMap(). These matrices are inputted into the cv2.remap() function, which needs to be called on each frame and outputs the corrected image. <br>
 
-```
+```python
 ### In real_time.py
 # K and D are camera intrinsics from the Camera Calibration
 # Res is the resolution of the image
@@ -108,7 +107,7 @@ The output of the detect() functions is a list of Detection objects. Each Detect
 - $Pose_R$: A 3x3 Rotation matrix of the tag in the camera frame
 - $Pose_t$: A 3x1 Translation vector of the tag in the camera frame
 
-```
+```python
 ### In real_time.py
 detector = Detector(families="tagStandard41h12",nthreads=4)
 
@@ -154,13 +153,13 @@ We now have a pose estimate of the camera position, but how accurate is this mea
 First, we can assume the camera won't move too drastically between frames, so we can use a moving average to smooth out some of the noise from frame to frame. The parameter choice here is how many time steps to average, with more time steps resulting in a more smooth trajectory over time. <br>
 Now, with a little more information about where our camera should be, for example if we know the inputs to our self-driving car's motor at the previous frame, we can use a g-h filter or a Kalman filter to further improve our position accuracy. There is a lifetime of really interesting work in this field and one of the best intro books I've read is [here](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python).
 
-```
+```python
 pose = moving_average(global_position,previous_positions,num_time_steps)
 ```
 
 ## Putting it all together\
 Here is psuedocode for real_time.py
-```
+```python
 #Camera Calibration Parameters
 camera_info = load_camera_information()
 
@@ -188,7 +187,7 @@ with PiCamera() as camera:
 
 ```
 Psuedocode for stream.py
-```
+``` python
 def write(raw_bytes):
   I_raw = np.frombuffer(raw_bytes)
   I = undistort(I_raw)
@@ -199,18 +198,23 @@ def write(raw_bytes):
 
 ## Future Improvements
 There are lots of improvements to be made to this, reducing localization error and improving FPS.
-#### Scence Setup
+
+**Scence Setup**
 - Print higher quality AprilTags on foam board to ensure a flat surface
 - Place tags in triangle clusters to improve localization accuracy
-#### Camera
+
+**Camera**
 - Reduce motion blur caused by moving camera by increasing shutter speed. Increase analog gain to compensate for darker photos. Picamera has a exposure mode setting that I would switch to SPORT
 - Improve camera calibration using more images and better setup to improve undistortion.
-#### AprilTag Detector
+
+**AprilTag Detector**
 - Find a optimal quad_decimate parameter that balances FPS and detection accuracy
 - Play with quad_sigma parameter and see if it improves detection accuracy
 - Play with decode_sharpening parameter and see it if improves detection accuracy
-#### Pose Estimation
+
+**Pose Estimation**
 - Adding orientation as well as position will help inform the car's trajectory
-#### Filtering
+
+**Filtering**
 - Add more information about the car model and the inputs from the servo to utilize a Kalman filter
 
