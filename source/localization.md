@@ -4,7 +4,7 @@ Author: Theodore Lewitt <br>
 
 ## Overview
 In this workshop, we will use a wide angle camera to estimate your car's position on the track. This information can help your car drive closer to the edge of the track and pick a faster line.
-This blog will teach you computer vision fundamentals like camera calibration, rotation and translation transformations, and image processing using OpenCV and a Raspberry Pi camera. There are additional oppurtunities to learn more about camera hardware fundamentals or control theory algorithms like Kalman filtering.
+This workshop will teach you computer vision fundamentals like camera calibration, rotation and translation transformations, and image processing using OpenCV and a Raspberry Pi camera. There are additional oppurtunities to learn more about camera hardware fundamentals or control theory algorithms like Kalman filtering.
 
 ## Final Product
 [![Thumbnail](https://img.youtube.com/vi/7iOmVOEvfgw/0.jpg)](https://www.youtube.com/watch?v=7iOmVOEvfgw)
@@ -129,9 +129,14 @@ $^{camera}t_{tag} = = -1 * Pose_t$<br>
 To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, multiply by $^{camera}R_{tag}$ and translate by $^{camera}t_{tag}$ . But the coordinates of the tag center in the tag frame is $(0,0,0)$ so our final equation is
 $^{camera}Position = ^{camera}R_{tag} * ^{camera}t_{tag}$ <br>
 
-The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need $X \rightarrow X, Y \rightarrow -Y, Z \rightarrow -Z$. We can use a 3x3 diagonal permutation matrix $P$ to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO<br>
+The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need $X \rightarrow X, Y \rightarrow -Y, Z \rightarrow -Z$. We can use a 3x3 diagonal permutation matrix $P$ to model this, with either 1 or -1 on the diagonal elements. 
+$$ P=
+\begin{bmatrix} 1 & 0 & 0\\
+0 & -1 & 0 \\
+0 & 0 & -1 \end{bmatrix}
+$$
 
-$Position_{unofficial} = P * ^{tag}Position_$<br>
+$Position_{unofficial} = P * ^{tag}Position$<br>
 
 Now we go from the tag frame to the global frame using the information from the look-up table we populated when doing the scene setup. We have our global rotation matrix $R_{g}$ and global translation vector $t_{g}$. <br>
 
@@ -153,7 +158,7 @@ Now, with a little more information about where our camera should be, for exampl
 pose = moving_average(global_position,previous_positions,num_time_steps)
 ```
 
-## Putting it all together
+## Putting it all together\
 Here is psuedocode for real_time.py
 ```
 #Camera Calibration Parameters
