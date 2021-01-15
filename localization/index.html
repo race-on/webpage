@@ -468,13 +468,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#putting-it-all-together" class="md-nav__link">
-    Putting it all together
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#future-improvements" class="md-nav__link">
     Future Improvements
   </a>
@@ -744,13 +737,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#putting-it-all-together" class="md-nav__link">
-    Putting it all together
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#future-improvements" class="md-nav__link">
     Future Improvements
   </a>
@@ -816,7 +802,7 @@
 Author: Theodore Lewitt <br></p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>In this workshop, we will use a wide angle camera to estimate your car's position on the track. This information can help your car drive closer to the edge of the track and pick a faster line.
-This blog will teach you computer vision fundamentals like camera calibration, rotation and translation transformations, and image processing using OpenCV and a Raspberry Pi camera. There are additional oppurtunities to learn more about camera hardware fundamentals or control theory algorithms like Kalman filtering.</p>
+This workshop will teach you computer vision fundamentals like camera calibration, rotation and translation transformations, and image processing using OpenCV and a Raspberry Pi camera. There are additional oppurtunities to learn more about camera hardware fundamentals or control theory algorithms like Kalman filtering.</p>
 <h2 id="final-product">Final Product<a class="headerlink" href="#final-product" title="Permanent link">&para;</a></h2>
 <p><a href="https://www.youtube.com/watch?v=7iOmVOEvfgw"><img alt="Thumbnail" src="https://img.youtube.com/vi/7iOmVOEvfgw/0.jpg" /></a></p>
 <h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
@@ -953,8 +939,13 @@ detections = detector.detect(I, estimate_tag_pose=True, camera_params=PARAMS,tag
 <span class="arithmatex">\(^{camera}t_{tag} = = -1 * Pose_t\)</span><br></p>
 <p>To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, multiply by <span class="arithmatex">\(^{camera}R_{tag}\)</span> and translate by <span class="arithmatex">\(^{camera}t_{tag}\)</span> . But the coordinates of the tag center in the tag frame is <span class="arithmatex">\((0,0,0)\)</span> so our final equation is
 <span class="arithmatex">\(^{camera}Position = ^{camera}R_{tag} * ^{camera}t_{tag}\)</span> <br></p>
-<p>The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need <span class="arithmatex">\(X \rightarrow X, Y \rightarrow -Y, Z \rightarrow -Z\)</span>. We can use a 3x3 diagonal permutation matrix <span class="arithmatex">\(P\)</span> to model this, with either 1 or -1 on the diagonal elements. ADD PHOTO<br></p>
-<p><span class="arithmatex">\(Position_{unofficial} = P * ^{tag}Position_\)</span><br></p>
+<p>The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need <span class="arithmatex">\(X \rightarrow X, Y \rightarrow -Y, Z \rightarrow -Z\)</span>. We can use a 3x3 diagonal permutation matrix <span class="arithmatex">\(P\)</span> to model this, with either 1 or -1 on the diagonal elements. 
+$$ P=
+\begin{bmatrix} 1 &amp; 0 &amp; 0\
+0 &amp; -1 &amp; 0 \
+0 &amp; 0 &amp; -1 \end{bmatrix}
+$$</p>
+<p><span class="arithmatex">\(Position_{unofficial} = P * ^{tag}Position\)</span><br></p>
 <p>Now we go from the tag frame to the global frame using the information from the look-up table we populated when doing the scene setup. We have our global rotation matrix <span class="arithmatex">\(R_{g}\)</span> and global translation vector <span class="arithmatex">\(t_{g}\)</span>. <br></p>
 <p><span class="arithmatex">\(Position_global = R_{g} * ^{unofficial}Position + t_{g}\)</span><br></p>
 <p>In Python, we can use the matrix mulptiplcation symbol @ introduced in 3.6. Combining all of the transformations becomes
@@ -971,8 +962,8 @@ Now, with a little more information about where our camera should be, for exampl
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pose = moving_average(global_position,previous_positions,num_time_steps)
 </code></pre></div>
 </td></tr></table>
-<h2 id="putting-it-all-together">Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Permanent link">&para;</a></h2>
-<p>Here is psuedocode for real_time.py
+<p>## Putting it all together\
+Here is psuedocode for real_time.py
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
