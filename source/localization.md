@@ -20,7 +20,7 @@ The other requirement is high localization accuracy so our car never is disquali
 **What You'll Need**
 - Printed AprilTags, download [here] (https://github.com/AprilRobotics/apriltag-imgs/tree/master/tagStandard41h12), resize to 6 inches by 6 inches using software like [GIMP]( https://www.gimp.org/downloads/), and print!
 - Printed Checkerboard for camera calibration, download [here](https://markhedleyjones.com/storage/checkerboards/Checkerboard-A4-30mm-8x6.pdf) and print!
-- [Raspberry Pi Wide Angle Camera Module](https://www.seeedstudio.com/Raspberry-Pi-Wide-Angle-Camera-Module.html) 
+- Raspberry Pi with [Raspberry Pi Wide Angle Camera Module](https://www.seeedstudio.com/Raspberry-Pi-Wide-Angle-Camera-Module.html) 
 
 **Set-Up**
 - Install OpenCV on the Pi following this [guide](https://www.pyimagesearch.com/2019/09/16/install-opencv-4-on-raspberry-pi-4-and-raspbian-buster/)
