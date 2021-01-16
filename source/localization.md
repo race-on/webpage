@@ -25,10 +25,12 @@ The other requirement is high localization accuracy so our car never is disquali
 **Set-Up**
 - Install OpenCV on the Pi following this [guide](https://www.pyimagesearch.com/2019/09/16/install-opencv-4-on-raspberry-pi-4-and-raspbian-buster/)
 - Clone this [repo](https://github.com/teddylew12/race_on_cv) and install other dependencies using ```pip install -r requirements.txt```
-- Measure the size of your AprilTags in meters. ADD PHOTO HERE
+- Measure the size of your AprilTags in meters from like in the photo below. 
+![Tag_Measurement](images/tag_measuring.png)
 
-**Camera Calibration**
-Before we start using the AprilTags for localization, we need some more information about the camera. The Wide Angle Camera Module is a fisheye camera with 160 degrees of view, compared to 80–90 degrees on a normal camera. The trade-off with an fisheye camera is straight lines become curves near the edges of the image. ADD PHOTO
+**Camera Calibration** <br>
+Before we start using the AprilTags for localization, we need some more information about the camera. The Wide Angle Camera Module is a fisheye camera with 160 degrees of view, compared to 80–90 degrees on a normal camera. The trade-off with an fisheye camera is straight lines become curves near the edges of the image. 
+![Distortion](images/distortion.PNG)
 
 We preform camera calibration to understand where a point in 3D space maps to the 2D pixel coordinates in the image. The output of the camera calibration is  the intrinsic matrix *K* and the distortion array *D*. To learn some of the theory behind camera calibration and what *K* means, check out this [blog](http://ksimek.github.io/2013/08/13/intrinsic/). 
 OpenCV has the fisheye calibration module, which finds both *K* and *D* from a set of images of a checkerboard. Use the *fisheye_calibration.py* script to obtain *K* and *D*.
@@ -71,7 +73,7 @@ The majority of the processing is within the *write()* function of the Stream cl
 5. Filtering
 
 ### Raw Data to OpenCV Image
-AprilTags detect on grayscale images, so instead of capturing a RGB image and converting to grayscale, we capture a YUV image. An YUV image is composed of three channels: luminance(Y), chroma blue (U), chroma red (V). The Y channel corresponds to a grayscale image, so when the camera writes to the stream, we only need to read in the first channel of the image to get the grayscale. OpenCV represents it's images as numpy arrays in Python. We use np.frombuffer() to read the bytes into a numpy array.
+AprilTags detect on grayscale images, so instead of capturing a RGB image and converting to grayscale, we capture a YUV image. An YUV image is composed of three channels: luminance(Y), chroma blue (U), chroma red (V). The Y channel is proportional to a grayscale image, so when the camera writes to the stream, we only need to read in the first channel of the image to get the grayscale. The advantage of this is that we only need to process 1/3rd of the total image, saving memory and computation time. OpenCV represents it's images as numpy arrays in Python. We use np.frombuffer() to read the bytes into a numpy array. 
 ```python
 # Within stream.py, data is the raw bytes from the camera
 res = (640,480)
@@ -118,12 +120,13 @@ detections = detector.detect(I, estimate_tag_pose=True, camera_params=PARAMS,tag
 ```
 
 ### Pose Estimation
-We now have all of the information we need to estimate the position of the camera. What we want is the position of the camera in the global frame, and we can break that into two steps. We get the location of the camera in the tag frame and combine with the location of the tag in the global frame.
+We now have all of the information we need to estimate the position of the camera. What we want is the position of the camera in the global frame, and we can break that into two steps. We get the location of the camera in the tag frame and combine with the location of the tag in the global frame. Both of these steps are applications of rigid-body transformations. A rigid-body transformation combines a translational transformation $O$ to translate from one frame's origin to another and a rotational transformation $R$ to rotate from one frame's coordinae axes to another. A great explanation of the theory behind this can be found ![here.](https://www.cc.gatech.edu/~afb/classes/CS4495-Fall2013/slides/CS4495-07-Calibration.pdf) We compose the two to take a point in Frame A and get it's location in frame B.
+$$^{B}p =^{B}_{A}R  ^{A}p + ^{B}_{A}O $$
 
 First, we need the rotation matrix *R* and translation vector *t* of the camera in the tag frame. We can get these by inverting the Pose_R and Pose_T we get from the Apriltags. R is an orthogonal rotation matrix, meaning the inverse is the same as the transpose. t is a translation vector, so its inverse just negates everything.
 
 $^{camera}R_{tag} = Pose_R^{T}$ <br>
-$^{camera}t_{tag} = = -1 * Pose_t$<br>
+$^{camera}t_{tag} = -1 * Pose_t$<br>
 
 To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, multiply by $^{camera}R_{tag}$ and translate by $^{camera}t_{tag}$ . But the coordinates of the tag center in the tag frame is $(0,0,0)$ so our final equation is
 $^{camera}Position = ^{camera}R_{tag} * ^{camera}t_{tag}$ <br>
