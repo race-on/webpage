@@ -681,9 +681,11 @@ Author: Theodore Lewitt <br></p>
 <p><strong>Set-Up</strong>
 - Install OpenCV on the Pi following this <a href="https://www.pyimagesearch.com/2019/09/16/install-opencv-4-on-raspberry-pi-4-and-raspbian-buster/">guide</a>
 - Clone this <a href="https://github.com/teddylew12/race_on_cv">repo</a> and install other dependencies using <code>pip install -r requirements.txt</code>
-- Measure the size of your AprilTags in meters. ADD PHOTO HERE</p>
-<p><strong>Camera Calibration</strong>
-Before we start using the AprilTags for localization, we need some more information about the camera. The Wide Angle Camera Module is a fisheye camera with 160 degrees of view, compared to 80–90 degrees on a normal camera. The trade-off with an fisheye camera is straight lines become curves near the edges of the image. ADD PHOTO</p>
+- Measure the size of your AprilTags in meters from like in the photo below. 
+<img alt="Tag_Measurement" src="../images/tag_measuring.png" /></p>
+<p><strong>Camera Calibration</strong> <br>
+Before we start using the AprilTags for localization, we need some more information about the camera. The Wide Angle Camera Module is a fisheye camera with 160 degrees of view, compared to 80–90 degrees on a normal camera. The trade-off with an fisheye camera is straight lines become curves near the edges of the image. 
+<img alt="Distortion" src="../images/distortion.PNG" /></p>
 <p>We preform camera calibration to understand where a point in 3D space maps to the 2D pixel coordinates in the image. The output of the camera calibration is  the intrinsic matrix <em>K</em> and the distortion array <em>D</em>. To learn some of the theory behind camera calibration and what <em>K</em> means, check out this <a href="http://ksimek.github.io/2013/08/13/intrinsic/">blog</a>. 
 OpenCV has the fisheye calibration module, which finds both <em>K</em> and <em>D</em> from a set of images of a checkerboard. Use the <em>fisheye_calibration.py</em> script to obtain <em>K</em> and <em>D</em>.</p>
 <h2 id="scene-setup">Scene Setup<a class="headerlink" href="#scene-setup" title="Permanent link">&para;</a></h2>
@@ -735,7 +737,7 @@ Our custom class, called Stream, is where all of the image processing and AprilT
 4. Pose Estimation
 5. Filtering</p>
 <h3 id="raw-data-to-opencv-image">Raw Data to OpenCV Image<a class="headerlink" href="#raw-data-to-opencv-image" title="Permanent link">&para;</a></h3>
-<p>AprilTags detect on grayscale images, so instead of capturing a RGB image and converting to grayscale, we capture a YUV image. An YUV image is composed of three channels: luminance(Y), chroma blue (U), chroma red (V). The Y channel corresponds to a grayscale image, so when the camera writes to the stream, we only need to read in the first channel of the image to get the grayscale. OpenCV represents it's images as numpy arrays in Python. We use np.frombuffer() to read the bytes into a numpy array.
+<p>AprilTags detect on grayscale images, so instead of capturing a RGB image and converting to grayscale, we capture a YUV image. An YUV image is composed of three channels: luminance(Y), chroma blue (U), chroma red (V). The Y channel is proportional to a grayscale image, so when the camera writes to the stream, we only need to read in the first channel of the image to get the grayscale. The advantage of this is that we only need to process &#8531;rd of the total image, saving memory and computation time. OpenCV represents it's images as numpy arrays in Python. We use np.frombuffer() to read the bytes into a numpy array. 
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
 2
 3
@@ -791,10 +793,11 @@ The pre-calculated step is computing a rectification and un-distortion matrices 
 </code></pre></div>
 </td></tr></table>
 <h3 id="pose-estimation">Pose Estimation<a class="headerlink" href="#pose-estimation" title="Permanent link">&para;</a></h3>
-<p>We now have all of the information we need to estimate the position of the camera. What we want is the position of the camera in the global frame, and we can break that into two steps. We get the location of the camera in the tag frame and combine with the location of the tag in the global frame.</p>
+<p>We now have all of the information we need to estimate the position of the camera. What we want is the position of the camera in the global frame, and we can break that into two steps. We get the location of the camera in the tag frame and combine with the location of the tag in the global frame. Both of these steps are applications of rigid-body transformations. A rigid-body transformation combines a translational transformation <span class="arithmatex">\(O\)</span> to translate from one frame's origin to another and a rotational transformation <span class="arithmatex">\(R\)</span> to rotate from one frame's coordinae axes to another. A great explanation of the theory behind this can be found <img alt="here." src="https://www.cc.gatech.edu/~afb/classes/CS4495-Fall2013/slides/CS4495-07-Calibration.pdf" /> We compose the two to take a point in Frame A and get it's location in frame B.
+$$^{B}p =^{B}<em A="A">{A}R  ^{A}p + ^{B}</em>O $$</p>
 <p>First, we need the rotation matrix <em>R</em> and translation vector <em>t</em> of the camera in the tag frame. We can get these by inverting the Pose_R and Pose_T we get from the Apriltags. R is an orthogonal rotation matrix, meaning the inverse is the same as the transpose. t is a translation vector, so its inverse just negates everything.</p>
 <p><span class="arithmatex">\(^{camera}R_{tag} = Pose_R^{T}\)</span> <br>
-<span class="arithmatex">\(^{camera}t_{tag} = = -1 * Pose_t\)</span><br></p>
+<span class="arithmatex">\(^{camera}t_{tag} = -1 * Pose_t\)</span><br></p>
 <p>To get the exact location of the camera in the tag frame, we start with the tag center in the tag frame, multiply by <span class="arithmatex">\(^{camera}R_{tag}\)</span> and translate by <span class="arithmatex">\(^{camera}t_{tag}\)</span> . But the coordinates of the tag center in the tag frame is <span class="arithmatex">\((0,0,0)\)</span> so our final equation is
 <span class="arithmatex">\(^{camera}Position = ^{camera}R_{tag} * ^{camera}t_{tag}\)</span> <br></p>
 <p>The next step is a correction between the official tag frame on the AprilTags website and the tag frame that I chose to use. My reasoning for choosing to use a slightly different tag frame is that my tag frame aligns with the global frame if all the Euler angles are 0 which helps me visualize the global transformations. The official AprilTags tag frame has the z-axis pointing from the tag center into the wall. The x-axis is to the right in the image taken by the camera, and y is down. This means to transform to our global frame with X right, Y up and Z out of the wall we need <span class="arithmatex">\(X \rightarrow X, Y \rightarrow -Y, Z \rightarrow -Z\)</span>. We can use a 3x3 diagonal permutation matrix <span class="arithmatex">\(P\)</span> to model this, with either 1 or -1 on the diagonal elements. 
